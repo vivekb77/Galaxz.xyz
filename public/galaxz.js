@@ -26,7 +26,7 @@ function GetGalaxz(){
 
           var options = { month: 'short', day: 'numeric' };
            var formatteddate0  = new Date(createdDate);
-           formatteddate = (formatteddate0.toLocaleDateString("en-US", options));
+          var formatteddate = (formatteddate0.toLocaleDateString("en-US", options));
 
                 //create an array , sort on priority
                 
@@ -88,7 +88,7 @@ document.getElementById('toppara'+counter).append(curatedDate);
 
 
 var titleDesc = document.createElement('a');
-titleDesc.setAttribute('href', "SolasysView.html/gId="+ galaxzArray[i].galaxzId);
+titleDesc.setAttribute('href', "solasys.html?gId="+ galaxzArray[i].galaxzId);
 titleDesc.id = 'titleDesc'+counter;
 document.getElementById('galaxzdiv'+counter).append(titleDesc);
 
