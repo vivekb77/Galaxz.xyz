@@ -10,7 +10,7 @@ function GetXanets(){
     var  articlesArray = [];
 
     database.ref('/articles').orderByChild('solasysId')
-    .equalTo(solasysId)   // get galaxz which are created by logged in user
+    .equalTo(solasysId).limitToLast(30)
     .once("value",function(ALLRecords){
         ALLRecords.forEach(
             function(CurrentRecord) {
@@ -52,7 +52,7 @@ function GetXanets(){
                     articlesArray.push(articlesObject)
                   
             });
-           //sorting , new solasys appear at the top
+           //sorting , new articles appear at the top
            articlesArray.reverse();
             AddXanetCell(articlesArray);
         
@@ -84,7 +84,7 @@ curatedBy.id = 'curatedBy'+counter;
 curatedBy.innerText = articlesArray[i].curatedBy;
 document.getElementById('toppara'+counter).append(curatedBy);
 
-document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var curatedDate = document.createElement('span');
 curatedDate.id = 'curatedDate'+counter;
@@ -174,12 +174,15 @@ document.getElementById('bottompara'+counter).append(sharesval);
 
 var hr = document.createElement("hr");
 hr.className='my-4';
+hr.id = 'hr'+counter;
 document.getElementById('galaxzdiv'+counter).append(hr);
 
 ++counter;
 
 }
-
+//remove the last hr
+let len = articlesArray.length - 1;
+document.getElementById('hr'+len).remove();
 }
 
 

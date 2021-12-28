@@ -9,7 +9,7 @@ function GetSolasys(){
     var  solasysArray = [];
 
     database.ref('/solasys').orderByChild('galaxzId')
-    .equalTo(galaxzId)   // get galaxz which are created by logged in user
+    .equalTo(galaxzId).limitToLast(15)
     .once("value",function(ALLRecords){
         ALLRecords.forEach(
             function(CurrentRecord) {
@@ -83,7 +83,7 @@ curatedBy.id = 'curatedBy'+counter;
 curatedBy.innerText = solasysArray[i].createdBy;
 document.getElementById('toppara'+counter).append(curatedBy);
 
-document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var curatedDate = document.createElement('span');
 curatedDate.id = 'curatedDate'+counter;
@@ -119,7 +119,7 @@ document.getElementById('galaxzdiv'+counter).append(bottompara);
 var solasysBtn = document.createElement('img');
 solasysBtn.id = 'solasysBtn'+counter;
 solasysBtn.className = 'img-bottompara';
-solasysBtn.src = 'assets/noofsolasys.svg';
+solasysBtn.src = 'assets/noofarticles.svg';
 document.getElementById('bottompara'+counter).append(solasysBtn);
 
 //document.getElementById('solasysBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
@@ -180,11 +180,16 @@ document.getElementById('bottompara'+counter).append(sharesval);
 
 var hr = document.createElement("hr");
 hr.className='my-4';
+hr.id = 'hr'+counter;
 document.getElementById('galaxzdiv'+counter).append(hr);
 
 ++counter;
 
 }
+
+//remove the last hr
+let len = solasysArray.length - 1;
+document.getElementById('hr'+len).remove();
 
 }
 
