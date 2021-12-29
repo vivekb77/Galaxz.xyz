@@ -1,5 +1,17 @@
 
+firebase.auth().signInAnonymously()
+.then(() => {
 
+})
+.catch((error) => {
+
+});
+// firebase.auth().onAuthStateChanged((user) => {
+//     if (user) {
+//       var uid = user.uid;
+//       console.log(uid);
+//     } 
+//   });
 
     var curatorIdfromQ = new URLSearchParams(window.location.search);
     var curatorId = curatorIdfromQ.get('cId');
@@ -28,7 +40,7 @@ function GetCuratorGalaxzies(){
     const database = firebase.database();
     
     database.ref('/galaxz').orderByChild("createdById")
-    .equalTo(curatorId).limitToLast(30)  
+    .equalTo(curatorId).limitToLast(10)  
     .once("value",function(ALLRecords){
         ALLRecords.forEach(
             function(CurrentRecord) {
@@ -73,9 +85,14 @@ function GetCuratorGalaxzies(){
                  galaxzArray.push(galaxzObject)
                   
             });
+           // filter the inactive ones
+            galaxzArray = galaxzArray.filter(function(filterByStatus) {
+            return filterByStatus.status == "Active"; });
+        
            //sorting , the higher the priority, the above galaxz appears
            galaxzArray.sort((a, b) => {
-           return b.priority - a.priority;
+           return a.priority - a.priority;
+           
        });
         
         

@@ -1,5 +1,10 @@
 
+firebase.auth().signInAnonymously()
+.then(() => {
 
+})
+.catch((error) => {
+});
 
     var galaxzIdfromQ = new URLSearchParams(window.location.search);
     var galaxzId = galaxzIdfromQ.get('gId')
@@ -21,8 +26,8 @@ function GetSolasys(){
     const database = firebase.database();
     var  solasysArray = [];
 
-    database.ref('/solasys').orderByChild('galaxzId_status')
-    .equalTo(galaxzId+"_Active").limitToLast(15)
+    database.ref('/solasys').orderByChild('galaxzId')
+    .equalTo(galaxzId).limitToLast(15)
     .once("value",function(ALLRecords){
         ALLRecords.forEach(
             function(CurrentRecord) {
@@ -33,6 +38,7 @@ function GetSolasys(){
     var createdById = CurrentRecord.val().createdById;
     var createdDate = CurrentRecord.val().createdDate;
     var name = CurrentRecord.val().name;
+    var status = CurrentRecord.val().status;
     var description = CurrentRecord.val().description;
     var numberOfArticles = CurrentRecord.val().numberOfArticles;
     var views = CurrentRecord.val().views;
@@ -52,6 +58,7 @@ function GetSolasys(){
                var solasysObject = 
                     {"galaxzId":galaxzId,
                     "solasysId":solasysId,
+                    "status":status,
                     "createdBy":createdBy,
                     "createdById":createdById,
                     "formatteddate":formatteddate,
@@ -67,6 +74,8 @@ function GetSolasys(){
                   
             });
            //sorting , new solasys appear at the top
+           solasysArray = solasysArray.filter(function(filterByStatus) {
+            return filterByStatus.status == "Active"; });
             solasysArray.reverse();
             AddSolasysCell(solasysArray);
         

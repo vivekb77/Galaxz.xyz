@@ -1,13 +1,22 @@
+firebase.auth().signInAnonymously()
+  .then(() => {
+ 
+})
+.catch((error) => {
+  });
+
+
 var galaxzIdfromQ = new URLSearchParams(window.location.search);
 var galaxzId = galaxzIdfromQ.get('gId')
 
+var  galaxzArrayQ = [];
 var  galaxzArray = [];
 
 function GetGalaxz(){
 
     //if there is galaxzid passed in query string , add the galaxz at the top and the rest below
  if (galaxzId !== null){
-
+    
     const database = firebase.database();
 
 database.ref('/galaxz').orderByChild("galaxzId")
@@ -21,6 +30,7 @@ var createdBy = CurrentRecord.val().createdBy;
 var createdById = CurrentRecord.val().createdById;
 var createdDate = CurrentRecord.val().createdDate;
 var name = CurrentRecord.val().name;
+var status = CurrentRecord.val().status;
 var description = CurrentRecord.val().description;
 var numberOfSolasys = CurrentRecord.val().numberOfSolasys;
 var views = CurrentRecord.val().views;
@@ -28,20 +38,19 @@ var followers = CurrentRecord.val().followers;
 var shares = CurrentRecord.val().shares;
 var priority = CurrentRecord.val().priority;
            
-           
-     // var formatteddate = new Date(createdDate).toDateString();
 
       let options = { month: 'short', day: 'numeric' };
        let formatteddate0  = new Date(createdDate);
       var formatteddate = (formatteddate0.toLocaleDateString("en-US", options));
 
              
-           var galaxzObject = 
+           var galaxzObjectQ = 
                 {"galaxzId":galaxzId,
                 "createdBy":createdBy,
                 "createdById":createdById,
                 "formatteddate":formatteddate,
                 "name":name,
+                "status":status,
                 "description":description,
                 "numberOfSolasys":numberOfSolasys,
                 "views":views,
@@ -49,7 +58,7 @@ var priority = CurrentRecord.val().priority;
                 "shares":shares,
                 "priority":priority};
             
-             galaxzArray.push(galaxzObject)
+                galaxzArrayQ.push(galaxzObjectQ)
         });
         
     });
@@ -69,6 +78,7 @@ var priority = CurrentRecord.val().priority;
     var createdById = CurrentRecord.val().createdById;
     var createdDate = CurrentRecord.val().createdDate;
     var name = CurrentRecord.val().name;
+    var status = CurrentRecord.val().status;
     var description = CurrentRecord.val().description;
     var numberOfSolasys = CurrentRecord.val().numberOfSolasys;
     var views = CurrentRecord.val().views;
@@ -76,22 +86,19 @@ var priority = CurrentRecord.val().priority;
     var shares = CurrentRecord.val().shares;
     var priority = CurrentRecord.val().priority;
                
-               
-         // var formatteddate = new Date(createdDate).toDateString();
+   
 
           let options = { month: 'short', day: 'numeric' };
            let formatteddate0  = new Date(createdDate);
           var formatteddate = (formatteddate0.toLocaleDateString("en-US", options));
 
-                //create an array , sort on priority
-                
-                 
                var galaxzObject = 
                     {"galaxzId":galaxzId,
                     "createdBy":createdBy,
                     "createdById":createdById,
                     "formatteddate":formatteddate,
                     "name":name,
+                    "status":status,
                     "description":description,
                     "numberOfSolasys":numberOfSolasys,
                     "views":views,
@@ -102,14 +109,20 @@ var priority = CurrentRecord.val().priority;
                  galaxzArray.push(galaxzObject)
                   
             });
-           //sorting , the higher the priority, the above galaxz appears
-         //  galaxzArray.sort((a, b) => {
-          //  return b.priority - a.priority;
-      //  });
+           //sorting ,  lower priority,  galaxz appears at top
+            galaxzArray.sort((a, b) => {
+            return a.priority - b.priority;
+            
+      });
         
-        
+        galaxzArray = galaxzArray.concat(galaxzArrayQ); 
+        // remove duplicates , code here
+        galaxzArray.reverse();                           // sorted on lower priority before, reversing it to keep the Q string galaxz at the top and rest higher priority , at the top
+        galaxzArray = galaxzArray.filter(function(filterByStatus) {   
+        return filterByStatus.status == "Active";});        
+    
         AddGalaxzCell(galaxzArray);
-        //console.log(galaxzArray);
+        
         });
 
 }
@@ -119,8 +132,8 @@ var priority = CurrentRecord.val().priority;
 
 
 function AddGalaxzCell (galaxzArray){
-    //console.log(galaxzArray);
-    var counter = 0;  // to create unique ids for the tags for each galaxz
+
+    var counter = 0;  
 
  for (i=0 ;i < galaxzArray.length; i++){
    
@@ -278,7 +291,7 @@ document.getElementById('galaxzdiv').append(title);
 
 }
 
-//increment views in DB when clicked
+//increment a view in DB when clicked
 function IncrementView(id){
     var clickedGalaxztag = document.getElementById(id);
     const database = firebase.database();
@@ -335,4 +348,7 @@ function IncrementShares(id){
 
    
 }
+
+// on back button , take user to same scroll position
+
 

@@ -17,7 +17,7 @@
 
 
     </head>
-    <body onload="GetXanets()">
+    <body>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
@@ -28,7 +28,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="galaxz.html" target="_blank">The Big Bang Theory</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html" target="_blank">Explore</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="curators.html" target="_blank">GRAVITY</a></li>
                     </ul>
                 </div>
@@ -40,8 +40,9 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>Xanets</h1>
-                            <a class="subheading" id ="gobacktoS">Go To Solasys</a>
+                            <h1 id="curatorname">How to Survive in a World of Information Overload?</h1>
+                                <span class="subheading">We curate relevant URLs/Webpages under a Galaxy (GALAXZ) → 
+                                Solar system (SOLASYS) → Planets (XANETS) taxonomy to group them together (bound by Gravity) with a THEME</span>
                         </div>
                     </div>
                 </div>
@@ -51,33 +52,22 @@
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7" id="maindiv">
-                   
-                    <!-- Post preview-->
-                    <!-- <div class="post-preview" id= "galaxzdiv1">
-                        <p class="post-meta" id="toppara1">
-                         <span id="curatedBy1"></span>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span id="curatedDate1"></span>
-                        </p>
-                        <a href="" id="titleDesc1">
-                            <h2 id="post-title1" class="post-title"></h2>
-                            <h3 id="post-subtitle1" class="post-subtitle"></h3>
+                 
+                     <!-- Post preview-->
+                     <div class="post-preview" id= "galaxzdiv1">
+                       
+                        <a>
+                            <h2 id="subheading" class="post-title">THE GRAVITY MODEL, Universe →  Galaxz →  Solasys →  Xanets</h2>
+                            <a class="subheading">
+								<img src="assets/universe.png"/>
+							</a>
+                            <p class="post-meta">Information that’s broken down into small, easy to understand chunks with a theme. Get the context of what's inside before you start reading. Sometimes reality is too complex, stories give it form.</p>
                         </a>
-                        <br/>
-                        <p class="post-meta" id="bottompara1">
-                            <span id="solasys1"></span>&nbsp;&nbsp;<span id="solasysval1"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span id="views1"></span>&nbsp;&nbsp;<span id="viewsval1"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span id="follows1"></span>&nbsp;&nbsp;<span id="followsval1"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span id="shares1"></span>&nbsp;&nbsp;<span id="sharesval1"></span>
-                        </p>
-                     </div> -->
+                        <a class="rocketshipgoback" href="index.html"><img class="rocketshipgoback" src = 'assets/rocket.svg'></img><br/>
+							Explore GALAXZ
+						</a>
+                     </div> 
 
-                    
-                    <!-- Divider-->
-                    <!-- <hr class="my-4" /> -->
                 </div>
                   
             </div>
@@ -93,6 +83,11 @@
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x"></i>
                                         <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                        <p>
+                                            <a href="#">Send us Feedback</a><br />
+                                            <a href="curators.html">Become a Curator</a><br />
+                                            <a href="#">Terms & Conditions</a>
+                                        </p>
                                     </span>
                                 </a>
                             </li>
@@ -106,20 +101,10 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
        
-         <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script> use this for prod , remove below one -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
-    
-    <script src="firebase.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     
-    <script src="xanets.js"></script>
+   
     </body>
 </html>

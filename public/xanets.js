@@ -1,5 +1,10 @@
 
+firebase.auth().signInAnonymously()
+.then(() => {
 
+})
+.catch((error) => {
+});
     var solasysfromQ = new URLSearchParams(window.location.search);
      var solasysId = solasysfromQ.get('sId');
      var galaxzId = solasysfromQ.get('gId');
@@ -21,8 +26,8 @@ function GetXanets(){
 
     const database = firebase.database();
 
-    database.ref('/articles').orderByChild('solasysIdStatus')
-    .equalTo(solasysId+"_Active").limitToLast(30)
+    database.ref('/articles').orderByChild('solasysId')
+    .equalTo(solasysId).limitToLast(30)
     .once("value",function(ALLRecords){
         ALLRecords.forEach(
             function(CurrentRecord) {
@@ -33,6 +38,7 @@ function GetXanets(){
     var createdById = CurrentRecord.val().createdById;
     var curatedDate = CurrentRecord.val().curatedDate;
     var name = CurrentRecord.val().name;
+    var status = CurrentRecord.val().status;
     var description = CurrentRecord.val().description;
     var url = CurrentRecord.val().url;
     var views = CurrentRecord.val().views;
@@ -56,6 +62,7 @@ function GetXanets(){
                     "createdById":createdById,
                     "formatteddate":formatteddate,
                     "name":name,
+                    "status":status,
                     "description":description,
                     "url":url,
                     "views":views,
@@ -67,6 +74,8 @@ function GetXanets(){
                   
             });
            //sorting , new articles appear at the top
+           articlesArray = articlesArray.filter(function(filterByStatus) {
+            return filterByStatus.status == "Active"; });
            articlesArray.reverse();
             AddXanetCell(articlesArray);
         
