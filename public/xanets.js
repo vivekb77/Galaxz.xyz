@@ -233,7 +233,7 @@ document.getElementById('maindiv').append(galaxzdiv);
 var title = document.createElement('h2');
 title.id = 'post-title';
 title.className = 'post-title';
-title.innerText = "Oops! this SOLASYS is inhabitable, click the Rocket to go back and check out other SOLASYS";
+title.innerText = "Oops! this SOLASYS is uninhabitable, click the Rocket to go back and check out other SOLASYS";
 document.getElementById('galaxzdiv').append(title);
 
 var rocketclick = document.createElement('a');
@@ -296,6 +296,15 @@ function IncrementShares(id){
     var messagetoshare = "Hey! check out this Article about "+articlename;  // find a nice message here to add
     //console.log(messagetoshare);
 
+      //show po up
+   var showpopup = document.getElementById('modal-container');
+   showpopup.classList.add('show');
+ //close popup
+   var  closepopup = document.getElementById('closepopup');
+   closepopup.addEventListener('click',()=>{
+     showpopup.classList.remove('show');
+   });
+   
      //increment shares by 1 on the UI and DB
     let newid1 = id.substr(9);
     let newid = "sharesval"+newid1;

@@ -11,11 +11,19 @@ var galaxzId = galaxzIdfromQ.get('gId')
 
 var  galaxzArrayQ = [];
 var  galaxzArray = [];
+var counter = 0;  
 
 function GetGalaxz(){
 
     //if there is galaxzid passed in query string , add the galaxz at the top and the rest below
  if (galaxzId !== null){
+
+    // var sharedgalaxz = document.createElement('h5');
+    // sharedgalaxz.className = 'post-title';
+    // sharedgalaxz.innerText = "Shared Galaxz with you";
+    // document.getElementById('maindiv').append(sharedgalaxz);
+    // var brshared = document.createElement("br");
+    // document.getElementById('maindiv').append(brshared);
     
     const database = firebase.database();
 
@@ -60,11 +68,33 @@ var priority = CurrentRecord.val().priority;
             
                 galaxzArrayQ.push(galaxzObjectQ)
         });
+       
+        //only call the func if there is data happens if gid in url is wrong
+        if (galaxzArrayQ.length >0){
+        AddGalaxzCell(galaxzArrayQ);
+        }
+        else{  // no galaxz to show , this error message
+            var otherGalaxzies = document.createElement('h5');
+            otherGalaxzies.className = 'post-title';
+            otherGalaxzies.innerText = "Oops! the Galaxz you are looking for is not here";
+            document.getElementById('maindiv').append(otherGalaxzies);
+            var brshared1 = document.createElement("br");
+            document.getElementById('maindiv').append(brshared1);
+            
+        }
         
+        var otherGalaxzies = document.createElement('h5');
+        otherGalaxzies.className = 'post-title';
+        otherGalaxzies.innerText = "Other interesting Galaxzies you may like";
+        document.getElementById('maindiv').append(otherGalaxzies);
+        var brshared1 = document.createElement("br");
+        document.getElementById('maindiv').append(brshared1);
+
     });
 }
     // pull all active galaxzies 
-    
+
+
     const database = firebase.database();
     
     database.ref('/galaxz').orderByChild("status")
@@ -109,18 +139,13 @@ var priority = CurrentRecord.val().priority;
                  galaxzArray.push(galaxzObject)
                   
             });
-           //sorting ,  lower priority,  galaxz appears at top
+           //sorting ,  higher priority,  galaxz appears at top
             galaxzArray.sort((a, b) => {
-            return a.priority - b.priority;
+            return b.priority - a.priority;
             
-      });
-        
-        galaxzArray = galaxzArray.concat(galaxzArrayQ); 
-        // remove duplicates , code here
-        galaxzArray.reverse();                           // sorted on lower priority before, reversing it to keep the Q string galaxz at the top and rest higher priority , at the top
-        galaxzArray = galaxzArray.filter(function(filterByStatus) {   
-        return filterByStatus.status == "Active";});        
+      });      
     
+         counter = 1;  
         AddGalaxzCell(galaxzArray);
         
         });
@@ -132,8 +157,6 @@ var priority = CurrentRecord.val().priority;
 
 
 function AddGalaxzCell (galaxzArray){
-
-    var counter = 0;  
 
  for (i=0 ;i < galaxzArray.length; i++){
    
@@ -270,22 +293,26 @@ document.getElementById('galaxzdiv'+counter).append(hr);
 //remove the last hr only if there is data in the array
 if (galaxzArray.length>0)
 {
-    let len = galaxzArray.length - 1;
-    document.getElementById('hr'+len).remove();
+    //skip for the shared galaxz where len is 1 and only remove hr for the last one 
+   if(galaxzArray.length>1){ 
+    let len = galaxzArray.length;
+    document.getElementById('hr'+len).remove(); 
+   }
    
 }
+
 else{
 //if there is no data , something is fucked up
-var galaxzdiv = document.createElement('div');
-galaxzdiv.className = 'post-preview';
-galaxzdiv.id = 'galaxzdiv';
-document.getElementById('maindiv').append(galaxzdiv);
+var galaxzdiv1 = document.createElement('div');
+galaxzdiv1.className = 'post-preview';
+galaxzdiv1.id = 'galaxzdiv1';
+document.getElementById('maindiv').append(galaxzdiv1);
 
 var title = document.createElement('h2');
 title.id = 'post-title';
 title.className = 'post-title';
-title.innerText = "Oops! something went wrong!";
-document.getElementById('galaxzdiv').append(title);
+title.innerText = "Oops! the Galaxz you are looking for is sucked by a Black hole!";
+document.getElementById('galaxzdiv1').append(title);
 
 }
 
@@ -320,20 +347,30 @@ function IncrementFollows(id){
 
 //increment shares by 1 on the UI and DB and open sharing options
 function IncrementShares(id){
-  
+    
     document.getElementById(id).src = "assets/sharefill.svg";
     var clickedGalaxztag = document.getElementById(id);
     
     //url to share
-     var urltoshare = "index.html?gId="+ clickedGalaxztag.value;
-     //console.log(urltoshare);
+     var urltoshare = "https://galaxz.xyz/index.html?gId="+ clickedGalaxztag.value;
 
      //name of galaxz to share
     let extractnumberfromid = id.substr(9);
     let galaxznametag = "post-title"+extractnumberfromid;
     var galaxzname = document.getElementById(galaxznametag).innerText;
-    var messagetoshare = "Hey! check out this Galaxz about "+galaxzname;  // find a nice message here to add
-    //console.log(messagetoshare);
+    var messagetoshare = "Hey! check out this Galaxz about "+galaxzname; 
+
+      //show po up
+   var showpopup = document.getElementById('modal-container');
+   showpopup.classList.add('show');
+ //close popup
+   var  closepopup = document.getElementById('closepopup');
+   closepopup.addEventListener('click',()=>{
+     showpopup.classList.remove('show');
+   });
+    
+   // sharedToSocial(urltoshare,messagetoshare);
+    
 
      //increment shares by 1 on the UI and DB
     let newid1 = id.substr(9);
@@ -351,4 +388,16 @@ function IncrementShares(id){
 
 // on back button , take user to same scroll position
 
+// function sharedToSocial(urltoshare,messagetoshare) {
 
+
+
+//     var shareGalaxz = document.getElementById("copylink");
+//     //copy url code here
+//     var shareGalaxz = document.getElementById("twittershare");
+//     shareGalaxz.setAttribute('href', "https://twitter.com/intent/tweet/?text="+messagetoshare + "&url="+ urltoshare);
+//     var shareGalaxz = document.getElementById("whatsappshare");
+//     shareGalaxz.setAttribute('href', "whatsapp://send?text=" +messagetoshare + " " +urltoshare);
+//     var shareGalaxz = document.getElementById("facebookshare");
+//     shareGalaxz.setAttribute('href', "https://facebook.com/sharer/sharer.php?u="+urltoshare);
+// }

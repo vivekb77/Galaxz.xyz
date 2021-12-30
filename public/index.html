@@ -14,6 +14,8 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+       
+
 
     </head>
     <body onload="GetGalaxz()">
@@ -50,9 +52,16 @@
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7" id="maindiv">
-                   
                 </div>
-                  
+                 <!-- DOM here -->
+                <!-- Social Icons pop up -->
+                <div class="modal-container" id="modal-container">
+                    <div class="modalpopup">
+                    <div class="addthis_inline_share_toolbox"></div>
+                    <button class="btn-closepopup" id="closepopup">Close</button>
+                    </div>
+                </div>
+                  <!-- DOM ends -->
             </div>
         </div>
         <!-- Footer-->
@@ -67,7 +76,14 @@
                                         <i class="fas fa-circle fa-stack-2x"></i>
                                         <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
                                     </span>
+                                   
                                 </a>
+                                <p><!-- Go to www.addthis.com/dashboard to customize your tools  -->
+                                    <div class="addthis_inline_share_toolbox"></div>
+                                                    </br>
+                                    <!-- <a href="#" class="subheading">Send Feedback</a><br />
+                                    <a href="#" class="subheading">Terms of Service</a> -->
+                                </p>
                             </li>
                         </ul>
                       
@@ -94,5 +110,10 @@
     <script src="js/scripts.js"></script>
     
     <script src="galaxz.js"></script>
+
+      <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55c1c74c27ca469a"></script>
+
+
     </body>
 </html>

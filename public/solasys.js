@@ -10,7 +10,7 @@ firebase.auth().signInAnonymously()
     var galaxzId = galaxzIdfromQ.get('gId')
 
     var gobacktoG = document.getElementById('gobacktoG');
-    gobacktoG.setAttribute('href', "index.html");
+    gobacktoG.setAttribute('href', "index.html?gId="+galaxzId);
     var br1 = document.createElement("br");
      document.getElementById('gobacktoG').append(br1);
      var rocketship = document.createElement('img');
@@ -239,7 +239,7 @@ document.getElementById('maindiv').append(galaxzdiv);
 var title = document.createElement('h2');
 title.id = 'post-title';
 title.className = 'post-title';
-title.innerText = "Oops! this GALAXZ is inhabitable, click the Rocket to go back and check out other GALAXZies";
+title.innerText = "Oops! this GALAXZ is uninhabitable, click the Rocket to go back and check out other GALAXZies";
 document.getElementById('galaxzdiv').append(title);
 
 var rocketclick = document.createElement('a');
@@ -298,12 +298,21 @@ function IncrementShares(id){
      var urltoshare = "solasys.html?gId="+galaxzId;  // sharing the gId solasys.html?gId=-MrKGzWbTPKEoDRYmopf
     // console.log(urltoshare);
 
-     //name of galaxz to share
+     //name of solasys to share
     let extractnumberfromid = id.substr(9);
     let solasysnametag = "post-title"+extractnumberfromid;
     var solasysname = document.getElementById(solasysnametag).innerText;
     var messagetoshare = "Hey! check out this Solasys about "+solasysname;  // find a nice message here to add
    // console.log(messagetoshare);
+
+   //show po up
+   var showpopup = document.getElementById('modal-container');
+      showpopup.classList.add('show');
+    //close popup
+      var  closepopup = document.getElementById('closepopup');
+      closepopup.addEventListener('click',()=>{
+        showpopup.classList.remove('show');
+      });
 
      //increment shares by 1 on the UI and DB
     let newid1 = id.substr(9);
