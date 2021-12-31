@@ -1,0 +1,1 @@
+analytics.logEvent('404 Page displayed', { name: '404 page'});

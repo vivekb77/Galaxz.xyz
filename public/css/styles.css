@@ -11257,7 +11257,7 @@ header.masthead .site-heading .h1 {
 .modal-container{
   
   background-color: #fff;
-  position: fixed;
+  position:relative;
   top: 50%;
   left: 50%;
   width: 20vw;

@@ -10,10 +10,10 @@ const firebaseConfig = {
   storageBucket: "galaxz.appspot.com",
   messagingSenderId: "8289726070",
   appId: "1:8289726070:web:5c75248fc04ed297383957",
-  measurementId: "${config.measurementId}"
+  measurementId: "G-2WV0JV7TWT"  //this is needed for analytics
 };
 
 // Initialize Firebase
 
 firebase.initializeApp(firebaseConfig);
-
+const analytics = firebase.analytics();

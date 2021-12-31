@@ -1,116 +1,115 @@
 
-firebase.auth().signInAnonymously()
-.then(() => {
+analytics.logEvent('Xanet Page Viewed', {
+    content_type: 'Text',
+    content_id: 'P1245343771002',
+    items: [{ name: 'x?Xanetpageviewd' }]
+  });
 
-})
-.catch((error) => {
+    firebase.auth().signInAnonymously()
+     .then(() => {
 
-});
-// firebase.auth().onAuthStateChanged((user) => {
-//     if (user) {
-//       var uid = user.uid;
-//       console.log(uid);
-//     } 
-//   });
-
-    var curatorIdfromQ = new URLSearchParams(window.location.search);
-    var curatorId = curatorIdfromQ.get('cId');
-    var curatorName = curatorIdfromQ.get('cName');
-
-    var cname = document.getElementById('curatorname');
-    cname.innerText = curatorName;
-
-    var gobacktoG = document.getElementById('gobacktoG');
-    gobacktoG.setAttribute('href', "index.html");
-    var br1 = document.createElement("br");
-     document.getElementById('gobacktoG').append(br1);
+                })
+      .catch((error) => {
+       });
+    var solasysfromQ = new URLSearchParams(window.location.search);
+     var solasysId = solasysfromQ.get('sId');
+     var galaxzId = solasysfromQ.get('gId');
+ 
+     var gobacktoS = document.getElementById('gobacktoS');
+     gobacktoS.setAttribute('href', "solasys.html?gId="+ galaxzId);
+     gobacktoS.setAttribute('onclick', "countGoBackToSolasys()");
+     var br1 = document.createElement("br");
+     document.getElementById('gobacktoS').append(br1);
      var rocketship = document.createElement('img');
     rocketship.id = 'rocketship';
     rocketship.className = 'rocketshipgoback';
     rocketship.src = 'assets/rocketship.svg';
-     document.getElementById('gobacktoG').append(rocketship);
-    
+     document.getElementById('gobacktoS').append(rocketship);
+     
+     //for google analytics to count how many navigates from S to G view
+function countGoBackToSolasys(){
+        analytics.logEvent('User Navigated from Xanet to Solasys', { name: 'NavFromXtoS'});
+     }
 
-var  galaxzArray = [];
+     var  articlesArray = [];
 
-function GetCuratorGalaxzies(){
 
-    // pull all galaxzies created by curator 
-    
+     // add +1 view ot solasys / views / adding here so that views  via a link are captured  along with clicking solasys
+    //  if (solasysId !== null){
+    //   const database = firebase.database();
+    //   database.ref('/solasys/' +solasysId).update({ 
+    //   views:firebase.database.ServerValue.increment(1)})
+    //  }
+
+
+function GetXanets(){
+
     const database = firebase.database();
-    
-    database.ref('/galaxz').orderByChild("createdById")
-    .equalTo(curatorId).limitToLast(10)  
+
+    database.ref('/articles').orderByChild('solasysId')
+    .equalTo(solasysId).limitToLast(30)
     .once("value",function(ALLRecords){
         ALLRecords.forEach(
             function(CurrentRecord) {
                
-    var galaxzId = CurrentRecord.val().galaxzId;
-    var createdBy = CurrentRecord.val().createdBy;
+    var solasysId = CurrentRecord.val().solasysId;
+    var articleId = CurrentRecord.val().articleId;
+    var curatedBy = CurrentRecord.val().curatedBy;
     var createdById = CurrentRecord.val().createdById;
-    var createdDate = CurrentRecord.val().createdDate;
-    var status = CurrentRecord.val().status;
+    var curatedDate = CurrentRecord.val().curatedDate;
     var name = CurrentRecord.val().name;
+    var status = CurrentRecord.val().status;
     var description = CurrentRecord.val().description;
-    var numberOfSolasys = CurrentRecord.val().numberOfSolasys;
+    var url = CurrentRecord.val().url;
     var views = CurrentRecord.val().views;
-    var followers = CurrentRecord.val().followers;
+    var likes = CurrentRecord.val().likes;
     var shares = CurrentRecord.val().shares;
-    var priority = CurrentRecord.val().priority;
                
                
          // var formatteddate = new Date(createdDate).toDateString();
 
-          let options = { month: 'short', day: 'numeric' };
-           let formatteddate0  = new Date(createdDate);
+          var options = { month: 'short', day: 'numeric' };
+           var formatteddate0  = new Date(curatedDate);
           var formatteddate = (formatteddate0.toLocaleDateString("en-US", options));
 
                 //create an array , sort on priority
                 
                  
-               var galaxzObject = 
-                    {"galaxzId":galaxzId,
-                    "createdBy":createdBy,
+               var articlesObject = 
+                    {"solasysId":solasysId,
+                    "articleId":articleId,
+                    "curatedBy":curatedBy,
                     "createdById":createdById,
                     "formatteddate":formatteddate,
-                    "status":status,
                     "name":name,
+                    "status":status,
                     "description":description,
-                    "numberOfSolasys":numberOfSolasys,
+                    "url":url,
                     "views":views,
-                    "followers":followers,
+                    "likes":likes,
                     "shares":shares,
-                    "priority":priority};
+                    };
                 
-                 galaxzArray.push(galaxzObject)
+                    articlesArray.push(articlesObject)
                   
             });
-           // filter the inactive ones
-            galaxzArray = galaxzArray.filter(function(filterByStatus) {
+           //sorting , new articles appear at the top
+           articlesArray = articlesArray.filter(function(filterByStatus) {
             return filterByStatus.status == "Active"; });
+           articlesArray.reverse();
+            AddXanetCell(articlesArray);
         
-           //sorting , the higher the priority, the above galaxz appears
-           galaxzArray.sort((a, b) => {
-           return a.priority - a.priority;
-           
-       });
-        
-        
-        AddGalaxzCell(galaxzArray);
-        //console.log(galaxzArray);
-        });
+     });
 
+        
 }
 
 
-
-
-
-function AddGalaxzCell (galaxzArray){
-    //console.log(galaxzArray);
+function AddXanetCell (articlesArray){
+   
     var counter = 0;  // to create unique ids for the tags for each galaxz
 
- for (i=0 ;i < galaxzArray.length; i++){
+ for (i=0 ;i < articlesArray.length; i++){
    
    
 var galaxzdiv = document.createElement('div');
@@ -124,40 +123,48 @@ toppara.id = 'toppara'+counter;
 document.getElementById('galaxzdiv'+counter).append(toppara);
 
 var curatorlink = document.createElement('a');
-curatorlink.setAttribute('href', "curatorprofile.html?cId="+ galaxzArray[i].createdById);
+curatorlink.setAttribute('href', "curatorprofile.html?cId="+ articlesArray[i].createdById+"&cName="+articlesArray[i].curatedBy);
 curatorlink.id = 'curatorlink'+counter;
 document.getElementById('toppara'+counter).append(curatorlink);
 
 var curatedBy = document.createElement('span');
 curatedBy.id = 'curatedBy'+counter;
-curatedBy.innerText = galaxzArray[i].createdBy;
+curatedBy.innerText = articlesArray[i].curatedBy;
 document.getElementById('curatorlink'+counter).append(curatedBy);
 
-document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var curatedDate = document.createElement('span');
 curatedDate.id = 'curatedDate'+counter;
-curatedDate.innerText = galaxzArray[i].formatteddate;
+curatedDate.innerText = articlesArray[i].formatteddate;
 document.getElementById('toppara'+counter).append(curatedDate);
 
+
 var titleDesc = document.createElement('a');
-titleDesc.setAttribute('href', "solasys.html?gId="+ galaxzArray[i].galaxzId);
+titleDesc.setAttribute('href', articlesArray[i].url );
+titleDesc.setAttribute('target', '_blank');
 titleDesc.setAttribute('onclick', "IncrementView(this.id)");
+titleDesc.value = articlesArray[i].articleId;
 titleDesc.id = 'titleDesc'+counter;
-titleDesc.value = galaxzArray[i].galaxzId;
 document.getElementById('galaxzdiv'+counter).append(titleDesc);
 
 var title = document.createElement('h2');
 title.id = 'post-title'+counter;
 title.className = 'post-title';
-title.innerText = galaxzArray[i].name;
+title.innerText = articlesArray[i].name;
 document.getElementById('titleDesc'+counter).append(title);
 
 var postsubtitle = document.createElement('h3');
 postsubtitle.id = 'post-subtitle'+counter;
 postsubtitle.className = 'post-subtitle';
-postsubtitle.innerText = galaxzArray[i].description;
+postsubtitle.innerText = articlesArray[i].description;
 document.getElementById('titleDesc'+counter).append(postsubtitle);
+
+var posturl = document.createElement('h3');
+posturl.id = 'post-url'+counter;
+posturl.className = 'post-subtitle';
+posturl.innerText = articlesArray[i].url;
+document.getElementById('titleDesc'+counter).append(posturl);
 
 var br = document.createElement("br");
 document.getElementById('galaxzdiv'+counter).append(br);
@@ -167,21 +174,7 @@ bottompara.className = 'post-meta';
 bottompara.id = 'bottompara'+counter;
 document.getElementById('galaxzdiv'+counter).append(bottompara);
 
-var solasysBtn = document.createElement('img');
-solasysBtn.id = 'solasysBtn'+counter;
-solasysBtn.className = 'img-bottompara';
-solasysBtn.src = 'assets/noofsolasys.svg';
-document.getElementById('bottompara'+counter).append(solasysBtn);
 
-document.getElementById('solasysBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
-
-var solasysval = document.createElement('span');
-solasysval.id = 'solasysval'+counter;
-solasysval.innerText = galaxzArray[i].numberOfSolasys;
-document.getElementById('bottompara'+counter).append(solasysval);
-
-document.getElementById('solasysval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var viewsBtn = document.createElement('img');
 viewsBtn.id = 'viewsBtn'+counter;
@@ -189,11 +182,11 @@ viewsBtn.className = 'img-bottompara';
 viewsBtn.src = 'assets/views.svg';
 document.getElementById('bottompara'+counter).append(viewsBtn);
 
-document.getElementById('viewsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
+//document.getElementById('viewsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
 
 var viewsval = document.createElement('span');
 viewsval.id = 'viewsval'+counter;
-viewsval.innerText = galaxzArray[i].views;
+viewsval.innerText = articlesArray[i].views;
 document.getElementById('bottompara'+counter).append(viewsval);
 
 document.getElementById('viewsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
@@ -202,35 +195,35 @@ document.getElementById('viewsval'+counter).appendChild( document.createTextNode
 var followsBtn = document.createElement('img');
 followsBtn.id = 'followsBtn'+counter;
 followsBtn.className = 'img-bottompara';
-followsBtn.value = galaxzArray[i].galaxzId;   
+followsBtn.value = articlesArray[i].articleId;   
 followsBtn.setAttribute('onclick', "IncrementFollows(this.id)");
 followsBtn.src = 'assets/like.svg';
 document.getElementById('bottompara'+counter).append(followsBtn);
 
-document.getElementById('followsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+//document.getElementById('followsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
 
 
 var followsval = document.createElement('span');
 followsval.id = 'followsval'+counter;
-followsval.innerText = galaxzArray[i].followers;
+followsval.innerText = articlesArray[i].likes;
 document.getElementById('bottompara'+counter).append(followsval);
 
 document.getElementById('followsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var sharesBtn = document.createElement('img');
 sharesBtn.id = 'sharesBtn'+counter;
-sharesBtn.value = galaxzArray[i].galaxzId;
-sharesBtn.setAttribute('onclick', "IncrementShares(this.id)");
 sharesBtn.className = 'img-bottompara';
+sharesBtn.value = articlesArray[i].articleId;
+sharesBtn.setAttribute('onclick', "IncrementShares(this.id)");
 sharesBtn.src = 'assets/share.svg';
 document.getElementById('bottompara'+counter).append(sharesBtn);
 
-document.getElementById('sharesBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
+//document.getElementById('sharesBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
 
 
 var sharesval = document.createElement('span');
 sharesval.id = 'sharesval'+counter;
-sharesval.innerText = galaxzArray[i].shares;
+sharesval.innerText = articlesArray[i].shares;
 document.getElementById('bottompara'+counter).append(sharesval);
 
 var hr = document.createElement("hr");
@@ -243,35 +236,51 @@ document.getElementById('galaxzdiv'+counter).append(hr);
 }
 
 //remove the last hr only if there is data in the array
-if (galaxzArray.length>0)
+if (articlesArray.length>0)
 {
-    let len = galaxzArray.length - 1;
+    let len = articlesArray.length - 1;
     document.getElementById('hr'+len).remove();
-   
 }
-else{
-//if there is no data , something is fucked up
+else
+{
+//if there is no data , display go back to Galaxz view
 var galaxzdiv = document.createElement('div');
 galaxzdiv.className = 'post-preview';
 galaxzdiv.id = 'galaxzdiv';
 document.getElementById('maindiv').append(galaxzdiv);
 
+
 var title = document.createElement('h2');
 title.id = 'post-title';
 title.className = 'post-title';
-title.innerText = "Oops! something went wrong!";
+title.innerText = "Oops! this SOLASYS is uninhabitable, click the Rocket to go back and check out other SOLASYS";
 document.getElementById('galaxzdiv').append(title);
 
+var rocketclick = document.createElement('a');
+rocketclick.setAttribute('href', "solasys.html?gId="+ galaxzId);
+rocketclick.id = 'rocketclick';
+document.getElementById('galaxzdiv').append(rocketclick);
+
+var rocket = document.createElement('img');
+rocket.id = 'rocket';
+rocket.className = 'rocketgoback';
+rocket.src = 'assets/rocket.svg';
+document.getElementById('rocketclick').append(rocket);
+
 }
 
 }
+
 
 //increment views in DB when clicked
 function IncrementView(id){
-    var clickedGalaxztag = document.getElementById(id);
+    var clickedArticletag = document.getElementById(id);
     const database = firebase.database();
-    database.ref('/galaxz/' +clickedGalaxztag.value).update({ 
+    database.ref('/articles/' +clickedArticletag.value).update({ 
     views:firebase.database.ServerValue.increment(1)})
+
+    //google analytics add event 
+    analytics.logEvent('Article Read', { name: 'Article Read'});
  
 }
 
@@ -287,29 +296,38 @@ function IncrementFollows(id){
     addedlike = ++like;
     document.getElementById(newid).innerHTML = addedlike ;   
     
-    var clickedGalaxztag = document.getElementById(id);
+    var clickedArticletag = document.getElementById(id);
     const database = firebase.database();
-    database.ref('/galaxz/' +clickedGalaxztag.value).update({ 
-    followers:firebase.database.ServerValue.increment(1)})
+    database.ref('/articles/' +clickedArticletag.value).update({ 
+    likes:firebase.database.ServerValue.increment(1)})
 }
 
 //increment shares by 1 on the UI and DB and open sharing options
 function IncrementShares(id){
   
     document.getElementById(id).src = "assets/sharefill.svg";
-    var clickedGalaxztag = document.getElementById(id);
+    var clickedArticletag = document.getElementById(id);
     
     //url to share
-     var urltoshare = "index.html?gId="+ clickedGalaxztag.value;
-     //console.log(urltoshare);
+     var urltoshare = "xanets.html?gId="+galaxzId+"&sId="+solasysId;  // sharing the gId solasys.html?gId=-MrKGzWbTPKEoDRYmopf
+    // console.log(urltoshare);
 
      //name of galaxz to share
     let extractnumberfromid = id.substr(9);
-    let galaxznametag = "post-title"+extractnumberfromid;
-    var galaxzname = document.getElementById(galaxznametag).innerText;
-    var messagetoshare = "Hey! check out this Galaxz about "+galaxzname;  // find a nice message here to add
+    let articlenametag = "post-title"+extractnumberfromid;
+    var articlename = document.getElementById(articlenametag).innerText;
+    var messagetoshare = "Hey! check out this Article about "+articlename;  // find a nice message here to add
     //console.log(messagetoshare);
 
+      //show po up
+   var showpopup = document.getElementById('modal-container');
+   showpopup.classList.add('show');
+ //close popup
+   var  closepopup = document.getElementById('closepopup');
+   closepopup.addEventListener('click',()=>{
+     showpopup.classList.remove('show');
+   });
+   
      //increment shares by 1 on the UI and DB
     let newid1 = id.substr(9);
     let newid = "sharesval"+newid1;
@@ -318,11 +336,12 @@ function IncrementShares(id){
     document.getElementById(newid).innerHTML = addedshare ;   
 
     const database = firebase.database();
-    database.ref('/galaxz/' +clickedGalaxztag.value).update({ 
+    database.ref('/articles/' +clickedArticletag.value).update({ 
     shares:firebase.database.ServerValue.increment(1)})
+ 
+    //log shared details to analytics
+    
+ analytics.logEvent('Xanet Shared', { name: 'X?Shared'});
 
    
 }
-
-
-

@@ -1,0 +1,1 @@
+analytics.logEvent('Terms of service viewed', { name: 'termsviewed'});

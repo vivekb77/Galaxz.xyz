@@ -1,9 +1,16 @@
+analytics.logEvent('Galaxz Page Viewed', {
+  content_type: 'Text',
+  content_id: 'P124534371000',
+  items: [{ name: 'x?Galaxzpageviewd' }]
+});
+
 firebase.auth().signInAnonymously()
   .then(() => {
  
 })
 .catch((error) => {
   });
+
 
 
 var galaxzIdfromQ = new URLSearchParams(window.location.search);
@@ -18,12 +25,12 @@ function GetGalaxz(){
     //if there is galaxzid passed in query string , add the galaxz at the top and the rest below
  if (galaxzId !== null){
 
-    // var sharedgalaxz = document.createElement('h5');
-    // sharedgalaxz.className = 'post-title';
-    // sharedgalaxz.innerText = "Shared Galaxz with you";
-    // document.getElementById('maindiv').append(sharedgalaxz);
-    // var brshared = document.createElement("br");
-    // document.getElementById('maindiv').append(brshared);
+    var sharedgalaxz = document.createElement('h5');
+    sharedgalaxz.className = 'post-title';
+    sharedgalaxz.innerText = "Home Galaxz";
+    document.getElementById('maindiv').append(sharedgalaxz);
+    var brshared = document.createElement("br");
+    document.getElementById('maindiv').append(brshared);
     
     const database = firebase.database();
 
@@ -76,7 +83,7 @@ var priority = CurrentRecord.val().priority;
         else{  // no galaxz to show , this error message
             var otherGalaxzies = document.createElement('h5');
             otherGalaxzies.className = 'post-title';
-            otherGalaxzies.innerText = "Oops! the Galaxz you are looking for is not here";
+            otherGalaxzies.innerText = "Oops! the Galaxz you are looking for is unreachable";
             document.getElementById('maindiv').append(otherGalaxzies);
             var brshared1 = document.createElement("br");
             document.getElementById('maindiv').append(brshared1);
@@ -311,7 +318,7 @@ document.getElementById('maindiv').append(galaxzdiv1);
 var title = document.createElement('h2');
 title.id = 'post-title';
 title.className = 'post-title';
-title.innerText = "Oops! the Galaxz you are looking for is sucked by a Black hole!";
+title.innerText = "Oops! Something went wrong!";
 document.getElementById('galaxzdiv1').append(title);
 
 }
@@ -368,6 +375,8 @@ function IncrementShares(id){
    closepopup.addEventListener('click',()=>{
      showpopup.classList.remove('show');
    });
+   //close pop up by ciicking outside of it
+  //code
     
    // sharedToSocial(urltoshare,messagetoshare);
     
@@ -383,11 +392,17 @@ function IncrementShares(id){
     database.ref('/galaxz/' +clickedGalaxztag.value).update({ 
     shares:firebase.database.ServerValue.increment(1)})
 
+    //log shared details to analytics
+    
+    analytics.logEvent('Galaxz Shared', { name: 'X?Shared'});
+
    
 }
 
 // on back button , take user to same scroll position
+//code
 
+//custom url sharing
 // function sharedToSocial(urltoshare,messagetoshare) {
 
 

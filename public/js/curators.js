@@ -1,0 +1,1 @@
+analytics.logEvent('Curators Information Page Viewed', { name: 'curatorsonBoard'});

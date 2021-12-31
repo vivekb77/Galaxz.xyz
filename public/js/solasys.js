@@ -1,4 +1,10 @@
 
+analytics.logEvent('Solasys Page Viewed', {
+    content_type: 'Text',
+    content_id: 'P1001',
+    items: [{ name: 'x?Solasyspageviewd' }]
+  });
+
 firebase.auth().signInAnonymously()
 .then(() => {
 
@@ -8,9 +14,11 @@ firebase.auth().signInAnonymously()
 
     var galaxzIdfromQ = new URLSearchParams(window.location.search);
     var galaxzId = galaxzIdfromQ.get('gId')
+    var solasysId = galaxzIdfromQ.get('sId');
 
     var gobacktoG = document.getElementById('gobacktoG');
     gobacktoG.setAttribute('href', "index.html?gId="+galaxzId);
+    gobacktoG.setAttribute('onclick', "countGoBackToGalaxz()");
     var br1 = document.createElement("br");
      document.getElementById('gobacktoG').append(br1);
      var rocketship = document.createElement('img');
@@ -19,6 +27,17 @@ firebase.auth().signInAnonymously()
     rocketship.src = 'assets/rocketship.svg';
      document.getElementById('gobacktoG').append(rocketship);
     
+          //for google analytics to count how many navigates from solasys to Galaxz view
+     function countGoBackToGalaxz(){
+        analytics.logEvent('User Navigated from Solasys to Galaxz', { name: 'NavFromStoG'});
+     }
+
+    //  // add +1 view ot galaxz / views when user visits via a link rather than clicking galaxz
+    //  if (solasysId == null){
+    //   const database = firebase.database();
+    //   database.ref('/galaxz/' +galaxzId).update({ 
+    //   views:firebase.database.ServerValue.increment(1)})
+    //  }
 
 function GetSolasys(){
 
@@ -255,11 +274,29 @@ document.getElementById('rocketclick').append(rocket);
 
 }
 
+// ads container
+
+var br5 = document.createElement("br");
+document.getElementById('maindiv').append(br5);
+
+var adsdiv = document.createElement('div');
+adsdiv.className = 'post-preview';
+adsdiv.id = 'adsdiv';
+document.getElementById('maindiv').append(adsdiv);
+
+var adstext = document.createElement('h2');
+adstext.innerText = 'Ad here';
+adstext.className = 'post-preview';
+adstext.id = 'adstext';
+document.getElementById('adsdiv').append(adstext);
+
 }
 
 
 //increment views in DB when clicked
 function IncrementView(id){
+  //view counting need to move to xanet js to count views from direct link visits rather than just clicks on solasys here
+  //tried but if sid is wrong in the Qstring it add a new solasys
     var clickedSolasystag = document.getElementById(id);
     const database = firebase.database();
     database.ref('/solasys/' +clickedSolasystag.value).update({ 
@@ -325,5 +362,8 @@ function IncrementShares(id){
     database.ref('/solasys/' +clickedSolasystag.value).update({ 
     shares:firebase.database.ServerValue.increment(1)})
 
-   
+   //log shared details to analytics
+    
+   analytics.logEvent('Solasys Shared', { name: 'X?Shared'});
+
 }

@@ -1,0 +1,1 @@
+analytics.logEvent('The Big Bang Page Viewed', { name: 'PeopleknowaboutBigBangnow'});
