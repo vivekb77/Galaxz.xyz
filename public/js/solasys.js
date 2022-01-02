@@ -276,19 +276,19 @@ document.getElementById('rocketclick').append(rocket);
 
 // ads container
 
-var br5 = document.createElement("br");
-document.getElementById('maindiv').append(br5);
+// var br5 = document.createElement("br");
+// document.getElementById('maindiv').append(br5);
 
-var adsdiv = document.createElement('div');
-adsdiv.className = 'post-preview';
-adsdiv.id = 'adsdiv';
-document.getElementById('maindiv').append(adsdiv);
+// var adsdiv = document.createElement('div');
+// adsdiv.className = 'post-preview';
+// adsdiv.id = 'adsdiv';
+// document.getElementById('maindiv').append(adsdiv);
 
-var adstext = document.createElement('h2');
-adstext.innerText = 'Ad here';
-adstext.className = 'post-preview';
-adstext.id = 'adstext';
-document.getElementById('adsdiv').append(adstext);
+// var adstext = document.createElement('h2');
+// adstext.innerText = 'Ad here';
+// adstext.className = 'post-preview';
+// adstext.id = 'adstext';
+// document.getElementById('adsdiv').append(adstext);
 
 }
 

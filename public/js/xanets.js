@@ -107,10 +107,11 @@ function GetXanets(){
 
 function AddXanetCell (articlesArray){
    
+
     var counter = 0;  // to create unique ids for the tags for each galaxz
 
  for (i=0 ;i < articlesArray.length; i++){
-   
+ 
    
 var galaxzdiv = document.createElement('div');
 galaxzdiv.className = 'post-preview';
@@ -139,8 +140,32 @@ curatedDate.id = 'curatedDate'+counter;
 curatedDate.innerText = articlesArray[i].formatteddate;
 document.getElementById('toppara'+counter).append(curatedDate);
 
+// only add href to a tag if there is url value in the array , using this for twitter like lists feature
+if (articlesArray[i].url == "") {
+//console.log(" NULL URL");
 
 var titleDesc = document.createElement('a');
+titleDesc.id = 'titleDesc'+counter;
+document.getElementById('galaxzdiv'+counter).append(titleDesc);
+
+var title = document.createElement('h2');
+title.id = 'post-title'+counter;
+title.className = 'post-title';
+title.innerText = articlesArray[i].name;
+document.getElementById('titleDesc'+counter).append(title);
+
+var postsubtitle = document.createElement('h3');
+postsubtitle.id = 'post-subtitle'+counter;
+postsubtitle.className = 'post-subtitle';
+postsubtitle.innerText = articlesArray[i].description;
+document.getElementById('titleDesc'+counter).append(postsubtitle);
+
+}  
+//if url is present add a tag href attribute
+else {
+  //console.log("not null url");
+
+  var titleDesc = document.createElement('a');
 titleDesc.setAttribute('href', articlesArray[i].url );
 titleDesc.setAttribute('target', '_blank');
 titleDesc.setAttribute('onclick', "IncrementView(this.id)");
@@ -165,6 +190,7 @@ posturl.id = 'post-url'+counter;
 posturl.className = 'post-subtitle';
 posturl.innerText = articlesArray[i].url;
 document.getElementById('titleDesc'+counter).append(posturl);
+}
 
 var br = document.createElement("br");
 document.getElementById('galaxzdiv'+counter).append(br);
@@ -176,20 +202,20 @@ document.getElementById('galaxzdiv'+counter).append(bottompara);
 
 
 
-var viewsBtn = document.createElement('img');
-viewsBtn.id = 'viewsBtn'+counter;
-viewsBtn.className = 'img-bottompara';
-viewsBtn.src = 'assets/views.svg';
-document.getElementById('bottompara'+counter).append(viewsBtn);
+// var viewsBtn = document.createElement('img');
+// viewsBtn.id = 'viewsBtn'+counter;
+// viewsBtn.className = 'img-bottompara';
+// viewsBtn.src = 'assets/views.svg';
+// document.getElementById('bottompara'+counter).append(viewsBtn);
 
-//document.getElementById('viewsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
+// //document.getElementById('viewsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
 
-var viewsval = document.createElement('span');
-viewsval.id = 'viewsval'+counter;
-viewsval.innerText = articlesArray[i].views;
-document.getElementById('bottompara'+counter).append(viewsval);
+// var viewsval = document.createElement('span');
+// viewsval.id = 'viewsval'+counter;
+// viewsval.innerText = articlesArray[i].views;
+// document.getElementById('bottompara'+counter).append(viewsval);
 
-document.getElementById('viewsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+// document.getElementById('viewsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 
 var followsBtn = document.createElement('img');
