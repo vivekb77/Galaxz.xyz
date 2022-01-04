@@ -293,6 +293,10 @@ rocket.className = 'rocketgoback';
 rocket.src = 'assets/rocket.svg';
 document.getElementById('rocketclick').append(rocket);
 
+//analytics
+analytics.logEvent('No Xanet shown error', { name: 'fatal error'});
+
+
 }
 
 }

@@ -321,6 +321,9 @@ title.className = 'post-title';
 title.innerText = "Oops! Something went wrong!";
 document.getElementById('galaxzdiv1').append(title);
 
+ //log error details to analytics
+    
+ analytics.logEvent('No Galaxz shown error', { name: 'fatal error'});
 }
 
 }

@@ -274,6 +274,8 @@ title.className = 'post-title';
 title.innerText = "Oops! something went wrong!";
 document.getElementById('galaxzdiv').append(title);
 
+analytics.logEvent('No Galaxz shown on curator profile page error', { name: 'fatal error'});
+
 }
 
 }

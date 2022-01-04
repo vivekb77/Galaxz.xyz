@@ -272,6 +272,10 @@ rocket.className = 'rocketgoback';
 rocket.src = 'assets/rocket.svg';
 document.getElementById('rocketclick').append(rocket);
 
+//analytics
+analytics.logEvent('No Solasys shown error', { name: 'fatal error'});
+
+
 }
 
 // ads container

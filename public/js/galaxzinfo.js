@@ -1,1 +1,1 @@
-analytics.logEvent('The Big Bang Page Viewed', { name: 'PeopleknowaboutBigBangnow'});
+analytics.logEvent('Space information page Viewed', { name: 'PeopleknowaboutGalaxzNow'});
