@@ -188,7 +188,7 @@ curatedBy.id = 'curatedBy'+counter;
 curatedBy.innerText = galaxzArray[i].createdBy;
 document.getElementById('curatorlink'+counter).append(curatedBy);
 
-document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+//document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var curatedDate = document.createElement('span');
 curatedDate.id = 'curatedDate'+counter;
@@ -228,7 +228,7 @@ solasysBtn.className = 'img-bottompara';
 solasysBtn.src = 'assets/noofsolasys.svg';
 document.getElementById('bottompara'+counter).append(solasysBtn);
 
-document.getElementById('solasysBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
+//document.getElementById('solasysBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
 
 
 var solasysval = document.createElement('span');
@@ -236,7 +236,7 @@ solasysval.id = 'solasysval'+counter;
 solasysval.innerText = galaxzArray[i].numberOfSolasys;
 document.getElementById('bottompara'+counter).append(solasysval);
 
-document.getElementById('solasysval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+//document.getElementById('solasysval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var viewsBtn = document.createElement('img');
 viewsBtn.id = 'viewsBtn'+counter;
@@ -244,14 +244,14 @@ viewsBtn.className = 'img-bottompara';
 viewsBtn.src = 'assets/views.svg';
 document.getElementById('bottompara'+counter).append(viewsBtn);
 
-document.getElementById('viewsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
+//document.getElementById('viewsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
 
 var viewsval = document.createElement('span');
 viewsval.id = 'viewsval'+counter;
 viewsval.innerText = galaxzArray[i].views;
 document.getElementById('bottompara'+counter).append(viewsval);
 
-document.getElementById('viewsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+//document.getElementById('viewsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 
 var followsBtn = document.createElement('img');
@@ -262,7 +262,7 @@ followsBtn.setAttribute('onclick', "IncrementFollows(this.id)");
 followsBtn.src = 'assets/like.svg';
 document.getElementById('bottompara'+counter).append(followsBtn);
 
-document.getElementById('followsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+//document.getElementById('followsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 
 var followsval = document.createElement('span');
@@ -270,7 +270,7 @@ followsval.id = 'followsval'+counter;
 followsval.innerText = galaxzArray[i].followers;
 document.getElementById('bottompara'+counter).append(followsval);
 
-document.getElementById('followsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+//document.getElementById('followsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var sharesBtn = document.createElement('img');
 sharesBtn.id = 'sharesBtn'+counter;
@@ -280,7 +280,7 @@ sharesBtn.className = 'img-bottompara';
 sharesBtn.src = 'assets/share.svg';
 document.getElementById('bottompara'+counter).append(sharesBtn);
 
-document.getElementById('sharesBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
+//document.getElementById('sharesBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
 
 
 var sharesval = document.createElement('span');
@@ -402,20 +402,3 @@ function IncrementShares(id){
    
 }
 
-// on back button , take user to same scroll position
-//code
-
-//custom url sharing
-// function sharedToSocial(urltoshare,messagetoshare) {
-
-
-
-//     var shareGalaxz = document.getElementById("copylink");
-//     //copy url code here
-//     var shareGalaxz = document.getElementById("twittershare");
-//     shareGalaxz.setAttribute('href', "https://twitter.com/intent/tweet/?text="+messagetoshare + "&url="+ urltoshare);
-//     var shareGalaxz = document.getElementById("whatsappshare");
-//     shareGalaxz.setAttribute('href', "whatsapp://send?text=" +messagetoshare + " " +urltoshare);
-//     var shareGalaxz = document.getElementById("facebookshare");
-//     shareGalaxz.setAttribute('href', "https://facebook.com/sharer/sharer.php?u="+urltoshare);
-// }

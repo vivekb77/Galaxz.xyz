@@ -133,7 +133,7 @@ curatedBy.id = 'curatedBy'+counter;
 curatedBy.innerText = articlesArray[i].curatedBy;
 document.getElementById('curatorlink'+counter).append(curatedBy);
 
-document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+//document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var curatedDate = document.createElement('span');
 curatedDate.id = 'curatedDate'+counter;
@@ -185,15 +185,18 @@ postsubtitle.className = 'post-subtitle';
 postsubtitle.innerText = articlesArray[i].description;
 document.getElementById('titleDesc'+counter).append(postsubtitle);
 
+var br = document.createElement("br");
+document.getElementById('titleDesc'+counter).append(br);
+
 var posturl = document.createElement('h3');
 posturl.id = 'post-url'+counter;
-posturl.className = 'post-subtitle';
+posturl.className = 'post-url';  // need another class for url , font italic , font size 3-5 smaller than description
 posturl.innerText = articlesArray[i].url;
 document.getElementById('titleDesc'+counter).append(posturl);
 }
 
-var br = document.createElement("br");
-document.getElementById('galaxzdiv'+counter).append(br);
+var br5 = document.createElement("br");
+document.getElementById('galaxzdiv'+counter).append(br5);
 
 var bottompara = document.createElement('p');
 bottompara.className = 'post-meta';
@@ -234,7 +237,7 @@ followsval.id = 'followsval'+counter;
 followsval.innerText = articlesArray[i].likes;
 document.getElementById('bottompara'+counter).append(followsval);
 
-document.getElementById('followsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
+//document.getElementById('followsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var sharesBtn = document.createElement('img');
 sharesBtn.id = 'sharesBtn'+counter;

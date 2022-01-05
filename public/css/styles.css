@@ -11222,6 +11222,12 @@ header.masthead .site-heading .h1 {
   font-weight: 300;
   margin-bottom: 0.625rem;
 }
+/* need italic , font size 5 smaller than post-subtitle , only one line and text overflow like "content is...." at the end */
+.post-preview > a > .post-url {
+  font-weight: 70;
+  margin-bottom: 0.425rem;
+  text-overflow: ellipsis;
+}
 .post-preview > .post-meta {
   font-size: 1.125rem;
   font-style: bold;
