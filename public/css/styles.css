@@ -11175,8 +11175,8 @@ header.masthead .post-heading .meta a {
 }
 @media (min-width: 992px) {
   header.masthead {
-    padding-top: 12.5rem;
-    padding-bottom: 12.5rem;
+    padding-top: 5rem;
+    padding-bottom: 4rem;
   }
   header.masthead .page-heading h1, header.masthead .page-heading .h1,
 header.masthead .site-heading h1,
@@ -11222,6 +11222,14 @@ header.masthead .site-heading .h1 {
   font-weight: 300;
   margin-bottom: 0.625rem;
 }
+#galaxzdiv
+{
+	text-align: center;
+}
+#galaxzdiv h2.post-title
+{
+	text-align: center;
+}
 /* need italic , font size 5 smaller than post-subtitle , only one line and text overflow like "content is...." at the end */
 .post-preview > a > .post-url {
   font-weight: 70;
@@ -11243,14 +11251,22 @@ header.masthead .site-heading .h1 {
   }
 }
 .img-bottompara {
-  width: 30px;
-   height : 30px;
+  width: 20px;
+   height : 20px;
 }
-
-
+.post-meta a span
+{
+	width: 20%;
+	display: inline-block;
+}
+.post-meta span
+{
+	padding: 0 20px 0 5px;
+}
 .rocketgoback {
   width: 700px;
    height : 700px;
+   margin: 40px 0 40px 0;
 }
 
 
