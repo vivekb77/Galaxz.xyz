@@ -144,15 +144,15 @@ toppara.className = 'post-meta';
 toppara.id = 'toppara'+counter;
 document.getElementById('galaxzdiv'+counter).append(toppara);
 
-// var curatorlink = document.createElement('a');
-// curatorlink.setAttribute('href', "curatorprofile.html?cId="+ galaxzArray[i].createdById+"&cName="+galaxzArray[i].createdBy);
-// curatorlink.id = 'curatorlink'+counter;
-// document.getElementById('toppara'+counter).append(curatorlink);
+var curatorlink = document.createElement('a');
+//curatorlink.setAttribute('href', "curatorprofile.html?cId="+ galaxzArray[i].createdById+"&cName="+galaxzArray[i].createdBy);
+curatorlink.id = 'curatorlink'+counter;
+document.getElementById('toppara'+counter).append(curatorlink);
 
 var curatedBy = document.createElement('span');
 curatedBy.id = 'curatedBy'+counter;
 curatedBy.innerText = galaxzArray[i].createdBy;
-document.getElementById('toppara'+counter).append(curatedBy);
+document.getElementById('curatorlink'+counter).append(curatedBy);
 
 //document.getElementById('toppara'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 

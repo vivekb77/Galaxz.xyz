@@ -78,7 +78,15 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
+h3.subheading
+{
+	background: #474D53;
+	color: #fff;
+	padding: 20px 10px;
+	border-radius: 10px;
+	width: auto;
+	display: inline-block;
+}
 hr {
   margin: 1rem 0;
   color: inherit;
@@ -11219,8 +11227,9 @@ header.masthead .site-heading .h1 {
   margin-bottom: 0.625rem;
 }
 .post-preview > a > .post-subtitle {
-  font-weight: 300;
-  margin-bottom: 0.625rem;
+  font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 0.625rem;
 }
 #galaxzdiv
 {
@@ -11230,11 +11239,14 @@ header.masthead .site-heading .h1 {
 {
 	text-align: center;
 }
-/* need italic , font size 5 smaller than post-subtitle , only one line and text overflow like "content is...." at the end */
 .post-preview > a > .post-url {
-  font-weight: 70;
+  font-size: 1.2rem;
+  font-weight: 300;
   margin-bottom: 0.425rem;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; 
+overflow: hidden; 
+white-space: nowrap;
+  
 }
 .post-preview > .post-meta {
   font-size: 1.125rem;
@@ -11247,7 +11259,7 @@ header.masthead .site-heading .h1 {
 }
 @media (min-width: 992px) {
   .post-preview > a > .post-title {
-    font-size: 2.25rem;
+    font-size: 1.5rem;
   }
 }
 .img-bottompara {
@@ -11256,12 +11268,13 @@ header.masthead .site-heading .h1 {
 }
 .post-meta a span
 {
-	width: 20%;
+	width: 70%;
 	display: inline-block;
 }
 .post-meta span
 {
 	padding: 0 20px 0 5px;
+  font-size: 1.2rem;
 }
 .rocketgoback {
   width: 700px;
@@ -11303,9 +11316,9 @@ header.masthead .site-heading .h1 {
   align-items: center;
   justify-content:safe;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 20vw;
+  top: 40%;
+  left: 40%;
+  width: auto;
   height: 10vh;
   max-width: 100%;
   border-radius: 5px;

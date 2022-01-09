@@ -194,9 +194,6 @@ postsubtitle.className = 'post-subtitle';
 postsubtitle.innerText = articlesArray[i].description;
 document.getElementById('titleDesc'+counter).append(postsubtitle);
 
-var br = document.createElement("br");
-document.getElementById('titleDesc'+counter).append(br);
-
 var posturl = document.createElement('h3');
 posturl.id = 'post-url'+counter;
 posturl.className = 'post-url';  // need another class for url , font italic , font size 3-5 smaller than description
