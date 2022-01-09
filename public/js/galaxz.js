@@ -165,6 +165,14 @@ var priority = CurrentRecord.val().priority;
 
 function AddGalaxzCell (galaxzArray){
 
+    //remove the placeholer first
+    const placeholder1 = document.getElementById('placeholder-animation1');
+    placeholder1.innerHTML ='';
+    const placeholder2 = document.getElementById('placeholder-animation2');
+    placeholder2.innerHTML ='';
+    const placeholder3 = document.getElementById('placeholder-animation3');
+    placeholder3.innerHTML ='';
+
  for (i=0 ;i < galaxzArray.length; i++){
    
    

@@ -97,7 +97,9 @@ function GetXanets(){
            articlesArray = articlesArray.filter(function(filterByStatus) {
             return filterByStatus.status == "Active"; });
            articlesArray.reverse();
+          
             AddXanetCell(articlesArray);
+            
         
      });
 
@@ -106,9 +108,16 @@ function GetXanets(){
 
 
 function AddXanetCell (articlesArray){
-   
-
-    var counter = 0;  // to create unique ids for the tags for each galaxz
+  
+  //remove the placeholer first
+  const placeholder1 = document.getElementById('placeholder-animation1');
+  placeholder1.innerHTML ='';
+  const placeholder2 = document.getElementById('placeholder-animation2');
+  placeholder2.innerHTML ='';
+  const placeholder3 = document.getElementById('placeholder-animation3');
+  placeholder3.innerHTML ='';
+  
+ var counter = 0;  // to create unique ids for the tags for each galaxz
 
  for (i=0 ;i < articlesArray.length; i++){
  
