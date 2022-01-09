@@ -25,7 +25,7 @@ firebase.auth().signInAnonymously()
     rocketship.id = 'rocketship';
     rocketship.className = 'rocketshipgoback';
     rocketship.src = 'assets/rocketship.svg';
-     document.getElementById('gobacktoG').append(rocketship);
+    document.getElementById('gobacktoG').append(rocketship);
     
           //for google analytics to count how many navigates from solasys to Galaxz view
      function countGoBackToGalaxz(){

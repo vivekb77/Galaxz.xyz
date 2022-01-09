@@ -11139,11 +11139,11 @@ header.masthead .site-heading {
 header.masthead .page-heading h1, header.masthead .page-heading .h1,
 header.masthead .site-heading h1,
 header.masthead .site-heading .h1 {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 header.masthead .page-heading .subheading,
 header.masthead .site-heading .subheading {
-  font-size: 1.5rem;
+  font-size: 1.0rem;
   font-weight: 300;
   line-height: 1.1;
   display: block;
@@ -11155,11 +11155,11 @@ header.masthead .post-heading h1, header.masthead .post-heading .h1 {
 }
 header.masthead .post-heading .meta,
 header.masthead .post-heading .subheading {
-  line-height: 1.1;
+  line-height: 1.0;
   display: block;
 }
 header.masthead .post-heading .subheading {
-  font-size: 1.5rem;
+  font-size: 1.0rem;
   font-weight: 600;
   margin: 0.75rem 0 2rem;
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -11181,13 +11181,13 @@ header.masthead .post-heading .meta a {
   header.masthead .page-heading h1, header.masthead .page-heading .h1,
 header.masthead .site-heading h1,
 header.masthead .site-heading .h1 {
-    font-size: 5rem;
+    font-size: 2rem;
   }
   header.masthead .post-heading h1, header.masthead .post-heading .h1 {
     font-size: 3.5rem;
   }
   header.masthead .post-heading .subheading {
-    font-size: 1.875rem;
+    font-size: 1.175rem;
   }
 }
 
@@ -11271,8 +11271,8 @@ header.masthead .site-heading .h1 {
 
 
 .rocketshipgoback {
-  width: 70px;
-   height : 100px;
+  width: 40px;
+   height : 50px;
 }
 
 .universe {
