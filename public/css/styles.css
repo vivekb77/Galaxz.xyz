@@ -11347,14 +11347,14 @@ padding: 10px 25px;
 
 .skeleton-text-top{
 width: 100%;
-height: 1.5rem;
+height: 1rem;
 margin-bottom: .25rem;
 border-radius: .125rem;
 }
 
 .skeleton-text-title{
   width: 100%;
-  height: 3rem;
+  height: 2rem;
   margin-bottom: .25rem;
   border-radius: .125rem;
   }
@@ -11366,7 +11366,7 @@ border-radius: .125rem;
     
 .skeleton-text-desc{
     width: 100%;
-    height: 2rem;
+    height: 1.5rem;
     margin-bottom: .25rem;
     border-radius: .125rem;
     }
@@ -11377,7 +11377,7 @@ border-radius: .125rem;
 
 .skeleton-text-bottom{
       width: 100%;
-      height: 1.5rem;
+      height: 1rem;
       margin-bottom: .25rem;
       border-radius: .125rem;
       }
