@@ -64,16 +64,11 @@ function GetSolasys(){
     var followers = CurrentRecord.val().followers;
     var shares = CurrentRecord.val().shares;
                
-               
-         // var formatteddate = new Date(createdDate).toDateString();
 
           var options = { month: 'short', day: 'numeric' };
            var formatteddate0  = new Date(createdDate);
           var formatteddate = (formatteddate0.toLocaleDateString("en-US", options));
 
-                //create an array , sort on priority
-                
-                 
                var solasysObject = 
                     {"galaxzId":galaxzId,
                     "solasysId":solasysId,
@@ -114,7 +109,7 @@ function AddSolasysCell (solasysArray){
     const placeholder3 = document.getElementById('placeholder-animation3');
     placeholder3.innerHTML ='';
     
-    var counter = 0;  // to create unique ids for the tags for each galaxz
+    var counter = 0;  
 
  for (i=0 ;i < solasysArray.length; i++){
    
@@ -138,8 +133,6 @@ var curatedBy = document.createElement('span');
 curatedBy.id = 'curatedBy'+counter;
 curatedBy.innerText = solasysArray[i].createdBy;
 document.getElementById('curatorlink'+counter).append(curatedBy);
-
-//document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var curatedDate = document.createElement('span');
 curatedDate.id = 'curatedDate'+counter;
@@ -180,15 +173,10 @@ solasysBtn.className = 'img-bottompara';
 solasysBtn.src = 'assets/noofarticles.svg';
 document.getElementById('bottompara'+counter).append(solasysBtn);
 
-//document.getElementById('solasysBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
-
 var solasysval = document.createElement('span');
 solasysval.id = 'solasysval'+counter;
 solasysval.innerText = solasysArray[i].numberOfArticles;
 document.getElementById('bottompara'+counter).append(solasysval);
-
-//document.getElementById('solasysval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var viewsBtn = document.createElement('img');
 viewsBtn.id = 'viewsBtn'+counter;
@@ -196,15 +184,10 @@ viewsBtn.className = 'img-bottompara';
 viewsBtn.src = 'assets/views.svg';
 document.getElementById('bottompara'+counter).append(viewsBtn);
 
-//document.getElementById('viewsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
 var viewsval = document.createElement('span');
 viewsval.id = 'viewsval'+counter;
 viewsval.innerText = solasysArray[i].views;
 document.getElementById('bottompara'+counter).append(viewsval);
-
-//document.getElementById('viewsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
-
 
 var followsBtn = document.createElement('img');
 followsBtn.id = 'followsBtn'+counter;
@@ -214,15 +197,10 @@ followsBtn.setAttribute('onclick', "IncrementFollows(this.id)");
 followsBtn.src = 'assets/like.svg';
 document.getElementById('bottompara'+counter).append(followsBtn);
 
-//document.getElementById('followsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
-
 var followsval = document.createElement('span');
 followsval.id = 'followsval'+counter;
 followsval.innerText = solasysArray[i].followers;
 document.getElementById('bottompara'+counter).append(followsval);
-
-//document.getElementById('followsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var sharesBtn = document.createElement('img');
 sharesBtn.id = 'sharesBtn'+counter;
@@ -231,9 +209,6 @@ sharesBtn.value = solasysArray[i].solasysId;
 sharesBtn.setAttribute('onclick', "IncrementShares(this.id)");
 sharesBtn.src = 'assets/share.svg';
 document.getElementById('bottompara'+counter).append(sharesBtn);
-
-//document.getElementById('sharesBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
 
 var sharesval = document.createElement('span');
 sharesval.id = 'sharesval'+counter;
@@ -285,22 +260,6 @@ analytics.logEvent('No Solasys shown error', { name: 'fatal error'});
 
 
 }
-
-// ads container
-
-// var br5 = document.createElement("br");
-// document.getElementById('maindiv').append(br5);
-
-// var adsdiv = document.createElement('div');
-// adsdiv.className = 'post-preview';
-// adsdiv.id = 'adsdiv';
-// document.getElementById('maindiv').append(adsdiv);
-
-// var adstext = document.createElement('h2');
-// adstext.innerText = 'Ad here';
-// adstext.className = 'post-preview';
-// adstext.id = 'adstext';
-// document.getElementById('adsdiv').append(adstext);
 
 }
 
@@ -357,10 +316,12 @@ function IncrementShares(id){
    //show po up
    var showpopup = document.getElementById('modal-container');
       showpopup.classList.add('show');
+      showpopup.style.display = "flex";
     //close popup
       var  closepopup = document.getElementById('closepopup');
       closepopup.addEventListener('click',()=>{
         showpopup.classList.remove('show');
+        showpopup.style.display = "none";
       });
 
      //increment shares by 1 on the UI and DB

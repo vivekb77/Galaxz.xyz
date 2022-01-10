@@ -65,15 +65,10 @@ function GetXanets(){
     var likes = CurrentRecord.val().likes;
     var shares = CurrentRecord.val().shares;
                
-               
-         // var formatteddate = new Date(createdDate).toDateString();
-
+       
           var options = { month: 'short', day: 'numeric' };
            var formatteddate0  = new Date(curatedDate);
           var formatteddate = (formatteddate0.toLocaleDateString("en-US", options));
-
-                //create an array , sort on priority
-                
                  
                var articlesObject = 
                     {"solasysId":solasysId,
@@ -117,7 +112,7 @@ function AddXanetCell (articlesArray){
   const placeholder3 = document.getElementById('placeholder-animation3');
   placeholder3.innerHTML ='';
   
- var counter = 0;  // to create unique ids for the tags for each galaxz
+ var counter = 0;  
 
  for (i=0 ;i < articlesArray.length; i++){
  
@@ -142,16 +137,13 @@ curatedBy.id = 'curatedBy'+counter;
 curatedBy.innerText = articlesArray[i].curatedBy;
 document.getElementById('curatorlink'+counter).append(curatedBy);
 
-//document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
-
 var curatedDate = document.createElement('span');
 curatedDate.id = 'curatedDate'+counter;
 curatedDate.innerText = articlesArray[i].formatteddate;
 document.getElementById('toppara'+counter).append(curatedDate);
 
-// only add href to a tag if there is url value in the array , using this for twitter like lists feature
+// only add href to a tag if there is url value in the array , using this for micro blow, lists QandAs feature
 if (articlesArray[i].url == "") {
-//console.log(" NULL URL");
 
 var titleDesc = document.createElement('a');
 titleDesc.id = 'titleDesc'+counter;
@@ -172,7 +164,6 @@ document.getElementById('titleDesc'+counter).append(postsubtitle);
 }  
 //if url is present add a tag href attribute
 else {
-  //console.log("not null url");
 
   var titleDesc = document.createElement('a');
 titleDesc.setAttribute('href', articlesArray[i].url );
@@ -196,7 +187,7 @@ document.getElementById('titleDesc'+counter).append(postsubtitle);
 
 var posturl = document.createElement('h3');
 posturl.id = 'post-url'+counter;
-posturl.className = 'post-url';  // need another class for url , font italic , font size 3-5 smaller than description
+posturl.className = 'post-url';  
 posturl.innerText = articlesArray[i].url;
 document.getElementById('titleDesc'+counter).append(posturl);
 }
@@ -209,7 +200,7 @@ bottompara.className = 'post-meta';
 bottompara.id = 'bottompara'+counter;
 document.getElementById('galaxzdiv'+counter).append(bottompara);
 
-
+// views removed on the UI
 
 // var viewsBtn = document.createElement('img');
 // viewsBtn.id = 'viewsBtn'+counter;
@@ -217,14 +208,10 @@ document.getElementById('galaxzdiv'+counter).append(bottompara);
 // viewsBtn.src = 'assets/views.svg';
 // document.getElementById('bottompara'+counter).append(viewsBtn);
 
-// //document.getElementById('viewsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
 // var viewsval = document.createElement('span');
 // viewsval.id = 'viewsval'+counter;
 // viewsval.innerText = articlesArray[i].views;
 // document.getElementById('bottompara'+counter).append(viewsval);
-
-// document.getElementById('viewsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 
 var followsBtn = document.createElement('img');
@@ -235,15 +222,11 @@ followsBtn.setAttribute('onclick', "IncrementFollows(this.id)");
 followsBtn.src = 'assets/like.svg';
 document.getElementById('bottompara'+counter).append(followsBtn);
 
-//document.getElementById('followsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
 
 var followsval = document.createElement('span');
 followsval.id = 'followsval'+counter;
 followsval.innerText = articlesArray[i].likes;
 document.getElementById('bottompara'+counter).append(followsval);
-
-//document.getElementById('followsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var sharesBtn = document.createElement('img');
 sharesBtn.id = 'sharesBtn'+counter;
@@ -252,8 +235,6 @@ sharesBtn.value = articlesArray[i].articleId;
 sharesBtn.setAttribute('onclick', "IncrementShares(this.id)");
 sharesBtn.src = 'assets/share.svg';
 document.getElementById('bottompara'+counter).append(sharesBtn);
-
-//document.getElementById('sharesBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
 
 
 var sharesval = document.createElement('span');
@@ -361,10 +342,12 @@ function IncrementShares(id){
       //show po up
    var showpopup = document.getElementById('modal-container');
    showpopup.classList.add('show');
+   showpopup.style.display = "flex";
  //close popup
    var  closepopup = document.getElementById('closepopup');
    closepopup.addEventListener('click',()=>{
      showpopup.classList.remove('show');
+     showpopup.style.display = "none";
    });
    
      //increment shares by 1 on the UI and DB

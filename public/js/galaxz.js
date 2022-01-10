@@ -76,7 +76,7 @@ var priority = CurrentRecord.val().priority;
                 galaxzArrayQ.push(galaxzObjectQ)
         });
        
-        //only call the func if there is data happens if gid in url is wrong
+        //only call the func if there is data , happens if gid in url is wrong
         if (galaxzArrayQ.length >0){
         AddGalaxzCell(galaxzArrayQ);
         }
@@ -196,8 +196,6 @@ curatedBy.id = 'curatedBy'+counter;
 curatedBy.innerText = galaxzArray[i].createdBy;
 document.getElementById('curatorlink'+counter).append(curatedBy);
 
-//document.getElementById('curatedBy'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
-
 var curatedDate = document.createElement('span');
 curatedDate.id = 'curatedDate'+counter;
 curatedDate.innerText = galaxzArray[i].formatteddate;
@@ -236,15 +234,10 @@ solasysBtn.className = 'img-bottompara';
 solasysBtn.src = 'assets/noofsolasys.svg';
 document.getElementById('bottompara'+counter).append(solasysBtn);
 
-//document.getElementById('solasysBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
-
 var solasysval = document.createElement('span');
 solasysval.id = 'solasysval'+counter;
 solasysval.innerText = galaxzArray[i].numberOfSolasys;
 document.getElementById('bottompara'+counter).append(solasysval);
-
-//document.getElementById('solasysval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var viewsBtn = document.createElement('img');
 viewsBtn.id = 'viewsBtn'+counter;
@@ -252,15 +245,10 @@ viewsBtn.className = 'img-bottompara';
 viewsBtn.src = 'assets/views.svg';
 document.getElementById('bottompara'+counter).append(viewsBtn);
 
-//document.getElementById('viewsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
 var viewsval = document.createElement('span');
 viewsval.id = 'viewsval'+counter;
 viewsval.innerText = galaxzArray[i].views;
 document.getElementById('bottompara'+counter).append(viewsval);
-
-//document.getElementById('viewsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
-
 
 var followsBtn = document.createElement('img');
 followsBtn.id = 'followsBtn'+counter;
@@ -270,15 +258,10 @@ followsBtn.setAttribute('onclick', "IncrementFollows(this.id)");
 followsBtn.src = 'assets/like.svg';
 document.getElementById('bottompara'+counter).append(followsBtn);
 
-//document.getElementById('followsBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
-
-
 var followsval = document.createElement('span');
 followsval.id = 'followsval'+counter;
 followsval.innerText = galaxzArray[i].followers;
 document.getElementById('bottompara'+counter).append(followsval);
-
-//document.getElementById('followsval'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' ) );
 
 var sharesBtn = document.createElement('img');
 sharesBtn.id = 'sharesBtn'+counter;
@@ -287,9 +270,6 @@ sharesBtn.setAttribute('onclick', "IncrementShares(this.id)");
 sharesBtn.className = 'img-bottompara';
 sharesBtn.src = 'assets/share.svg';
 document.getElementById('bottompara'+counter).append(sharesBtn);
-
-//document.getElementById('sharesBtn'+counter).appendChild( document.createTextNode( '\u00A0\u00A0\u00A0' ) );
-
 
 var sharesval = document.createElement('span');
 sharesval.id = 'sharesval'+counter;
@@ -308,7 +288,7 @@ document.getElementById('galaxzdiv'+counter).append(hr);
 //remove the last hr only if there is data in the array
 if (galaxzArray.length>0)
 {
-    //skip for the shared galaxz where len is 1 and only remove hr for the last one 
+    //skip for the  galaxz where len is 1 and only remove hr for the last one 
    if(galaxzArray.length>1){ 
     let len = galaxzArray.length;
     document.getElementById('hr'+len).remove(); 
@@ -336,7 +316,7 @@ document.getElementById('galaxzdiv1').append(title);
 
 }
 
-//increment a view in DB when clicked
+//increment a view in DB when g clicked
 function IncrementView(id){
     var clickedGalaxztag = document.getElementById(id);
     const database = firebase.database();
@@ -381,15 +361,15 @@ function IncrementShares(id){
       //show po up
    var showpopup = document.getElementById('modal-container');
    showpopup.classList.add('show');
+   showpopup.style.display = "flex";
  //close popup
    var  closepopup = document.getElementById('closepopup');
    closepopup.addEventListener('click',()=>{
      showpopup.classList.remove('show');
+     showpopup.style.display = "none";
    });
    //close pop up by ciicking outside of it
   //code
-    
-   // sharedToSocial(urltoshare,messagetoshare);
     
 
      //increment shares by 1 on the UI and DB

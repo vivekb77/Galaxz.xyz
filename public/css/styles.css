@@ -51,7 +51,7 @@
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #121618;
-  --bs-body-bg: #fff;
+  --bs-body-bg: rgb(255, 255, 255);
 }
 
 *,
@@ -82,7 +82,7 @@ h3.subheading
 {
 	background: #474D53;
 	color: #fff;
-	padding: 20px 10px;
+	padding: 7px 8px;
 	border-radius: 10px;
 	width: auto;
 	display: inline-block;
@@ -10994,8 +10994,11 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+/* zoom out all page to 80% */
 body {
   font-size: 1.25rem;
+  /* transform: scale(0.8); */
+  
 }
 
 hr {
@@ -11228,7 +11231,7 @@ header.masthead .site-heading .h1 {
 }
 .post-preview > a > .post-subtitle {
   font-weight: 500;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 0.625rem;
 }
 #galaxzdiv
@@ -11244,7 +11247,7 @@ header.masthead .site-heading .h1 {
   font-weight: 300;
   margin-bottom: 0.425rem;
   text-overflow: ellipsis; 
-overflow: hidden; 
+  overflow: hidden; 
 white-space: nowrap;
   
 }
@@ -11299,22 +11302,21 @@ white-space: nowrap;
   
   background-color: #fff;
   position:relative;
-  top: 50%;
-  left: 50%;
   width: 20vw;
   height: 10vh;
-  display: flex;
+  display:none;
   align-items: center;
   justify-content: center;
   pointer-events: none;
   opacity: 0;
+ 
 }
 
 .modalpopup{
   background-color: #fff;
   display: flex;
   align-items: center;
-  justify-content:safe;
+  justify-content:center;
   position: fixed;
   top: 40%;
   left: 40%;

@@ -337,10 +337,12 @@ function IncrementShares(id){
    //show po up
    var showpopup = document.getElementById('modal-container');
    showpopup.classList.add('show');
+   showpopup.style.display = "flex";
  //close popup
    var  closepopup = document.getElementById('closepopup');
    closepopup.addEventListener('click',()=>{
      showpopup.classList.remove('show');
+     showpopup.style.display = "none";
    });
    
      //increment shares by 1 on the UI and DB
