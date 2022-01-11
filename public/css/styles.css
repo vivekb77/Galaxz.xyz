@@ -11289,15 +11289,15 @@ white-space: nowrap;
 	}
 	.post-preview > a > .post-title
 	{
-		font-size: 22px;
+		font-size: 24px;
 	}
 	.post-preview > a > .post-subtitle
 	{
-		font-size: 15px;
+		font-size: 16px;
 	}
 	.post-preview > a > .post-url
 	{
-		font-size: 13px;
+		font-size: 16px;
 	}
 	header.masthead
 	{
@@ -11307,13 +11307,13 @@ white-space: nowrap;
 	.post-meta a span
 	{
 		width: 70%;
-		font-size: 15px;
+		font-size: 16px;
 		padding-left: 0;
 	}
 	.post-meta span
 	{
 		padding: 0 5px 0 0;
-		font-size: 15px !important;		
+		font-size: 16px !important;		
 	}
 	.img-bottompara
 	{
@@ -11333,14 +11333,14 @@ white-space: nowrap;
 	.post-meta a span
 	{
 		width: 70%;
-		font-size: 15px;
+		font-size: 16px;
 	}
 }
 @media (max-width: 420px) {
 	.post-meta a span
 	{
 		width: 65%;
-		font-size: 15px;
+		font-size: 16px;
 	}
 }
 
