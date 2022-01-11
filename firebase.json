@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "site":"galaxz-xyz",
     "public": "public",
+    "site":"galaxz-xyz",
     "ignore": [
       "firebase.json",
       "**/.*",

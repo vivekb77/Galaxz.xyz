@@ -39,7 +39,7 @@
         </nav>
         <!-- Page Header-->
         <header class="masthead">
-            <div class="container position-relative px-4 px-lg-5">
+            <div class="container position-relative px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
@@ -50,46 +50,48 @@
             </div>
         </header>
         <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7" id="maindiv">
-                   
-                  <script>
-                    var galaxzdiv = document.createElement('div');
-                galaxzdiv.className = 'post-preview';
-                galaxzdiv.id = 'galaxzdiv';
-                document.getElementById('maindiv').append(galaxzdiv);
-                
-                
-                var title = document.createElement('h2');
-                title.id = 'post-title';
-                title.className = 'post-title';
-                title.innerText = "Click the Rocket to go back Home";
-                document.getElementById('galaxzdiv').append(title);
-                
-                var rocketclick = document.createElement('a');
-                rocketclick.setAttribute('href', "index.html");
-                rocketclick.id = 'rocketclick';
-                document.getElementById('galaxzdiv').append(rocketclick);
-                
-                var rocket = document.createElement('img');
-                rocket.id = 'rocket';
-                rocket.className = 'rocketgoback';
-                rocket.src = 'assets/rocket.svg';
-                document.getElementById('rocketclick').append(rocket);
-                
-                var br = document.createElement('br');
-                document.getElementById('maindiv').append(br);
-                </script>
-                
-                   
-                </div>
-                  
-            </div>
+        <div class="container px-lg-5">
+			<div class="container-fluid">
+				<div class="row gx-4 gx-lg-5 justify-content-center">
+					<div class="col-md-10 col-lg-8 col-xl-7 px-4" id="maindiv">
+					   
+					  <script>
+						var galaxzdiv = document.createElement('div');
+					galaxzdiv.className = 'post-preview';
+					galaxzdiv.id = 'galaxzdiv';
+					document.getElementById('maindiv').append(galaxzdiv);
+					
+					
+					var title = document.createElement('h2');
+					title.id = 'post-title';
+					title.className = 'post-title';
+					title.innerText = "Click the Rocket to go back Home";
+					document.getElementById('galaxzdiv').append(title);
+					
+					var rocketclick = document.createElement('a');
+					rocketclick.setAttribute('href', "index.html");
+					rocketclick.id = 'rocketclick';
+					document.getElementById('galaxzdiv').append(rocketclick);
+					
+					var rocket = document.createElement('img');
+					rocket.id = 'rocket';
+					rocket.className = 'rocketgoback';
+					rocket.src = 'assets/rocket.svg';
+					document.getElementById('rocketclick').append(rocket);
+					
+					var br = document.createElement('br');
+					document.getElementById('maindiv').append(br);
+					</script>
+					
+					   
+					</div>
+					  
+				</div>
+			</div>
         </div>
         <!-- Footer-->
         <footer class="border-top">
-            <div class="container px-4 px-lg-5">
+            <div class="container px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <ul class="list-inline text-center">

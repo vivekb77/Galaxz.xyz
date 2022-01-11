@@ -188,7 +188,8 @@ document.getElementById('titleDesc'+counter).append(postsubtitle);
 var posturl = document.createElement('h3');
 posturl.id = 'post-url'+counter;
 posturl.className = 'post-url';  
-posturl.innerText = articlesArray[i].url;
+posturl.innerText = (articlesArray[i].url).substr(0,50) + "...";
+console.log((articlesArray[i].url).substr(0,45));
 document.getElementById('titleDesc'+counter).append(posturl);
 }
 
