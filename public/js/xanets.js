@@ -11,6 +11,8 @@ analytics.logEvent('Xanet Page Viewed', {
                 })
       .catch((error) => {
        });
+
+
     var solasysfromQ = new URLSearchParams(window.location.search);
      var solasysId = solasysfromQ.get('sId');
      var galaxzId = solasysfromQ.get('gId');
@@ -41,6 +43,10 @@ function countGoBackToSolasys(){
     //   views:firebase.database.ServerValue.increment(1)})
     //  }
 
+
+    // display solasys details 
+ 
+ GetSolasys();
 
 function GetXanets(){
 
@@ -88,10 +94,10 @@ function GetXanets(){
                     articlesArray.push(articlesObject)
                   
             });
-           //sorting , new articles appear at the top
+           //sorting , new ones appear at the bottom to from a list or a thread 
            articlesArray = articlesArray.filter(function(filterByStatus) {
             return filterByStatus.status == "Active"; });
-           articlesArray.reverse();
+           //articlesArray.reverse();
           
             AddXanetCell(articlesArray);
             
@@ -112,6 +118,7 @@ function AddXanetCell (articlesArray){
   const placeholder3 = document.getElementById('placeholder-animation3');
   placeholder3.innerHTML ='';
   
+
  var counter = 0;  
 
  for (i=0 ;i < articlesArray.length; i++){
@@ -188,8 +195,7 @@ document.getElementById('titleDesc'+counter).append(postsubtitle);
 var posturl = document.createElement('h3');
 posturl.id = 'post-url'+counter;
 posturl.className = 'post-url';  
-posturl.innerText = (articlesArray[i].url).substr(0,50) + "...";
-console.log((articlesArray[i].url).substr(0,45));
+posturl.innerText = (articlesArray[i].url).substr(0,40) + "...";
 document.getElementById('titleDesc'+counter).append(posturl);
 }
 
@@ -366,5 +372,107 @@ function IncrementShares(id){
     
  analytics.logEvent('Xanet Shared', { name: 'X?Shared'});
 
+
    
 }
+
+
+
+
+// display solasys at the top
+
+function GetSolasys(){
+
+
+  const database = firebase.database();
+  var  solasysArray = [];
+
+  database.ref('/solasys').orderByChild('solasysId')
+  .equalTo(solasysId).limitToLast(1)
+  .once("value",function(ALLRecords){
+      ALLRecords.forEach(
+          function(CurrentRecord) {
+      
+  var name = CurrentRecord.val().name;
+  var description = CurrentRecord.val().description;
+  var status = CurrentRecord.val().status;
+
+             var solasysObject = 
+                  {
+                  "name":name,
+                  "description":description,
+                  "status":status,
+                  
+                  };
+              
+               solasysArray.push(solasysObject)
+               
+                
+          });
+         // only the actice ones
+         solasysArray = solasysArray.filter(function(filterByStatus) {
+          return filterByStatus.status == "Active"; });
+          AddSolasysCell(solasysArray);
+      
+   });
+
+  }
+
+
+
+function AddSolasysCell (solasysArray){
+
+var solasystitle = document.createElement('h5');
+solasystitle.className = 'post-title';
+solasystitle.innerText = "SOLASYS";
+document.getElementById('maindiv').append(solasystitle);
+
+       var counter = 0;  
+
+ for (i=0 ;i < solasysArray.length; i++){
+   
+   
+var solasysdiv = document.createElement('div');
+solasysdiv.className = 'post-preview';
+solasysdiv.id = 'solasysdiv'+counter;
+document.getElementById('maindiv').append(solasysdiv);
+
+
+var stitleDesc = document.createElement('a');
+stitleDesc.id = 'stitleDesc'+counter;
+document.getElementById('solasysdiv'+counter).append(stitleDesc);
+
+var stitle = document.createElement('h2');
+stitle.id = 'stitle'+counter;
+stitle.className = 'post-title';
+stitle.innerText = solasysArray[i].name;
+document.getElementById('stitleDesc'+counter).append(stitle);
+
+var spostsubtitle = document.createElement('h3');
+spostsubtitle.id = 'spostsubtitle'+counter;
+spostsubtitle.className = 'post-subtitle';
+spostsubtitle.innerText = solasysArray[i].description;
+document.getElementById('stitleDesc'+counter).append(spostsubtitle);
+
+
+var hr31 = document.createElement("hr");
+hr31.className='my-4';
+document.getElementById('maindiv').append(hr31);
+
+var xanettitle = document.createElement('h5');
+xanettitle.className = 'post-title';
+xanettitle.innerText = "XANETS under the SOLASYS";
+document.getElementById('maindiv').append(xanettitle);
+
+
+var br34 = document.createElement("br");
+br34.className='my-4';
+document.getElementById('maindiv').append(br34);
+
+
+
+++counter;
+
+}
+
+  }
