@@ -48,6 +48,8 @@ function countGoBackToSolasys(){
  
  GetSolasys();
 
+ // then Xanets
+
 function GetXanets(){
 
     const database = firebase.database();
@@ -275,7 +277,7 @@ document.getElementById('maindiv').append(galaxzdiv);
 
 var title = document.createElement('h2');
 title.id = 'post-title';
-title.className = 'post-title';
+//title.setAttribute('style',"color:#0085A1");
 title.innerText = "Oops! this SOLASYS is uninhabitable, click the Rocket to go back and check out other SOLASYS";
 document.getElementById('galaxzdiv').append(title);
 
@@ -379,7 +381,7 @@ function IncrementShares(id){
 
 
 
-// display solasys at the top
+// display solasys details at the top
 
 function GetSolasys(){
 
@@ -423,7 +425,7 @@ function GetSolasys(){
 function AddSolasysCell (solasysArray){
 
 var solasystitle = document.createElement('h5');
-solasystitle.className = 'post-title';
+solasystitle.setAttribute('style',"color:#0085A1");
 solasystitle.innerText = "SOLASYS";
 document.getElementById('maindiv').append(solasystitle);
 
@@ -460,8 +462,8 @@ hr31.className='my-4';
 document.getElementById('maindiv').append(hr31);
 
 var xanettitle = document.createElement('h5');
-xanettitle.className = 'post-title';
-xanettitle.innerText = "XANETS under the SOLASYS";
+xanettitle.setAttribute('style',"color:#0085A1");
+xanettitle.innerText = "XANETS revolving around the SOLASYS";
 document.getElementById('maindiv').append(xanettitle);
 
 

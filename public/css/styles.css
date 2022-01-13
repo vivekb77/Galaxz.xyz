@@ -11295,9 +11295,9 @@ white-space: nowrap;
 	{
 		font-size: 16px;
 	}
-	.post-preview > a > .post-url
+  .post-preview > a > .post-url
 	{
-		font-size: 16px;
+		font-size: 14px;
 	}
 	header.masthead
 	{

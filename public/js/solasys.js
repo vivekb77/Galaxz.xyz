@@ -38,7 +38,9 @@ firebase.auth().signInAnonymously()
     //   database.ref('/galaxz/' +galaxzId).update({ 
     //   views:firebase.database.ServerValue.increment(1)})
     //  }
-
+// display galaxz details first
+GetGalaxz();
+// then solasys
 function GetSolasys(){
 
 
@@ -240,7 +242,7 @@ document.getElementById('maindiv').append(galaxzdiv);
 
 var title = document.createElement('h2');
 title.id = 'post-title';
-title.className = 'post-title';
+//title.setAttribute('style',"color:#0085A1");
 title.innerText = "Oops! this GALAXZ is uninhabitable, click the Rocket to go back and check out other GALAXZies";
 document.getElementById('galaxzdiv').append(title);
 
@@ -340,3 +342,100 @@ function IncrementShares(id){
    analytics.logEvent('Solasys Shared', { name: 'X?Shared'});
 
 }
+
+
+
+
+// display galaxz details at the top
+
+function GetGalaxz(){
+
+
+  const database = firebase.database();
+  var  galaxzArray = [];
+
+  database.ref('/galaxz').orderByChild('galaxzId')
+  .equalTo(galaxzId).limitToLast(1)
+  .once("value",function(ALLRecords){
+      ALLRecords.forEach(
+          function(CurrentRecord) {
+      
+  var name = CurrentRecord.val().name;
+  var description = CurrentRecord.val().description;
+  var status = CurrentRecord.val().status;
+
+             var galaxzObject = 
+                  {
+                  "name":name,
+                  "description":description,
+                  "status":status,
+                  };
+              
+                  galaxzArray.push(galaxzObject)
+             
+          });
+         // only the active ones
+         galaxzArray = galaxzArray.filter(function(filterByStatus) {
+          return filterByStatus.status == "Active"; });
+          AddGalaxzCell(galaxzArray);
+      
+   });
+
+  }
+
+
+
+function AddGalaxzCell (galaxzArray){
+
+var galaxztitle = document.createElement('h5');
+galaxztitle.setAttribute('style',"color:#0085A1");
+galaxztitle.innerText = "GALAXZ";
+document.getElementById('maindiv').append(galaxztitle);
+
+       var counter = 0;  
+
+ for (i=0 ;i < galaxzArray.length; i++){
+   
+   
+var galaxzdivnext = document.createElement('div');
+galaxzdivnext.className = 'post-preview';
+galaxzdivnext.id = 'galaxzdivnext'+counter;
+document.getElementById('maindiv').append(galaxzdivnext);
+
+
+var gtitleDesc = document.createElement('a');
+gtitleDesc.id = 'gtitleDesc'+counter;
+document.getElementById('galaxzdivnext'+counter).append(gtitleDesc);
+
+var gtitle = document.createElement('h2');
+gtitle.id = 'gtitle'+counter;
+gtitle.className = 'post-title';
+gtitle.innerText = galaxzArray[i].name;
+document.getElementById('gtitleDesc'+counter).append(gtitle);
+
+var gpostsubtitle = document.createElement('h3');
+gpostsubtitle.id = 'gpostsubtitle'+counter;
+gpostsubtitle.className = 'post-subtitle';
+gpostsubtitle.innerText = galaxzArray[i].description;
+document.getElementById('gtitleDesc'+counter).append(gpostsubtitle);
+
+
+var hr = document.createElement("hr");
+hr.className='my-4';
+document.getElementById('maindiv').append(hr);
+
+var galaxztitle444 = document.createElement('h5');
+galaxztitle444.setAttribute('style',"color:#0085A1");
+galaxztitle444.innerText = "SOLASYS revolving around the GALAXZ";
+document.getElementById('maindiv').append(galaxztitle444);
+
+
+var br = document.createElement("br");
+br.className='my-4';
+document.getElementById('maindiv').append(br);
+
+++counter;
+
+}
+
+  }

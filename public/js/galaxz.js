@@ -26,7 +26,7 @@ function GetGalaxz(){
  if (galaxzId !== null){
 
     var sharedgalaxz = document.createElement('h5');
-    sharedgalaxz.className = 'post-title';
+    sharedgalaxz.setAttribute('style',"color:#0085A1");
     sharedgalaxz.innerText = "Home Galaxz";
     document.getElementById('maindiv').append(sharedgalaxz);
     var brshared = document.createElement("br");
@@ -82,7 +82,7 @@ var priority = CurrentRecord.val().priority;
         }
         else{  // no galaxz to show , this error message
             var otherGalaxzies = document.createElement('h5');
-            otherGalaxzies.className = 'post-title';
+            otherGalaxzies.setAttribute('style',"color:#0085A1");
             otherGalaxzies.innerText = "Oops! the Galaxz you are looking for is unreachable";
             document.getElementById('maindiv').append(otherGalaxzies);
             var brshared1 = document.createElement("br");
@@ -91,7 +91,7 @@ var priority = CurrentRecord.val().priority;
         }
         
         var otherGalaxzies = document.createElement('h5');
-        otherGalaxzies.className = 'post-title';
+        otherGalaxzies.setAttribute('style',"color:#0085A1");
         otherGalaxzies.innerText = "Other interesting Galaxzies you may like";
         document.getElementById('maindiv').append(otherGalaxzies);
         var brshared1 = document.createElement("br");
