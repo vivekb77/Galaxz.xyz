@@ -16,16 +16,16 @@ firebase.auth().signInAnonymously()
     var galaxzId = galaxzIdfromQ.get('gId')
     var solasysId = galaxzIdfromQ.get('sId');
 
-    var gobacktoG = document.getElementById('gobacktoG');
-    gobacktoG.setAttribute('href', "index.html?gId="+galaxzId);
-    gobacktoG.setAttribute('onclick', "countGoBackToGalaxz()");
-    var br1 = document.createElement("br");
-     document.getElementById('gobacktoG').append(br1);
-     var rocketship = document.createElement('img');
-    rocketship.id = 'rocketship';
-    rocketship.className = 'rocketshipgoback';
-    rocketship.src = 'assets/rocketship.svg';
-    document.getElementById('gobacktoG').append(rocketship);
+    // var gobacktoG = document.getElementById('gobacktoG');
+    // gobacktoG.setAttribute('href', "index.html?gId="+galaxzId);
+    // gobacktoG.setAttribute('onclick', "countGoBackToGalaxz()");
+    // var br1 = document.createElement("br");
+    //  document.getElementById('gobacktoG').append(br1);
+    //  var rocketship = document.createElement('img');
+    // rocketship.id = 'rocketship';
+    // rocketship.className = 'rocketshipgoback';
+    // rocketship.src = 'assets/rocketship.svg';
+    // document.getElementById('gobacktoG').append(rocketship);
     
           //for google analytics to count how many navigates from solasys to Galaxz view
      function countGoBackToGalaxz(){
@@ -143,9 +143,9 @@ document.getElementById('toppara'+counter).append(curatedDate);
 
 
 var titleDesc = document.createElement('a');
-titleDesc.setAttribute('href', "xanets.html?gId="+ solasysArray[i].galaxzId+ "&sId=" +solasysArray[i].solasysId);
+titleDesc.setAttribute('href', "planets.html?gId="+ solasysArray[i].galaxzId+ "&sId=" +solasysArray[i].solasysId);
 titleDesc.id = 'titleDesc'+counter;
-titleDesc.setAttribute('onclick', "IncrementView(this.id)");
+//titleDesc.setAttribute('onclick', "IncrementView(this.id)");
 titleDesc.value = solasysArray[i].solasysId;
 document.getElementById('galaxzdiv'+counter).append(titleDesc);
 
@@ -243,7 +243,7 @@ document.getElementById('maindiv').append(galaxzdiv);
 var title = document.createElement('h2');
 title.id = 'post-title';
 //title.setAttribute('style',"color:#0085A1");
-title.innerText = "Oops! this GALAXZ is uninhabitable, click the Rocket to go back and check out other GALAXZies";
+title.innerText = "Oops! this GALAXZ got no SOLASYS, click the Rocket to go back and check out other GALAXZies";
 document.getElementById('galaxzdiv').append(title);
 
 var rocketclick = document.createElement('a');
@@ -266,16 +266,16 @@ analytics.logEvent('No Solasys shown error', { name: 'fatal error'});
 }
 
 
-//increment views in DB when clicked
-function IncrementView(id){
-  //view counting need to move to xanet js to count views from direct link visits rather than just clicks on solasys here
-  //tried but if sid is wrong in the Qstring it add a new solasys
-    var clickedSolasystag = document.getElementById(id);
-    const database = firebase.database();
-    database.ref('/solasys/' +clickedSolasystag.value).update({ 
-    views:firebase.database.ServerValue.increment(1)})
+// //increment views in DB when clicked
+// function IncrementView(id){
+//   //view counting need to move to xanet js to count views from direct link visits rather than just clicks on solasys here
+//   //tried but if sid is wrong in the Qstring it add a new solasys
+//     var clickedSolasystag = document.getElementById(id);
+//     const database = firebase.database();
+//     database.ref('/solasys/' +clickedSolasystag.value).update({ 
+//     views:firebase.database.ServerValue.increment(1)})
  
-}
+// }
 
 
 //increment followers by 1 on the UI and DB
@@ -396,12 +396,10 @@ document.getElementById('maindiv').append(galaxztitle);
 
  for (i=0 ;i < galaxzArray.length; i++){
    
-   
 var galaxzdivnext = document.createElement('div');
 galaxzdivnext.className = 'post-preview';
 galaxzdivnext.id = 'galaxzdivnext'+counter;
 document.getElementById('maindiv').append(galaxzdivnext);
-
 
 var gtitleDesc = document.createElement('a');
 gtitleDesc.id = 'gtitleDesc'+counter;
@@ -420,22 +418,52 @@ gpostsubtitle.innerText = galaxzArray[i].description;
 document.getElementById('gtitleDesc'+counter).append(gpostsubtitle);
 
 
-var hr = document.createElement("hr");
-hr.className='my-4';
-document.getElementById('maindiv').append(hr);
+//go back to galaxz button 
+var div4534 = document.createElement("div");
+div4534.className = 'rocketshipgobackahref';
+div4534.id = 'div4534';
+document.getElementById('maindiv').append(div4534);
+
+var gobacktoG = document.createElement('a');
+gobacktoG.setAttribute('href', "index.html?gId="+galaxzId);
+gobacktoG.setAttribute('onclick', "countGoBackToGalaxz()");
+gobacktoG.id = 'gobacktoG';
+document.getElementById('div4534').append(gobacktoG);
+
+var rocketship = document.createElement('img');
+rocketship.id = 'rocketship';
+rocketship.className = 'rocketshipgoback';
+rocketship.src = 'assets/rocketship.png';
+document.getElementById('gobacktoG').append(rocketship);
+
+var hr6666 = document.createElement("hr");
+hr6666.className='my-4';
+document.getElementById('maindiv').append(hr6666);
 
 var galaxztitle444 = document.createElement('h5');
 galaxztitle444.setAttribute('style',"color:#0085A1");
-galaxztitle444.innerText = "SOLASYS revolving around the GALAXZ";
+galaxztitle444.innerText = "SOLASYS";
 document.getElementById('maindiv').append(galaxztitle444);
 
-
-var br = document.createElement("br");
-br.className='my-4';
-document.getElementById('maindiv').append(br);
+var br33334 = document.createElement("br");
+br33334.className='my-4';
+document.getElementById('maindiv').append(br33334);
 
 ++counter;
+
+
+
+
 
 }
 
   }
+
+IncrementGalaxzView();
+  //increment a view on galaxz in DB when solasys page is viewed
+function IncrementGalaxzView(){
+  const database = firebase.database();
+  database.ref('/galaxz/' +galaxzId).update({ 
+  views:firebase.database.ServerValue.increment(1)})
+
+}

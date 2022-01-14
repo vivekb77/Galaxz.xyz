@@ -203,7 +203,7 @@ document.getElementById('toppara'+counter).append(curatedDate);
 
 var titleDesc = document.createElement('a');
 titleDesc.setAttribute('href', "solasys.html?gId="+ galaxzArray[i].galaxzId);
-titleDesc.setAttribute('onclick', "IncrementView(this.id)");
+//titleDesc.setAttribute('onclick', "IncrementView(this.id)");
 titleDesc.id = 'titleDesc'+counter;
 titleDesc.value = galaxzArray[i].galaxzId;
 document.getElementById('galaxzdiv'+counter).append(titleDesc);
@@ -316,14 +316,14 @@ document.getElementById('galaxzdiv1').append(title);
 
 }
 
-//increment a view in DB when g clicked
-function IncrementView(id){
-    var clickedGalaxztag = document.getElementById(id);
-    const database = firebase.database();
-    database.ref('/galaxz/' +clickedGalaxztag.value).update({ 
-    views:firebase.database.ServerValue.increment(1)})
+// //increment a view in DB when g clicked
+// function IncrementView(id){
+//     var clickedGalaxztag = document.getElementById(id);
+//     const database = firebase.database();
+//     database.ref('/galaxz/' +clickedGalaxztag.value).update({ 
+//     views:firebase.database.ServerValue.increment(1)})
  
-}
+// }
 
 //increment followers by 1 on the UI and DB
 function IncrementFollows(id){
