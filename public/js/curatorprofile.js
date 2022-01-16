@@ -81,7 +81,7 @@ function GetCuratorGalaxzies(){
         
            //sorting , the higher the priority, the above galaxz appears
            galaxzArray.sort((a, b) => {
-           return a.priority - a.priority;
+            return b.priority - a.priority;
            
        });
         
@@ -249,6 +249,26 @@ analytics.logEvent('No Galaxz shown on curator profile page error', { name: 'fat
 
 }
 
+//go back to galaxz button at the bottom
+var div4534 = document.createElement("div");
+div4534.className = 'rocketshipgobackahref';
+div4534.id = 'div4534';
+document.getElementById('maindiv').append(div4534);
+
+var gobacktoG = document.createElement('a');
+gobacktoG.setAttribute('href', "index.html");
+gobacktoG.setAttribute('onclick', "countGoBackToGalaxz()");
+gobacktoG.id = 'gobacktoG';
+document.getElementById('div4534').append(gobacktoG);
+
+var rocketship = document.createElement('img');
+rocketship.id = 'rocketship';
+rocketship.className = 'rocketshipgoback';
+rocketship.src = 'assets/rocketship.png';
+document.getElementById('gobacktoG').append(rocketship);
+var br89999 = document.createElement('br');
+document.getElementById('maindiv').append(br89999);
+
 }
 
 //increment views in DB when clicked
@@ -326,3 +346,7 @@ function IncrementShares(id){
 
 
 
+     //for google analytics to count how many navigates from C profile to G view
+     function countGoBackToGalaxz(){
+      analytics.logEvent('User Navigated from Curator Profile to Galaxz', { name: 'NavFromCPtoG'});
+   }

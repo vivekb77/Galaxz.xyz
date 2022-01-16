@@ -456,7 +456,7 @@ spostsubtitle.className = 'post-subtitle';
 spostsubtitle.innerText = solasysArray[i].description;
 document.getElementById('stitleDesc'+counter).append(spostsubtitle);
 
-//go back to galaxz button 
+//go back to solasys button 
 var div4534 = document.createElement("div");
 div4534.className = 'rocketshipgobackahref';
 div4534.id = 'div4534';

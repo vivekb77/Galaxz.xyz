@@ -11271,6 +11271,11 @@ white-space: nowrap;
   width: 20px;
    height : 20px;
 }
+.img-bottompara1 {
+  width: 30px;
+   height : 30px;
+   margin-right: 50px;
+}
 .post-meta a span
 {
 	width: 70%;
