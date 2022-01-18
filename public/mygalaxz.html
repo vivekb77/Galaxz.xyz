@@ -58,9 +58,16 @@
 					<div class="col-md-10 col-lg-8 col-xl-7 px-4" id="maindiv">
 					   <!-- DOM here -->
 					   
-					   <h5 className = "post-title">View / Update / Add New / Delete Galaxzies</h5><br/>
-                       
-					<br>
+					   <h2 class = "post-title">View / Add / Update / Delete GALAXZies</h2>
+                       <br/>
+                       <div class="info" id="info">     
+                       <a id="curatorprofilelink" target="blank">
+                                <h3 class="subheading">View Profile as a Reader</h3>
+                            </a>
+                            
+                             <h4 class="subheading">We've created the SPACE, you add the MATTER bound by GRAVITY</h4>
+                       </div>
+                      
 					  <!-- DOM ends -->
 
 								   <!-- Content Placeholder 1-->
@@ -135,6 +142,22 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <ul class="list-inline text-center">
                             <li class="list-inline-item">
+<!-- delete confirm  pop up -->
+<div class="modal-container1" id="modal-container">
+    <div class="modalpopup1">
+      <h6>Confirm Delete</h6></br>
+    <button class="btn-closepopup1" id="deleteGalaxzeee">Delete</button>
+    <button class="btn-closepopup1" id="closepopup">Cancel</button>
+    </div>
+</div>
+
+<!--  sharenurl  pop up -->
+<div class="modal-container1" id="modal-container-url">
+    <div class="modalpopup1">
+    <h6 id="url"></h6><br>
+    <button class="btn-closepopup1" id="copy-url">Copy Link</button>
+    </div>
+</div>
 
                             </li>
                         </ul>
@@ -161,8 +184,7 @@
     <script src="js/scripts.js"></script>
     
     <script src="js/mygalaxz.js"></script>
-
-
+   
         
     </body>
 </html>

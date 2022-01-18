@@ -11375,7 +11375,16 @@ white-space: nowrap;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
   
+}
+
+.info {
+  display:block;
+}
+.mygalaxzinfo {
+  width: 70px;
+   height : 50px;
 }
 
 .universe {
@@ -11402,7 +11411,6 @@ white-space: nowrap;
 
 .modalpopup{
   background-color: #fff;
-  display: flex;
   align-items: center;
   justify-content:center;
   position: fixed;
@@ -11431,6 +11439,57 @@ color: #fff;
 font-size: 14px;
 padding: 10px 25px;
 }
+
+/* sharing pop up end */
+
+/* mygalaxz delete pop up */
+
+.modal-container1{
+  
+  background-color: #fff;
+  position:relative;
+  width: 20vw;
+  height: 10vh;
+  display:none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+ 
+}
+
+.modalpopup1{
+  background-color: #fff;
+  align-items: center;
+  justify-content:center;
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  width: auto;
+  height: 10vh;
+  max-width: 100%;
+  border-radius: 5px;
+  padding: 30px 50px;
+  box-shadow:0px 2px 4px rgba(0, 0, 0, .2);
+ 
+}
+
+.modal-container1.show{
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.btn-closepopup1{
+background-color: #000;
+border-radius: 5px;
+border:0;
+box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+color: #fff;
+font-size: 14px;
+padding: 10px 25px;
+}
+
+/* mygalaxz delete pop up end */
 
 /* Skeleton Loading Animation With CSS */
 
@@ -11484,3 +11543,8 @@ border-radius: .125rem;
       margin-bottom: .25rem;
       border-radius: .125rem;
       }
+
+/* radio buttons  */
+.radiobuttons { width: 1.2em; height: 1.2em;
+ }
+

@@ -1,3 +1,5 @@
+analytics.logEvent('MyGalaxz Page used', { name: ''});
+
 function logout(){
     firebase.auth().signOut()
     location.replace("login.html") //  send to home page to login after logout
@@ -51,6 +53,8 @@ function getCuratorDetails(){
 // get curator's galaxies
 
 var  galaxzArray = [];
+var counter = 0;  
+var isitnewG = "No";  
 
 function GetCuratorGalaxzies(){
 
@@ -102,19 +106,75 @@ function GetCuratorGalaxzies(){
             // return filterByStatus.status == "Active"; });
         
            //sorting , the higher the priority, the above galaxz appears
-    //        galaxzArray.sort((a, b) => {
-    //         return b.priority - a.priority;
+          // galaxzArray.sort((a, b) => {
+           //return b.priority - a.priority;
+
+            // current behaviour - new ones at the top
+           galaxzArray.reverse();
            
     //    });
-
-        // current behaviour - new ones at the bottom
-        
         AddGalaxzCell(galaxzArray);
-       
         });
 
 }
 
+
+//this one to get the galaxz added by curator in real time
+function GetNewAddedGalaxz(NewAddedGalaxzId){
+isitnewG = "Yes";
+galaxzArray = []; //clear the array to remove existing ones
+
+    // pull the newly added g
+    const database = firebase.database();
+    
+    database.ref('/galaxz').orderByChild("galaxzId")
+    .equalTo(NewAddedGalaxzId).limitToLast(1)  
+    .once("value",function(ALLRecords){
+        ALLRecords.forEach(
+            function(CurrentRecord) {
+               
+    var galaxzId = CurrentRecord.val().galaxzId;
+    var createdBy = CurrentRecord.val().createdBy;
+    var createdById = CurrentRecord.val().createdById;
+    var createdDate = CurrentRecord.val().createdDate;
+    var status = CurrentRecord.val().status;
+    var name = CurrentRecord.val().name;
+    var description = CurrentRecord.val().description;
+    var numberOfSolasys = CurrentRecord.val().numberOfSolasys;
+    var views = CurrentRecord.val().views;
+    var followers = CurrentRecord.val().followers;
+    var shares = CurrentRecord.val().shares;
+    var priority = CurrentRecord.val().priority;
+    
+          let options = { month: 'short', day: 'numeric' };
+           let formatteddate0  = new Date(createdDate);
+          var formatteddate = (formatteddate0.toLocaleDateString("en-US", options));
+
+               var galaxzObject = 
+                    {"galaxzId":galaxzId,
+                    "createdBy":createdBy,
+                    "createdById":createdById,
+                    "formatteddate":formatteddate,
+                    "status":status,
+                    "name":name,
+                    "description":description,
+                    "numberOfSolasys":numberOfSolasys,
+                    "views":views,
+                    "followers":followers,
+                    "shares":shares,
+                    "priority":priority};
+                
+
+                 galaxzArray.push(galaxzObject)
+                  
+            });
+            
+        
+        AddGalaxzCell(galaxzArray);
+           
+        });
+
+}
 
 
 
@@ -128,17 +188,50 @@ function AddGalaxzCell (galaxzArray){
       placeholder2.innerHTML ='';
       const placeholder3 = document.getElementById('placeholder-animation3');
       placeholder3.innerHTML ='';
-      
-   
-    var counter = 0;  
+ 
+//only execute this once
+if(counter==0){    
+//share profile 
+document.getElementById('curatorprofilelink').setAttribute('href', "https://galaxz.xyz/curatorprofile.html?cId="+curatorId+"&cName="+curatorName);
+
+// add galaxz button
+var addGalaxz = document.createElement('img');
+addGalaxz.id = 'addGalaxz';
+addGalaxz.className = 'mygalaxzinfo';
+addGalaxz.src = 'assets/submit.svg';
+addGalaxz.setAttribute('onclick', "AddNewGalaxz()");
+document.getElementById('info').append(addGalaxz);
+var bdsfdfdfdsdfsdfr = document.createElement("br");
+document.getElementById('info').append(bdsfdfdfdsdfsdfr);
+}
+
+//add div holder for add galaxz div to hold childs
+var gadddivholderroot = document.createElement("div");
+gadddivholderroot.id = 'gadddivholderroot';
+document.getElementById('maindiv').append(gadddivholderroot);
+
+var bdsfsdfsdfr = document.createElement("br");
+document.getElementById('maindiv').append(bdsfsdfsdfr);
+
+//placeholder div for newly added Galaxz so that it appears at the top
+var newlyaddedGplaceholderdiv = document.createElement('div');
+newlyaddedGplaceholderdiv.className = 'post-preview';
+newlyaddedGplaceholderdiv.id = 'newlyaddedGplaceholderdiv';
+document.getElementById('maindiv').append(newlyaddedGplaceholderdiv);
+
+//add galaxzies from db
 
  for (i=0 ;i < galaxzArray.length; i++){
-   
    
 var galaxzdiv = document.createElement('div');
 galaxzdiv.className = 'post-preview';
 galaxzdiv.id = 'galaxzdiv'+counter;
+if(isitnewG == "Yes"){
+document.getElementById('newlyaddedGplaceholderdiv').append(galaxzdiv);
+}
+if(isitnewG == "No"){
 document.getElementById('maindiv').append(galaxzdiv);
+}
 
 var toppara = document.createElement('p');
 toppara.className = 'post-meta';
@@ -243,7 +336,14 @@ document.getElementById('galaxzdiv'+counter).append(actionbuttons);
 
 var statusofG = document.createElement('h6');
 statusofG.className = 'img-bottompara1';
+statusofG.id = 'statusofG'+counter;
 statusofG.innerText = galaxzArray[i].status;
+if(statusofG.innerText=="Active"){
+statusofG.setAttribute('style',"color:green");
+}
+if(statusofG.innerText=="InActive"){
+statusofG.setAttribute('style',"color:red");
+}
 document.getElementById('actionbuttons'+counter).append(statusofG);
 
 var actionbuttonEdit = document.createElement('img');
@@ -258,7 +358,7 @@ var actionbuttonDelete = document.createElement('img');
 actionbuttonDelete.id = 'actionbuttonDelete'+counter;
 actionbuttonDelete.className = 'img-bottompara1';
 actionbuttonDelete.value = galaxzArray[i].galaxzId;   
-actionbuttonDelete.setAttribute('onclick', "DeleteGalaxz(this.value)");
+actionbuttonDelete.setAttribute('onclick', "DeleteGalaxz(this.id,this.value)");
 actionbuttonDelete.src = 'assets/deleteG.svg';
 document.getElementById('actionbuttons'+counter).append(actionbuttonDelete);
 
@@ -270,58 +370,30 @@ actionbuttonShare.setAttribute('onclick', "ShareGalaxz(this.value)");
 actionbuttonShare.src = 'assets/shareG.svg';
 document.getElementById('actionbuttons'+counter).append(actionbuttonShare);
 
-//edit galaxz area start
+//edit galaxz area div start
+//root div for edit galaxz elements
 var div3423dfdf423 = document.createElement("div");
 div3423dfdf423.id = 'editgalaxzdiv'+counter;
 document.getElementById('galaxzdiv'+counter).append(div3423dfdf423);
 
-//edit galaxz area end
+//edit galaxz area div end
 
 var hr = document.createElement("hr");
 hr.className='my-4';
 hr.id = 'hr'+counter;
 document.getElementById('galaxzdiv'+counter).append(hr);
 
-++counter;
-
-}
+++counter;  
+ }
+++counter;  //counter outside if as well, because it should be incremented even when there are zero galaxzies under curator or plus button is added twice
 
 //remove the last hr only if there is data in the array
-if (galaxzArray.length>0)
+if (galaxzArray.length>1)
 {
-    let len = galaxzArray.length - 1;
+    let len = galaxzArray.length-1;
     document.getElementById('hr'+len).remove();
    
 }
-else{
-//if there is no data , ask to add new GALAXZ
-var galaxzdiv = document.createElement('div');
-galaxzdiv.className = 'post-preview';
-galaxzdiv.id = 'galaxzdiv';
-document.getElementById('maindiv').append(galaxzdiv);
-
-var title = document.createElement('h2');
-title.id = 'post-title';
-title.className = 'post-title';
-title.innerText = "You do not own GALAXZies, Create your first GALAXZ";
-document.getElementById('galaxzdiv').append(title);
-
-}
-
-//create a new GALAXZ 
-var div4534 = document.createElement("div");
-div4534.className = 'rocketshipgobackahref';
-div4534.id = 'div4534';
-document.getElementById('maindiv').append(div4534);
-
-var rocketship = document.createElement('img');
-rocketship.id = 'rocketship';
-rocketship.className = 'rocketshipgoback';
-rocketship.src = 'assets/rocketship.png';
-rocketship.setAttribute('onclick', "AddNewGalaxz()");
-document.getElementById('div4534').append(rocketship);
-var br89999 = document.createElement('br');
-document.getElementById('maindiv').append(br89999);
 
 }
 
@@ -331,15 +403,24 @@ document.getElementById('maindiv').append(br89999);
 // create new galaxz
 function AddNewGalaxz(){
 
-    div4534.remove();   // remove the button 
-    
-var div3423423 = document.createElement("div");
+document.getElementById('addGalaxz').style.display = 'none';   // remove the "add galaxz" button 
+let succmess = document.getElementById('successmessage');
+if(document.body.contains(succmess)){
+    succmess.innerText = "";   // clear ,not remove element as needed again, the "success message" if present 
+}
+
+var div3423423 = document.createElement("div");  //child div appended to root div
 div3423423.id = 'div3423423';
-document.getElementById('maindiv').append(div3423423);
+document.getElementById('gadddivholderroot').append(div3423423);
 
-var br4ddfdfdsfdsdfd5345 =document.createElement('hr');
-document.getElementById('div3423423').append(br4ddfdfdsfdsdfd5345);
+//add success  message label to root div
+var successmessage = document.createElement('h6');
+successmessage.className = 'post-meta';
+successmessage.id = 'successmessage';
+successmessage.setAttribute('style',"color:green");
+document.getElementById('gadddivholderroot').append(successmessage);
 
+//append all add elements to chhild div
 var sdfsdfsdfsdfsdf =document.createElement('h5');
 sdfsdfsdfsdfsdf.innerText = "Add new GALAXZ";
 sdfsdfsdfsdfsdf.setAttribute('style',"color:Green");
@@ -358,7 +439,7 @@ document.getElementById('div3423423').append(br4dfd5345);
 var titletextarea = document.createElement('textarea');
 titletextarea.id = 'titletextarea';
 titletextarea.className = 'post-title';
-titletextarea.setAttribute('placeholder',"80 chars");
+titletextarea.setAttribute('placeholder',"80 chars max");
 titletextarea.setAttribute('rows',"3");
 titletextarea.setAttribute('cols',"60");
 //titletextarea.setAttribute('minlength',"4");
@@ -380,7 +461,7 @@ document.getElementById('div3423423').append(br4dfdf5345);
 var descriptiontextarea = document.createElement('textarea');
 descriptiontextarea.id = 'descriptiontextarea';
 descriptiontextarea.className = 'post-title';
-descriptiontextarea.setAttribute('placeholder',"140 chars");
+descriptiontextarea.setAttribute('placeholder',"140 chars max");
 descriptiontextarea.setAttribute('rows',"5");
 descriptiontextarea.setAttribute('cols',"60");
 //descriptiontextarea.setAttribute('minlength',"4");
@@ -418,6 +499,10 @@ actionbuttoncancel.src = 'assets/cancel.svg';
 document.getElementById('submitcancelbuttons').append(actionbuttoncancel);
 
 
+
+// var br4ddfdfdsfdsdfd5345 =document.createElement('hr');
+// document.getElementById('div3423423').append(br4ddfdfdsfdsdfd5345);
+
 }
 
 function CancelAddingGalaxz(){
@@ -425,6 +510,9 @@ function CancelAddingGalaxz(){
     document.getElementById('titletextarea').value = "";
     document.getElementById('descriptiontextarea').value = "";
     document.getElementById('errormessage').innerText = "";
+    document.getElementById('div3423423').remove();  //hide the child div with all add elements
+    document.getElementById('addGalaxz').style.display = 'block'  // add the "ADD galaxz" button 
+    
     
 }
 
@@ -454,14 +542,13 @@ const database = firebase.database();
 const usersRef = database.ref('/galaxz');
 const autoId = usersRef.push().key
 
-
 usersRef.child(autoId).set({
  name: gname.trim(),
  description: gdescription.trim(),
  createdBy: curatorName,
  createdById: curatorId,
  galaxzId: autoId,
- priority:1001, 
+ priority:1,   //so that it appears at the bottom , admin will update the priority
  status: "InActive",
  numberOfSolasys:  0,
  views: 0,
@@ -471,14 +558,21 @@ usersRef.child(autoId).set({
 
 })
 
-var sdfsdfdfddfdfdfddf = document.getElementById('errormessage')
-sdfsdfdfddfdfdfddf.innerText = "GALAXZ Added, refresh the page to view it. It is InActive, we will verify and make it Active";
+var sdfsdfdfddfdfdfddf = document.getElementById('successmessage')
+sdfsdfdfddfdfdfddf.innerText = "GALAXZ Added. It is InActive now, add SOLASYS and PLANETS, then make it Active by editing and Share with READERS.";
 sdfsdfdfddfdfdfddf.setAttribute('style',"color:green");
+
 //clear the textareas
 document.getElementById('titletextarea').value = "";
 document.getElementById('descriptiontextarea').value = "";
+document.getElementById('div3423423').remove();  //hide the text area
+document.getElementById('addGalaxz').style.display = 'block'  // add the button 
+
+
+GetNewAddedGalaxz(autoId);  // add the newly added Galaxz to the UI
 
 }
+
 
 //ADD GALAXZ END 
 
@@ -487,11 +581,18 @@ document.getElementById('descriptiontextarea').value = "";
 //EDIT GALAXZ START 
 
 //show the text areas under the galaxz
+var gtitleedited;
+var gdescedited ;
+var statusofG;
+
 
 function EditGalaxz(tagid,galId){
 
-    var gname;
-    var gdesc;
+    let gname;
+    let gdesc;
+    let status;
+    
+
     // get g name and g desc from db for the edited g
 const database = firebase.database();
 database.ref('/galaxz').orderByChild('galaxzId')
@@ -502,9 +603,17 @@ database.ref('/galaxz').orderByChild('galaxzId')
                
      gname = CurrentRecord.val().name;
      gdesc = CurrentRecord.val().description;
+     status = CurrentRecord.val().status;
           });
           titletextarea44.innerText = gname;
           descriptiontextarea33.innerText = gdesc;
+          if(status == "Active"){
+           document.getElementById('radiobuttonActive').setAttribute('checked',"checked");
+        }
+        if(status == "InActive"){
+           document.getElementById('radiobuttonInactive').setAttribute('checked',"checked");
+        }
+
        });  
 
   // first remove the edit boxes if its already displayed for another galaxz and then add for other because we are reusing ids
@@ -513,17 +622,40 @@ if (document.body.contains(element))
 {
     element.remove();
 }
+var successmessage443333 =  document.getElementById('successmessage443');
+if (document.body.contains(successmessage443333))
+{
+    successmessage443333.remove();
+}
 
 var galId = galId;
-//get the editgalaxzdiv tag of the galaxz where edit button was clicked and append all edinting elements
+//get the editgalaxzdiv tag of the galaxz where edit button was clicked and append all editing elements
 
 let extractnumberfromid = tagid.substr(16);
    
 var clickededitgalaxzdivtagroot = "editgalaxzdiv"+extractnumberfromid;
 
+gtitleedited = "post-title"+extractnumberfromid;  // UpdateGalaxzAfterEdit() to work
+ gdescedited = "post-subtitle"+extractnumberfromid; // for UpdateGalaxzAfterEdit() to work
+ statusofG = "statusofG"+extractnumberfromid;  //for UpdateGalaxzAfterEdit() to work
+ 
+//success message tag to rootedit div
+var successmessage443 =document.createElement('h6');
+successmessage443.id = 'successmessage443';
+successmessage443.className = 'post-meta';
+successmessage443.setAttribute('style',"color:green");
+document.getElementById(clickededitgalaxzdivtagroot).append(successmessage443);
+
+//child tag under rootedit div which hold all editing elements 
 var divchild =document.createElement('div');
 divchild.id = 'clickededitgalaxzdivtag';
 document.getElementById(clickededitgalaxzdivtagroot).append(divchild);
+
+
+var titletexfdft4433 =document.createElement('h5');
+titletexfdft4433.innerText = "Update Galaxz";
+titletexfdft4433.setAttribute('style',"color:green");
+document.getElementById('clickededitgalaxzdivtag').append(titletexfdft4433);
 
 var titletext4433 =document.createElement('h5');
 titletext4433.innerText = "Galaxz Title";
@@ -540,7 +672,6 @@ titletextarea44.setAttribute('rows',"3");
 titletextarea44.setAttribute('cols',"60");
 //titletextarea.setAttribute('minlength',"4");
 titletextarea44.setAttribute('maxlength',"80");
-console.log(gname);
 document.getElementById('clickededitgalaxzdivtag').append(titletextarea44);
 
 var dfdfdfdfdfdf =document.createElement('br');
@@ -565,6 +696,34 @@ descriptiontextarea33.setAttribute('cols',"60");
 descriptiontextarea33.setAttribute('maxlength',"140");
 document.getElementById('clickededitgalaxzdivtag').append(descriptiontextarea33);
 
+var br4dfdfdfd5dfd345 =document.createElement('br');
+document.getElementById('clickededitgalaxzdivtag').append(br4dfdfdfd5dfd345);
+
+var titletexfdft4433 =document.createElement('h6');
+titletexfdft4433.innerText = "Active";
+document.getElementById('clickededitgalaxzdivtag').append(titletexfdft4433);
+
+var radiobuttons = document.createElement('INPUT');
+radiobuttons.setAttribute('type',"radio");
+radiobuttons.id = 'radiobuttonActive';
+radiobuttons.className = 'radiobuttons';
+radiobuttons.setAttribute('name',"Samename");
+radiobuttons.setAttribute('value',"Active");
+document.getElementById('clickededitgalaxzdivtag').append(radiobuttons);
+
+var titletexfddffdft4433 =document.createElement('h6');
+titletexfddffdft4433.innerText = "InActive";
+document.getElementById('clickededitgalaxzdivtag').append(titletexfddffdft4433);
+
+var radiobuttons = document.createElement('INPUT');
+radiobuttons.setAttribute('type',"radio");
+radiobuttons.id = 'radiobuttonInactive';
+radiobuttons.className = 'radiobuttons';
+radiobuttons.setAttribute('name',"Samename");
+radiobuttons.setAttribute('value',"InActive");
+document.getElementById('clickededitgalaxzdivtag').append(radiobuttons);
+
+
 
 //error message label
 var errormessage545 = document.createElement('h6');
@@ -576,10 +735,10 @@ document.getElementById('clickededitgalaxzdivtag').append(errormessage545);
 //submit  / cancel buttons
 
 var actionbuttonSubmit4333 = document.createElement('img');
-actionbuttonSubmit4333.id = 'actionbuttonSubmit4333';
+actionbuttonSubmit4333.id = 'clickededitgalaxzdivtag';   //send this id of div holding all edit elemets so that div can be removd
 actionbuttonSubmit4333.className = 'img-bottompara1'; 
 actionbuttonSubmit4333.value = galId;  
-actionbuttonSubmit4333.setAttribute('onclick', "UpdateGalaxz(this.value)");
+actionbuttonSubmit4333.setAttribute('onclick', "UpdateGalaxz(this.id,this.value)");
 actionbuttonSubmit4333.src = 'assets/submit.svg';
 document.getElementById('clickededitgalaxzdivtag').append(actionbuttonSubmit4333);
 
@@ -606,7 +765,7 @@ function CancelUpdatingGalaxz(clickededitgalaxzdivtagchild){
     
 }
 
-function UpdateGalaxz(galId){
+function UpdateGalaxz(childdivid,galId){
     
     //validate if text is entered
     if (document.getElementById("titletextarea44").value == "")
@@ -622,39 +781,123 @@ function UpdateGalaxz(galId){
         return false;
     }
     
-//add galaxz
+//update galaxz
 
 
 const gname = document.getElementById("titletextarea44").value;
 const gdescription = document.getElementById("descriptiontextarea33").value;
+const status = document.querySelector('input[name = Samename]:checked').value;
 
 const database = firebase.database();
 
 database.ref('/galaxz/' +galId).update({ 
  name: gname.trim(),
  description: gdescription.trim(),
+ status:status,
 })
 
-var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
-sdfsdfdfddfdfdfddf.innerText = "GALAXZ Updated, refresh the page to view it";
-sdfsdfdfddfdfdfddf.setAttribute('style',"color:green");
+var sdfsdfdfddfdfdfddf = document.getElementById('successmessage443')
+sdfsdfdfddfdfdfddf.innerText = "GALAXZ Updated";
 //clear the textareas
 document.getElementById('titletextarea44').value = "";
 document.getElementById('descriptiontextarea33').value = "";
+document.getElementById(childdivid).remove();
+UpdateUIAfterEdit(galId);
 
 }
+
+// update the UI with new details
+function UpdateUIAfterEdit(galId){
+let gname;
+let gdesc
+let status
+ 
+    // get g name and g desc for the edited after eding is done
+const database = firebase.database();
+database.ref('/galaxz').orderByChild('galaxzId')
+    .equalTo(galId).limitToFirst(1)  
+    .once("value",function(ALLRecords){
+        ALLRecords.forEach(
+            function(CurrentRecord) {
+               
+     gname = CurrentRecord.val().name;
+     gdesc = CurrentRecord.val().description;
+     status = CurrentRecord.val().status;
+          });
+          
+          document.getElementById(gtitleedited).innerText = gname;
+          document.getElementById(gdescedited).innerText = gdesc;
+          if(status=="Active"){
+            document.getElementById(statusofG).innerText = status;
+            document.getElementById(statusofG).setAttribute('style',"color:green");
+            }
+            if(status=="InActive"){
+                document.getElementById(statusofG).innerText = status;
+                document.getElementById(statusofG).setAttribute('style',"color:red");
+                }
+       
+
+       });  
+    }
 
 //EDIT GALAXZ END 
 
 
 //DELECT GALAXZ START
-function DeleteGalaxz(galId){
+function DeleteGalaxz(tagId,galId){
+    //first remove the error message
+    var element =  document.getElementById('cantdeletegalaxz');
+      if (document.body.contains(element))
+       {
+     element.remove();
+       }
 
-// const database = firebase.database();
-// database.ref('/galaxz/' +galId).remove();
-// var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
-// sdfsdfdfddfdfdfddf.innerText = "GALAXZ Deleted, refresh the page to view the changes";
-// sdfsdfdfddfdfdfddf.setAttribute('style',"color:green");
+
+      //show po up
+      var showpopup = document.getElementById('modal-container');
+      showpopup.classList.add('show');
+      showpopup.style.display = "flex";
+    //close popup
+      var  closepopup = document.getElementById('closepopup');
+        closepopup.onclick = function() {
+        showpopup.style.display = "none";
+    }
+      //delete Galaxz
+      var deleteGalaxzeee = document.getElementById('deleteGalaxzeee');
+      deleteGalaxzeee.onclick = function() {
+        showpopup.style.display = "none";
+       
+       let extractnumberfromid = tagId.substr(18);
+       var clickedgalaxzdiv = "galaxzdiv"+extractnumberfromid;
+       var numberofsolasys = "solasysval"+extractnumberfromid;
+       var noofsolasys = document.getElementById(numberofsolasys).innerText;
+       
+       //can delete only if number of  solasys = 0
+       if(noofsolasys > 0){
+        var clickededitgalaxzdivtagroot = "editgalaxzdiv"+extractnumberfromid;
+        //success message tag to rootedit div
+        var cantdeletegalaxz =document.createElement('h6');
+        cantdeletegalaxz.id = 'cantdeletegalaxz';
+        cantdeletegalaxz.className = 'post-meta';
+        cantdeletegalaxz.innerText = "There are SOLASYS under this GALAXZ, delete them first to delete GALAXZ";
+        cantdeletegalaxz.setAttribute('style',"color:red");
+        document.getElementById(clickededitgalaxzdivtagroot).append(cantdeletegalaxz);
+       }
+      else{
+        const database = firebase.database();
+        database.ref('/galaxz/' +galId).remove();
+        document.getElementById(clickedgalaxzdiv).remove();   // remove the deleted galaxz from UI
+       }
+    
+    }
+
+    //click anywhere , close pop up
+    // window.onclick = function(event) {
+    //     if (event.target == showpopup) {
+    //         showpopup.style.display = "none";
+    //         //console.log("clicked")
+    //     }
+    //   }
 
 }
 
@@ -662,10 +905,34 @@ function DeleteGalaxz(galId){
 
 //SHARE GALAXZ START
 function ShareGalaxz(galId){
-    var urltoshare = "galaxz.xyz/index.html?gId="+galId;
-// var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
-// sdfsdfdfddfdfdfddf.innerText = "GALAXZ link copied, share the link with others";
-// sdfsdfdfddfdfdfddf.setAttribute('style',"color:green");
+    var urltoshare = "https://galaxz.xyz/index.html?gId="+galId;
+     //show popup
+     var showpopup = document.getElementById('modal-container-url');
+     showpopup.classList.add('show');
+     showpopup.style.display = "flex";
+
+     var urldisplay = document.getElementById('url');
+     urldisplay.innerText = urltoshare;
+   //copy url 
+     var  copyurl = document.getElementById('copy-url');
+       copyurl.onclick = function() {
+           
+       if (!navigator.clipboard) {
+       showpopup.style.display = "none";
+       }
+// works only on https
+        navigator.clipboard
+        .writeText(urltoshare);
+        showpopup.style.display = "none";
+       
+       }
+  
+  //click anywhere , close pop up
+    // window.onclick = function(event) {
+    //     if (event.target == showpopup) {
+    //         showpopup.style.display = "none";
+    //     }
+    //   }
 }
 
 //SHARE GALAXZ END

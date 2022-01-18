@@ -242,8 +242,11 @@ document.getElementById('maindiv').append(galaxzdiv);
 var title = document.createElement('h2');
 title.id = 'post-title';
 title.className = 'post-title';
-title.innerText = "Oops! something went wrong!";
+title.innerText = "No Galaxzies to show!";
 document.getElementById('galaxzdiv').append(title);
+
+var sdfsdfsdf = document.createElement('br');
+document.getElementById('galaxzdiv').append(sdfsdfsdf);
 
 analytics.logEvent('No Galaxz shown on curator profile page error', { name: 'fatal error'});
 
