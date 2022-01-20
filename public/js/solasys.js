@@ -5,42 +5,30 @@ analytics.logEvent('Solasys Page Viewed', {
     items: [{ name: 'x?Solasyspageviewd' }]
   });
 
-firebase.auth().signInAnonymously()
-.then(() => {
-
-})
-.catch((error) => {
-});
+//only sign in ano if no user 
+  checkLogin();
+  function checkLogin() {
+      firebase.auth().onAuthStateChanged((user)=>{
+          if(!user){
+              firebase.auth().signInAnonymously();
+              //console.log(user);
+          }
+      })
+  }
 
     var galaxzIdfromQ = new URLSearchParams(window.location.search);
     var galaxzId = galaxzIdfromQ.get('gId')
     var solasysId = galaxzIdfromQ.get('sId');
 
-    // var gobacktoG = document.getElementById('gobacktoG');
-    // gobacktoG.setAttribute('href', "index.html?gId="+galaxzId);
-    // gobacktoG.setAttribute('onclick', "countGoBackToGalaxz()");
-    // var br1 = document.createElement("br");
-    //  document.getElementById('gobacktoG').append(br1);
-    //  var rocketship = document.createElement('img');
-    // rocketship.id = 'rocketship';
-    // rocketship.className = 'rocketshipgoback';
-    // rocketship.src = 'assets/rocketship.svg';
-    // document.getElementById('gobacktoG').append(rocketship);
-    
-          //for google analytics to count how many navigates from solasys to Galaxz view
+    //for google analytics to count how many navigates from solasys to Galaxz view
      function countGoBackToGalaxz(){
         analytics.logEvent('User Navigated from Solasys to Galaxz', { name: 'NavFromStoG'});
      }
 
-    //  // add +1 view ot galaxz / views when user visits via a link rather than clicking galaxz
-    //  if (solasysId == null){
-    //   const database = firebase.database();
-    //   database.ref('/galaxz/' +galaxzId).update({ 
-    //   views:firebase.database.ServerValue.increment(1)})
-    //  }
 // display galaxz details first
 GetGalaxz();
 // then solasys
+GetSolasys();
 function GetSolasys(){
 
 
@@ -264,18 +252,6 @@ analytics.logEvent('No Solasys shown error', { name: 'fatal error'});
 }
 
 }
-
-
-// //increment views in DB when clicked
-// function IncrementView(id){
-//   //view counting need to move to xanet js to count views from direct link visits rather than just clicks on solasys here
-//   //tried but if sid is wrong in the Qstring it add a new solasys
-//     var clickedSolasystag = document.getElementById(id);
-//     const database = firebase.database();
-//     database.ref('/solasys/' +clickedSolasystag.value).update({ 
-//     views:firebase.database.ServerValue.increment(1)})
- 
-// }
 
 
 //increment followers by 1 on the UI and DB

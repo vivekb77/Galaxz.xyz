@@ -5,19 +5,16 @@ analytics.logEvent('Curator Profile Page Viewed', {
     items: [{ name: 'x?Curatorprofilepageviewd' }]
   });
 
-firebase.auth().signInAnonymously()
-.then(() => {
-
-})
-.catch((error) => {
-
-});
-// firebase.auth().onAuthStateChanged((user) => {
-//     if (user) {
-//       var uid = user.uid;
-//       console.log(uid);
-//     } 
-//   });
+//only sign in ano if no user 
+checkLogin();
+function checkLogin() {
+    firebase.auth().onAuthStateChanged((user)=>{
+        if(!user){
+            firebase.auth().signInAnonymously();
+            //console.log(user);
+        }
+    })
+}
 
     var curatorIdfromQ = new URLSearchParams(window.location.search);
     var curatorId = curatorIdfromQ.get('cId');

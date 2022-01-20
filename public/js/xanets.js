@@ -5,28 +5,22 @@ analytics.logEvent('Planets Page Viewed', {
     items: [{ name: 'x?Planetpageviewd' }]
   });
 
-    firebase.auth().signInAnonymously()
-     .then(() => {
-
-                })
-      .catch((error) => {
-       });
+  //only sign in ano if no user 
+checkLogin();
+function checkLogin() {
+    firebase.auth().onAuthStateChanged((user)=>{
+        if(!user){
+            firebase.auth().signInAnonymously();
+            //console.log(user);
+        }
+    })
+}
 
 
     var solasysfromQ = new URLSearchParams(window.location.search);
      var solasysId = solasysfromQ.get('sId');
      var galaxzId = solasysfromQ.get('gId');
  
-    //  var gobacktoS = document.getElementById('gobacktoS');
-    //  gobacktoS.setAttribute('href', "solasys.html?gId="+ galaxzId);
-    //  gobacktoS.setAttribute('onclick', "countGoBackToSolasys()");
-    //  var br1 = document.createElement("br");
-    //  document.getElementById('gobacktoS').append(br1);
-    //  var rocketship = document.createElement('img');
-    // rocketship.id = 'rocketship';
-    // rocketship.className = 'rocketshipgoback';
-    // rocketship.src = 'assets/rocketship.svg';
-    //  document.getElementById('gobacktoS').append(rocketship);
      
      //for google analytics to count how many navigates from S to G view
 function countGoBackToSolasys(){
@@ -35,21 +29,13 @@ function countGoBackToSolasys(){
 
      var  articlesArray = [];
 
-
-     // add +1 view ot solasys / views / adding here so that views  via a link are captured  along with clicking solasys
-    //  if (solasysId !== null){
-    //   const database = firebase.database();
-    //   database.ref('/solasys/' +solasysId).update({ 
-    //   views:firebase.database.ServerValue.increment(1)})
-    //  }
-
-
-    // display solasys details 
+// display solasys details 
  
  GetSolasys();
 
  // then Xanets
-
+ GetXanets();
+ 
 function GetXanets(){
 
     const database = firebase.database();
@@ -494,8 +480,7 @@ document.getElementById('maindiv').append(br34);
 ++counter;
 
 }
-
-  }
+}
 
 IncrementSolasysView();
  //increment views for solasys in DB when planet page is viewed

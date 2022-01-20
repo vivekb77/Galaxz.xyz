@@ -4,13 +4,19 @@ analytics.logEvent('Galaxz Page Viewed', {
   items: [{ name: 'x?Galaxzpageviewd' }]
 });
 
-firebase.auth().signInAnonymously()
-  .then(() => {
- 
-})
-.catch((error) => {
-  });
 
+//only sign in ano if no user 
+checkLogin();
+function checkLogin() {
+    firebase.auth().onAuthStateChanged((user)=>{
+        if(!user){
+            firebase.auth().signInAnonymously();
+            //console.log(user);
+        }
+    })
+}
+
+  
 
 
 var galaxzIdfromQ = new URLSearchParams(window.location.search);
@@ -75,7 +81,9 @@ var priority = CurrentRecord.val().priority;
             
                 galaxzArrayQ.push(galaxzObjectQ)
         });
-       
+         galaxzArrayQ = galaxzArrayQ.filter(function(filterByStatus) {
+          return filterByStatus.status == "Active"; });
+         
         //only call the func if there is data , happens if gid in url is wrong
         if (galaxzArrayQ.length >0){
         AddGalaxzCell(galaxzArrayQ);
@@ -356,21 +364,32 @@ function IncrementShares(id){
     let extractnumberfromid = id.substr(9);
     let galaxznametag = "post-title"+extractnumberfromid;
     var galaxzname = document.getElementById(galaxznametag).innerText;
-    var messagetoshare = "Hey! check out this Galaxz about "+galaxzname; 
+    var messagetoshare = galaxzname; 
 
-      //show po up
-   var showpopup = document.getElementById('modal-container');
+   //show popup
+   var showpopup = document.getElementById('modal-container-url');
    showpopup.classList.add('show');
    showpopup.style.display = "flex";
- //close popup
-   var  closepopup = document.getElementById('closepopup');
-   closepopup.addEventListener('click',()=>{
-     showpopup.classList.remove('show');
+
+   var urldisplay = document.getElementById('url');
+   urldisplay.innerText = urltoshare;
+   var galaxztoshare = document.getElementById('galaxztoshare');
+   galaxztoshare.innerText = messagetoshare;
+
+ //copy url 
+   var  copyurl = document.getElementById('copy-url');
+     copyurl.onclick = function() {
+         
+     if (!navigator.clipboard) {
      showpopup.style.display = "none";
-   });
-   //close pop up by ciicking outside of it
-  //code
-    
+     }
+// works only on https
+      navigator.clipboard
+      .writeText(urltoshare);
+      showpopup.style.display = "none";
+     
+     }
+     
 
      //increment shares by 1 on the UI and DB
     let newid1 = id.substr(9);
@@ -389,4 +408,6 @@ function IncrementShares(id){
 
    
 }
+
+
 

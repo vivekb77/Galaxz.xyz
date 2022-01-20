@@ -26,23 +26,14 @@
     <body class="d-flex justify-content-center p-5">
         <div class="card">
             <div class="card-header">
-                <center><h3>Login</h3></center>
+                <center><h3>SIGN IN</h3></center>
             </div>
-            <form onsubmit="login()" id="loginForm" class="card-body px-5 py-4">
-                <center><small><span id="error" style="color: red"></span></small></center>
-                <center><label class="custom-field">
-                    <input id="email" type="text" class="input" required />
-                    <span class="placeholder">Email Id</span>
-                </label><br />
-                <label class="custom-field">
-                    <input id="password" type="password" class="input" required />
-                    <span class="placeholder">Password</span>
-                </label></center><br /><br/>
-                <!-- <a href="#" onclick="forgotPass()">Forgot Password</a>    -->
-                <center><button type="submit" class="btn btn-primary">Login</button>
-                <!-- <button onclick="signUp()" class="btn btn-secondary">Sign Up</button> -->
+            
+                <center><button id="loginwithgoogle" class="btn btn-primary">Google</button>
+                  
+                <button id="loginwithtwitter" class="btn btn-secondary">Twitter</button>
                 </center>
-            </form>
+          
         </div>
            <!-- The core Firebase JS SDK is always required and must be listed first -->
     <!-- <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script> use this for prod , remove below one -->

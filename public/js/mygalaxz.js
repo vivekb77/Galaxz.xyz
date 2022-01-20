@@ -11,16 +11,27 @@ var curatorEmail;
 var curatorId ;
 var curatorName;
 
-checkLogin();
+
 function checkLogin() {
     firebase.auth().onAuthStateChanged((user)=>{
+
         if(!user){
-            location.replace("login.html") // if user is not logged in , send to home page to login
-        }else{
-            document.getElementById("curatoremail").innerHTML = user.email  // if user is logged in , show my galaxz page
-            curatorEmail = user.email;
+            location.replace("login.html") // if user is not logged in , send to login
+        }
+        if(user){
+            var userisAorNot = user.isAnonymous.toString();
+
+            if(userisAorNot === "true"){
+                location.replace("login.html") // if user isAnonymous and not logged in , send to home page to login
+            }
+            if(userisAorNot === "false"){
+                document.getElementById("curatoremail").innerHTML = user.email  // if user is logged in , show my galaxz page
+                curatorEmail = user.email;
+                curatorId = user.uid;
+               // var uid = user.uid;
+                getCuratorDetails();
+            }
             
-            getCuratorDetails();
             
         }
     })
@@ -31,20 +42,19 @@ function checkLogin() {
 function getCuratorDetails(){
     const database = firebase.database();
     
-    database.ref('/curators').orderByChild('curatorEmail')
-    .equalTo(curatorEmail).limitToFirst(1)  
+    database.ref('/curators').orderByChild('curatorId')
+    .equalTo(curatorId).limitToFirst(1)  
     .once("value",function(ALLRecords){
         ALLRecords.forEach(
             function(CurrentRecord) {
                
-     curatorId = CurrentRecord.val().curatorId;
-     curatorName = CurrentRecord.val().curatorname;
+     curatorName = CurrentRecord.val().curatorName;
      
-     var cname = document.getElementById('curatorname');
-     cname.innerText = curatorName;
+     document.getElementById('curatorname').innerText = curatorName;
+     
     
           });
-          GetCuratorGalaxzies();
+          GetCuratorGalaxzies(curatorId);
        });  
        
 }
@@ -56,8 +66,7 @@ var  galaxzArray = [];
 var counter = 0;  
 var isitnewG = "No";  
 
-function GetCuratorGalaxzies(){
-
+function GetCuratorGalaxzies(curatorId){
     // pull all galaxzies created by curator 
     const database = firebase.database();
     
@@ -99,7 +108,7 @@ function GetCuratorGalaxzies(){
                     "priority":priority};
                 
                  galaxzArray.push(galaxzObject)
-                  
+                 
             });
            // filter the inactive ones
             // galaxzArray = galaxzArray.filter(function(filterByStatus) {
@@ -113,6 +122,7 @@ function GetCuratorGalaxzies(){
            galaxzArray.reverse();
            
     //    });
+    
         AddGalaxzCell(galaxzArray);
         });
 
@@ -180,6 +190,7 @@ galaxzArray = []; //clear the array to remove existing ones
 
 
 function AddGalaxzCell (galaxzArray){
+    
 
       //remove the placeholer first
       const placeholder1 = document.getElementById('placeholder-animation1');
@@ -780,7 +791,7 @@ function UpdateGalaxz(childdivid,galId){
         sdfsdfdfddfdfdfddf.innerText = "Please enter Galaxz Description";
         return false;
     }
-    
+     
 //update galaxz
 
 

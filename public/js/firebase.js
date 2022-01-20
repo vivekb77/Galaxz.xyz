@@ -4,7 +4,8 @@
 
 const firebaseConfig = {
   apiKey: "AIzaSyCAFcJgh3zDD1QhIStikR9gMWxjaQ5tVnI",
-  authDomain: "galaxz.firebaseapp.com",
+  //authDomain: "galaxz.firebaseapp.com",
+  authDomain: "galaxz.xyz",  // for twitter and google auth
   databaseURL: "https://galaxz-default-rtdb.firebaseio.com",
   projectId: "galaxz",
   storageBucket: "galaxz.appspot.com",
