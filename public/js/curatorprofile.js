@@ -19,7 +19,7 @@ function checkLogin() {
     var curatorIdfromQ = new URLSearchParams(window.location.search);
     var curatorId = curatorIdfromQ.get('cId');
     var curatorName = curatorIdfromQ.get('cName');
-
+    document.getElementById('CuratorTitle').innerText = "GALAXZ - "+curatorName; // set the title of page to curator name
     var cname = document.getElementById('curatorname');
     cname.innerText = curatorName;
 

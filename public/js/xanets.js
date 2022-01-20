@@ -400,6 +400,7 @@ function GetSolasys(){
          // only the actice ones
          solasysArray = solasysArray.filter(function(filterByStatus) {
           return filterByStatus.status == "Active"; });
+          document.getElementById('XanetTitle').innerText = "SOLASYS - "+solasysArray[0].name; // set the title of page to solasys name
           AddSolasysCell(solasysArray);
       
    });

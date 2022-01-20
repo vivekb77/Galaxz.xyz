@@ -565,7 +565,9 @@ usersRef.child(autoId).set({
  views: 0,
  followers:0,
  shares: 0,
- createdDate: firebase.database.ServerValue.TIMESTAMP
+ createdDate: firebase.database.ServerValue.TIMESTAMP,
+ adminGpriority:1,   //gstatus and gpriority is used for displaying data on galaxz home page , we control that not the user
+ adminGstatus: "InActive",
 
 })
 

@@ -51,13 +51,13 @@ var createdBy = CurrentRecord.val().createdBy;
 var createdById = CurrentRecord.val().createdById;
 var createdDate = CurrentRecord.val().createdDate;
 var name = CurrentRecord.val().name;
-var status = CurrentRecord.val().status;
+var status = CurrentRecord.val().status;   //curator made it active show at the top home ga;laxz section only when in Q string  , see pull all active g function
 var description = CurrentRecord.val().description;
 var numberOfSolasys = CurrentRecord.val().numberOfSolasys;
 var views = CurrentRecord.val().views;
 var followers = CurrentRecord.val().followers;
 var shares = CurrentRecord.val().shares;
-var priority = CurrentRecord.val().priority;
+var priority = CurrentRecord.val().priority;  //curator made it active show at the top when in Q string
            
 
       let options = { month: 'short', day: 'numeric' };
@@ -112,7 +112,7 @@ var priority = CurrentRecord.val().priority;
 
     const database = firebase.database();
     
-    database.ref('/galaxz').orderByChild("status")
+    database.ref('/galaxz').orderByChild("adminGstatus")
     .equalTo("Active").limitToLast(30)  
     .once("value",function(ALLRecords){
         ALLRecords.forEach(
@@ -123,13 +123,13 @@ var priority = CurrentRecord.val().priority;
     var createdById = CurrentRecord.val().createdById;
     var createdDate = CurrentRecord.val().createdDate;
     var name = CurrentRecord.val().name;
-    var status = CurrentRecord.val().status;
+    var status = CurrentRecord.val().adminGstatus;  //curator made it active but do not show on home page till admin makes it active and sets priority
     var description = CurrentRecord.val().description;
     var numberOfSolasys = CurrentRecord.val().numberOfSolasys;
     var views = CurrentRecord.val().views;
     var followers = CurrentRecord.val().followers;
     var shares = CurrentRecord.val().shares;
-    var priority = CurrentRecord.val().priority;
+    var priority = CurrentRecord.val().adminGpriority;   //curator made it active but do not show on home page till admin makes it active and sets priority
                
    
 

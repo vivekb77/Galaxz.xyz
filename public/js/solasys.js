@@ -353,7 +353,9 @@ function GetGalaxz(){
          // only the active ones
          galaxzArray = galaxzArray.filter(function(filterByStatus) {
           return filterByStatus.status == "Active"; });
+          document.getElementById('SolasysTitle').innerText = "GALAXZ - "+galaxzArray[0].name; // set the title of page to galaxz name
           AddGalaxzCell(galaxzArray);
+
       
    });
 
