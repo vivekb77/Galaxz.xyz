@@ -77,10 +77,10 @@ function GetSolasys(){
                  solasysArray.push(solasysObject)
                   
             });
-           //sorting , new solasys appear at the top
+           //sorting , new solasys appear at the bottom
            solasysArray = solasysArray.filter(function(filterByStatus) {
             return filterByStatus.status == "Active"; });
-            solasysArray.reverse();
+            //solasysArray.reverse();
             AddSolasysCell(solasysArray);
         
      });

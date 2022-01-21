@@ -124,7 +124,7 @@ function getGalaxzDetails(curatorId){
             // share solasys button at the top
             var sharelinktitle = document.createElement('h6');
             sharelinktitle.setAttribute('style',"color:#0085A1");
-            sharelinktitle.innerText = "Share SOLASYS";
+            sharelinktitle.innerText = "Share these SOLASYSes with Readers";
             document.getElementById('shareSolasys').append(sharelinktitle);
 
             var sharelink = document.createElement('img');
@@ -143,7 +143,7 @@ function getGalaxzDetails(curatorId){
             
             var galaxztitle = document.createElement('h5');
             galaxztitle.setAttribute('style',"color:red");
-            galaxztitle.innerText = "You do not own this GALAXZ to make changes to SOLASYS under it";
+            galaxztitle.innerText = "You do not own this GALAXZ to make changes to SOLASYSes under it";
             document.getElementById('shareSolasys').append(galaxztitle);
             
                //go back to mygalaxz button or login
@@ -184,7 +184,7 @@ function getGalaxzDetails(curatorId){
            else{
             var galaxztitle = document.createElement('h5');
             galaxztitle.setAttribute('style',"color:red");
-            galaxztitle.innerText = "You do not own this GALAXZ to make changes to SOLASYS under it";
+            galaxztitle.innerText = "You do not own this GALAXZ to make changes to SOLASYSes under it";
             document.getElementById('shareSolasys').append(galaxztitle);
             
                //go back to mygalaxz button or login
@@ -243,30 +243,30 @@ function getGalaxzDetails(curatorId){
   galaxztitle.innerText = "GALAXZ";
   document.getElementById('maindiv').append(galaxztitle);
   
-         var counter = 0;  
+         var gcounter = 0;  
   
    for (i=0 ;i < galaxzArray.length; i++){
      
   var galaxzdivnext = document.createElement('div');
   galaxzdivnext.className = 'post-preview';
-  galaxzdivnext.id = 'galaxzdivnext'+counter;
+  galaxzdivnext.id = 'galaxzdivnext'+gcounter;
   document.getElementById('maindiv').append(galaxzdivnext);
   
   var gtitleDesc = document.createElement('a');
-  gtitleDesc.id = 'gtitleDesc'+counter;
-  document.getElementById('galaxzdivnext'+counter).append(gtitleDesc);
+  gtitleDesc.id = 'gtitleDesc'+gcounter;
+  document.getElementById('galaxzdivnext'+gcounter).append(gtitleDesc);
   
   var gtitle = document.createElement('h2');
-  gtitle.id = 'gtitle'+counter;
+  gtitle.id = 'gtitle'+gcounter;
   gtitle.className = 'post-title';
   gtitle.innerText = galaxzArray[i].name;
-  document.getElementById('gtitleDesc'+counter).append(gtitle);
+  document.getElementById('gtitleDesc'+gcounter).append(gtitle);
   
   var gpostsubtitle = document.createElement('h3');
-  gpostsubtitle.id = 'gpostsubtitle'+counter;
+  gpostsubtitle.id = 'gpostsubtitle'+gcounter;
   gpostsubtitle.className = 'post-subtitle';
   gpostsubtitle.innerText = galaxzArray[i].description;
-  document.getElementById('gtitleDesc'+counter).append(gpostsubtitle);
+  document.getElementById('gtitleDesc'+gcounter).append(gpostsubtitle);
   
   
   //go back to galaxz button 
@@ -298,10 +298,11 @@ function getGalaxzDetails(curatorId){
   var brrrdfsdfdsrrr = document.createElement('br');
     document.getElementById('maindiv').append(brrrdfsdfdsrrr);
   
-  ++counter;
+  ++gcounter;
 
   
   }
+
   
     }
   
@@ -310,7 +311,7 @@ function getGalaxzDetails(curatorId){
 
     //  DISPLAY ALL SOLASYS DETAILS START
     var isitnewG = "No"; 
-    var counter = 0; 
+    var counter = 0;   // a global variable so that new ids are assigned to newly added solasys
     var  solasysArray = [];
     
 function GetExistingSolasys(){
@@ -370,11 +371,11 @@ function GetExistingSolasys(){
 
 
 function AddSolasysCell (solasysArray){
-   
+
 
  for (i=0 ;i < solasysArray.length; i++){
    
-   
+
     var galaxzdiv = document.createElement('div');
     galaxzdiv.className = 'post-preview';
     galaxzdiv.id = 'galaxzdiv'+counter;
@@ -526,8 +527,6 @@ document.getElementById('galaxzdiv'+counter).append(hr);
 
 }
 
-
-
 // //remove the last hr only if there is data in the array
 // if (solasysArray.length>0)
 // {
@@ -560,7 +559,7 @@ document.getElementById('maindiv').append(bdsfdfdfdfddsdfsdfr);
 // add solasys text and button
 var addSolasystext = document.createElement("h5");
 addSolasystext.id = "addSolasystext";
-addSolasystext.innerText = "Add New SOLASYS";
+addSolasystext.innerText = "Add a New SOLASYS";
 addSolasystext.setAttribute('style',"color:#0085A1");
 document.getElementById('maindiv').append(addSolasystext);
 
@@ -579,6 +578,9 @@ var bdsfdfdfdsdfsdfr = document.createElement("br");
 document.getElementById('maindiv').append(bdsfdfdfdsdfsdfr);
  }
 
+++counter;  
+// ++counter // issue when user ads first solasys add solasys buttton is added again becuase counter and length of array is same
+//so  the add solasys button is not added again is we ++ counter 
 
 }
 
@@ -647,11 +649,11 @@ function AddNewSolasys(){
     var descriptiontextarea = document.createElement('textarea');
     descriptiontextarea.id = 'descriptiontextarea';
     descriptiontextarea.className = 'post-title';
-    descriptiontextarea.setAttribute('placeholder',"140 chars max");
+    descriptiontextarea.setAttribute('placeholder',"180 chars max");
     descriptiontextarea.setAttribute('rows',"5");
     descriptiontextarea.setAttribute('cols',"60");
     //descriptiontextarea.setAttribute('minlength',"4");
-    descriptiontextarea.setAttribute('maxlength',"140");
+    descriptiontextarea.setAttribute('maxlength',"180");
     document.getElementById('childdivaddSolasys').append(descriptiontextarea);
     
     
@@ -685,10 +687,6 @@ function AddNewSolasys(){
     document.getElementById('submitcancelbuttons').append(actionbuttoncancel);
     
     
-    
-    // var br4ddfdfdsfdsdfd5345 =document.createElement('hr');
-    // document.getElementById('div3423423').append(br4ddfdfdsfdsdfd5345);
-    
     }
     
 
@@ -713,6 +711,18 @@ function AddSolasys(){
     {
         var sdfsdfdfdfdfddf = document.getElementById('errormessagelbl')
         sdfsdfdfdfdfddf.innerText = "Please enter Solasys Description";
+        return false;
+    }
+    if (document.getElementById("titletextarea").value.length > 80)
+    {
+        var sdfsdfdfddf = document.getElementById('errormessagelbl')
+        sdfsdfdfddf.innerText = "Please enter Solasys Title less than 80 chars";
+        return false;
+    }
+    if (document.getElementById("descriptiontextarea").value.length > 180)
+    {
+        var sdfsdfdfdfdfddf = document.getElementById('errormessagelbl')
+        sdfsdfdfdfdfddf.innerText = "Please enter Solasys Description less than 180 chars";
         return false;
     }
     
@@ -892,9 +902,9 @@ var statusofS;
 
 function EditSolasys(tagid,solId){
 
-    let gname;
-    let gdesc;
-    let status;
+    let sname;
+    let sdesc;
+    let sstatus;
     
 
     // get s name and s desc from db for the edited s
@@ -907,14 +917,14 @@ database.ref('/solasys').orderByChild('solasysId')
                
      sname = CurrentRecord.val().name;
      sdesc = CurrentRecord.val().description;
-     status = CurrentRecord.val().status;
+     sstatus = CurrentRecord.val().status;
           });
           titletextarea44.innerText = sname;
           descriptiontextarea33.innerText = sdesc;
-          if(status == "Active"){
+          if(sstatus == "Active"){
            document.getElementById('radiobuttonActive').setAttribute('checked',"checked");
         }
-        if(status == "InActive"){
+        if(sstatus == "InActive"){
            document.getElementById('radiobuttonInactive').setAttribute('checked',"checked");
         }
 
@@ -993,11 +1003,11 @@ document.getElementById('childdiveditsolasys').append(br4dfdfdfd5345);
 var descriptiontextarea33 = document.createElement('textarea');
 descriptiontextarea33.id = 'descriptiontextarea33';
 descriptiontextarea33.className = 'post-title';
-descriptiontextarea33.setAttribute('placeholder',"140 chars");
+descriptiontextarea33.setAttribute('placeholder',"180 chars");
 descriptiontextarea33.setAttribute('rows',"5");
 descriptiontextarea33.setAttribute('cols',"60");
 //descriptiontextarea.setAttribute('minlength',"4");
-descriptiontextarea33.setAttribute('maxlength',"140");
+descriptiontextarea33.setAttribute('maxlength',"180");
 document.getElementById('childdiveditsolasys').append(descriptiontextarea33);
 
 var br4dfdfdfd5dfd345 =document.createElement('br');
@@ -1082,6 +1092,18 @@ function UpdateSolasys(childdivid,solId){
     {
         var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
         sdfsdfdfddfdfdfddf.innerText = "Please enter Solasys Description";
+        return false;
+    }
+    if (document.getElementById("titletextarea44").value.length >80)
+    {
+        var sdfsdfffdfddf = document.getElementById('errormessage545')
+        sdfsdfffdfddf.innerText = "Please enter Solasys Title less than 80 chars";
+        return false;
+    }
+    if (document.getElementById("descriptiontextarea33").value.length>180)
+    {
+        var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
+        sdfsdfdfddfdfdfddf.innerText = "Please enter Solasys Description less than 180 chars";
         return false;
     }
      

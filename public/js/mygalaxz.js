@@ -205,6 +205,11 @@ if(counter==0){
 //share profile 
 document.getElementById('curatorprofilelink').setAttribute('href', "https://galaxz.xyz/curatorprofile.html?cId="+curatorId+"&cName="+curatorName);
 
+var sharelinktitle = document.createElement('h6');
+sharelinktitle.setAttribute('style',"color:#0085A1");
+sharelinktitle.innerText = "Use the share buttons on Galaxzies to share individual Galaxz url with Readers or share the profile url below";
+document.getElementById('shareGalaxzinfo').append(sharelinktitle);
+
 // add galaxz button
 var addGalaxz = document.createElement('img');
 addGalaxz.id = 'addGalaxz';
@@ -238,7 +243,7 @@ var galaxzdiv = document.createElement('div');
 galaxzdiv.className = 'post-preview';
 galaxzdiv.id = 'galaxzdiv'+counter;
 if(isitnewG == "Yes"){
-document.getElementById('newlyaddedGplaceholderdiv').append(galaxzdiv);
+document.getElementById('newlyaddedGplaceholderdiv').prepend(galaxzdiv);  // prepend to add elements to the top , appeand to add elements below
 }
 if(isitnewG == "No"){
 document.getElementById('maindiv').append(galaxzdiv);
@@ -472,11 +477,11 @@ document.getElementById('div3423423').append(br4dfdf5345);
 var descriptiontextarea = document.createElement('textarea');
 descriptiontextarea.id = 'descriptiontextarea';
 descriptiontextarea.className = 'post-title';
-descriptiontextarea.setAttribute('placeholder',"140 chars max");
+descriptiontextarea.setAttribute('placeholder',"180 chars max");
 descriptiontextarea.setAttribute('rows',"5");
 descriptiontextarea.setAttribute('cols',"60");
 //descriptiontextarea.setAttribute('minlength',"4");
-descriptiontextarea.setAttribute('maxlength',"140");
+descriptiontextarea.setAttribute('maxlength',"180");
 document.getElementById('div3423423').append(descriptiontextarea);
 
 
@@ -542,6 +547,18 @@ function AddGalaxz(){
         sdfsdfdfdfdfddf.innerText = "Please enter Galaxz Description";
         return false;
     }
+    if (document.getElementById("titletextarea").value.length >80 )
+    {
+        var sdfsdfdfddf = document.getElementById('errormessage')
+        sdfsdfdfddf.innerText = "Please enter Galaxz Title less than 80 chars";
+        return false;
+    }
+    if (document.getElementById("descriptiontextarea").value.length >180)
+    {
+        var sdfsdfdfdfdfddf = document.getElementById('errormessage')
+        sdfsdfdfdfdfddf.innerText = "Please enter Galaxz Description less than 180 chars";
+        return false;
+    }
     
 //add galaxz
 
@@ -572,7 +589,7 @@ usersRef.child(autoId).set({
 })
 
 var sdfsdfdfddfdfdfddf = document.getElementById('successmessage')
-sdfsdfdfddfdfdfddf.innerText = "GALAXZ Added. It is InActive now, add SOLASYS and PLANETS, then make it Active by editing and Share with READERS.";
+sdfsdfdfddfdfdfddf.innerText = "GALAXZ Added. It is InActive now, add SOLASYSes and PLANETS, then make it Active by editing and Share with READERS.";
 sdfsdfdfddfdfdfddf.setAttribute('style',"color:green");
 
 //clear the textareas
@@ -702,11 +719,11 @@ document.getElementById('clickededitgalaxzdivtag').append(br4dfdfdfd5345);
 var descriptiontextarea33 = document.createElement('textarea');
 descriptiontextarea33.id = 'descriptiontextarea33';
 descriptiontextarea33.className = 'post-title';
-descriptiontextarea33.setAttribute('placeholder',"140 chars");
+descriptiontextarea33.setAttribute('placeholder',"180 chars");
 descriptiontextarea33.setAttribute('rows',"5");
 descriptiontextarea33.setAttribute('cols',"60");
 //descriptiontextarea.setAttribute('minlength',"4");
-descriptiontextarea33.setAttribute('maxlength',"140");
+descriptiontextarea33.setAttribute('maxlength',"180");
 document.getElementById('clickededitgalaxzdivtag').append(descriptiontextarea33);
 
 var br4dfdfdfd5dfd345 =document.createElement('br');
@@ -791,6 +808,18 @@ function UpdateGalaxz(childdivid,galId){
     {
         var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
         sdfsdfdfddfdfdfddf.innerText = "Please enter Galaxz Description";
+        return false;
+    }
+    if (document.getElementById("titletextarea44").value.length > 80)
+    {
+        var sdfsdfffdfddf = document.getElementById('errormessage545')
+        sdfsdfffdfddf.innerText = "Please enter Galaxz Title less than 80 chars";
+        return false;
+    }
+    if (document.getElementById("descriptiontextarea33").value.length > 180)
+    {
+        var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
+        sdfsdfdfddfdfdfddf.innerText = "Please enter Galaxz Description less than 180 chars";
         return false;
     }
      
@@ -892,7 +921,7 @@ function DeleteGalaxz(tagId,galId){
         var cantdeletegalaxz =document.createElement('h6');
         cantdeletegalaxz.id = 'cantdeletegalaxz';
         cantdeletegalaxz.className = 'post-meta';
-        cantdeletegalaxz.innerText = "There are SOLASYS under this GALAXZ, delete them first to delete GALAXZ";
+        cantdeletegalaxz.innerText = "There are SOLASYSes under this GALAXZ, delete them first to delete GALAXZ";
         cantdeletegalaxz.setAttribute('style',"color:red");
         document.getElementById(clickededitgalaxzdivtagroot).append(cantdeletegalaxz);
        }
