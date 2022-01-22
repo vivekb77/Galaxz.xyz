@@ -535,25 +535,25 @@ function CancelAddingGalaxz(){
 function AddGalaxz(){
     
     //validate if text is entered
-    if (document.getElementById("titletextarea").value == "")
+    if (document.getElementById("titletextarea").value.trim() == "")
     {
         var sdfsdfdfddf = document.getElementById('errormessage')
         sdfsdfdfddf.innerText = "Please enter Galaxz Title";
         return false;
     }
-    if (document.getElementById("descriptiontextarea").value == "")
+    if (document.getElementById("descriptiontextarea").value.trim() == "")
     {
         var sdfsdfdfdfdfddf = document.getElementById('errormessage')
         sdfsdfdfdfdfddf.innerText = "Please enter Galaxz Description";
         return false;
     }
-    if (document.getElementById("titletextarea").value.length >80 )
+    if (document.getElementById("titletextarea").value.trim().length >80 )
     {
         var sdfsdfdfddf = document.getElementById('errormessage')
         sdfsdfdfddf.innerText = "Please enter Galaxz Title less than 80 chars";
         return false;
     }
-    if (document.getElementById("descriptiontextarea").value.length >180)
+    if (document.getElementById("descriptiontextarea").value.trim().length >180)
     {
         var sdfsdfdfdfdfddf = document.getElementById('errormessage')
         sdfsdfdfdfdfddf.innerText = "Please enter Galaxz Description less than 180 chars";
@@ -798,25 +798,25 @@ function CancelUpdatingGalaxz(clickededitgalaxzdivtagchild){
 function UpdateGalaxz(childdivid,galId){
     
     //validate if text is entered
-    if (document.getElementById("titletextarea44").value == "")
+    if (document.getElementById("titletextarea44").value.trim() == "")
     {
         var sdfsdfffdfddf = document.getElementById('errormessage545')
         sdfsdfffdfddf.innerText = "Please enter Galaxz Title";
         return false;
     }
-    if (document.getElementById("descriptiontextarea33").value == "")
+    if (document.getElementById("descriptiontextarea33").value.trim() == "")
     {
         var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
         sdfsdfdfddfdfdfddf.innerText = "Please enter Galaxz Description";
         return false;
     }
-    if (document.getElementById("titletextarea44").value.length > 80)
+    if (document.getElementById("titletextarea44").value.trim().length > 80)
     {
         var sdfsdfffdfddf = document.getElementById('errormessage545')
         sdfsdfffdfddf.innerText = "Please enter Galaxz Title less than 80 chars";
         return false;
     }
-    if (document.getElementById("descriptiontextarea33").value.length > 180)
+    if (document.getElementById("descriptiontextarea33").value.trim().length > 180)
     {
         var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
         sdfsdfdfddfdfdfddf.innerText = "Please enter Galaxz Description less than 180 chars";
@@ -894,6 +894,18 @@ function DeleteGalaxz(tagId,galId){
      element.remove();
        }
 
+       //get the number of solasys from db
+    var noofsolasys;
+    const database = firebase.database();
+    database.ref('/galaxz').orderByChild('galaxzId')
+    .equalTo(galId).limitToFirst(1)  
+    .once("value",function(ALLRecords){
+    ALLRecords.forEach(
+        function(CurrentRecord) {
+            
+        noofsolasys = CurrentRecord.val().numberOfSolasys;
+        });
+    });
 
       //show po up
       var showpopup = document.getElementById('modal-container');
@@ -909,11 +921,11 @@ function DeleteGalaxz(tagId,galId){
       deleteGalaxzeee.onclick = function() {
         showpopup.style.display = "none";
        
-       let extractnumberfromid = tagId.substr(18);
-       var clickedgalaxzdiv = "galaxzdiv"+extractnumberfromid;
-       var numberofsolasys = "solasysval"+extractnumberfromid;
-       var noofsolasys = document.getElementById(numberofsolasys).innerText;
-       
+    let extractnumberfromid = tagId.substr(18);
+    var clickedgalaxzdiv = "galaxzdiv"+extractnumberfromid;
+       // var numberofsolasys = "solasysval"+extractnumberfromid;
+
+     
        //can delete only if number of  solasys = 0
        if(noofsolasys > 0){
         var clickededitgalaxzdivtagroot = "editgalaxzdiv"+extractnumberfromid;
@@ -926,20 +938,14 @@ function DeleteGalaxz(tagId,galId){
         document.getElementById(clickededitgalaxzdivtagroot).append(cantdeletegalaxz);
        }
       else{
+        
         const database = firebase.database();
         database.ref('/galaxz/' +galId).remove();
         document.getElementById(clickedgalaxzdiv).remove();   // remove the deleted galaxz from UI
        }
     
     }
-
-    //click anywhere , close pop up
-    // window.onclick = function(event) {
-    //     if (event.target == showpopup) {
-    //         showpopup.style.display = "none";
-    //         //console.log("clicked")
-    //     }
-    //   }
+      
 
 }
 

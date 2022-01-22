@@ -360,21 +360,21 @@ function IncrementShares(id){
     //url to share
      var urltoshare = "https://galaxz.xyz/index.html?gId="+ clickedGalaxztag.value;
 
-     //name of galaxz to share
-    let extractnumberfromid = id.substr(9);
-    let galaxznametag = "post-title"+extractnumberfromid;
-    var galaxzname = document.getElementById(galaxznametag).innerText;
-    var messagetoshare = galaxzname; 
+    //  //name of galaxz to share
+    // let extractnumberfromid = id.substr(9);
+    // let galaxznametag = "post-title"+extractnumberfromid;
+    // var galaxzname = document.getElementById(galaxznametag).innerText;
+    // var messagetoshare = galaxzname; 
 
    //show popup
    var showpopup = document.getElementById('modal-container-url');
    showpopup.classList.add('show');
    showpopup.style.display = "flex";
 
-   var urldisplay = document.getElementById('url');
-   urldisplay.innerText = urltoshare;
-   var galaxztoshare = document.getElementById('galaxztoshare');
-   galaxztoshare.innerText = messagetoshare;
+//    var urldisplay = document.getElementById('url');
+//    urldisplay.innerText = urltoshare;
+//    var galaxztoshare = document.getElementById('galaxztoshare');
+//    galaxztoshare.innerText = messagetoshare;
 
  //copy url 
    var  copyurl = document.getElementById('copy-url');

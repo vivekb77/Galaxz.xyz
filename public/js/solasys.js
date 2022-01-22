@@ -15,7 +15,7 @@ analytics.logEvent('Solasys Page Viewed', {
           }
       })
   }
-
+ 
     var galaxzIdfromQ = new URLSearchParams(window.location.search);
     var galaxzId = galaxzIdfromQ.get('gId')
     var solasysId = galaxzIdfromQ.get('sId');

@@ -305,28 +305,39 @@ function IncrementShares(id){
     var clickedGalaxztag = document.getElementById(id);
     
     //url to share
-     var urltoshare = "index.html?gId="+ clickedGalaxztag.value;
+     var urltoshare = "https://galaxz.xyz/index.html?gId="+ clickedGalaxztag.value;
      //console.log(urltoshare);
 
      //name of galaxz to share
-    let extractnumberfromid = id.substr(9);
-    let galaxznametag = "post-title"+extractnumberfromid;
-    var galaxzname = document.getElementById(galaxznametag).innerText;
-    var messagetoshare = "Hey! check out this Galaxz about "+galaxzname;  // find a nice message here to add
-    //console.log(messagetoshare);
+    // let extractnumberfromid = id.substr(9);
+    // let galaxznametag = "post-title"+extractnumberfromid;
+    // var galaxzname = document.getElementById(galaxznametag).innerText;
+    // var messagetoshare = "Hey! check out this Galaxz about "+galaxzname;  // find a nice message here to add
+    // //console.log(messagetoshare);
 
+//show popup
+var showpopup = document.getElementById('modal-container-url');
+showpopup.classList.add('show');
+showpopup.style.display = "flex";
 
-   //show po up
-   var showpopup = document.getElementById('modal-container');
-   showpopup.classList.add('show');
-   showpopup.style.display = "flex";
- //close popup
-   var  closepopup = document.getElementById('closepopup');
-   closepopup.addEventListener('click',()=>{
-     showpopup.classList.remove('show');
-     showpopup.style.display = "none";
-   });
-   
+// var urldisplay = document.getElementById('url');
+// urldisplay.innerText = urltoshare;
+//    var galaxztoshare = document.getElementById('galaxztoshare');
+//    galaxztoshare.innerText = messagetoshare;
+
+//copy url 
+var  copyurl = document.getElementById('copy-url');
+  copyurl.onclick = function() {
+      
+  if (!navigator.clipboard) {
+  showpopup.style.display = "none";
+  }
+// works only on https
+   navigator.clipboard
+   .writeText(urltoshare);
+   showpopup.style.display = "none";
+  
+  }
      //increment shares by 1 on the UI and DB
     let newid1 = id.substr(9);
     let newid = "sharesval"+newid1;

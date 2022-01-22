@@ -2,8 +2,8 @@
   //  GALAXZ DETAILS START
   //  DISPLAY ALL SOLASYS DETAILS START
   //ADD NEW SOLASYS START
-  //DELECT GALAXZ START
-  //EDIT GALAXZ START 
+  //DELECT SOLASYS START
+  //EDIT SOLASYS START 
 
   //test cases
   // log in with twitter , new , existing , when anonomous login is present , when not
@@ -14,6 +14,7 @@
   // wrong g id in q string which do not exist in DB   -- you do not own this galaxz
   // add first galaxz , add more , 
   //delete with solasys >0 , =0 
+  analytics.logEvent('MySolasys Page used', { name: ''});
 
 var galaxzIdfromQ = new URLSearchParams(window.location.search);
     var galaxzId = galaxzIdfromQ.get('gId')
@@ -701,25 +702,25 @@ function CancelAddingSolasys(){
 function AddSolasys(){
     
     //validate if text is entered
-    if (document.getElementById("titletextarea").value == "")
+    if (document.getElementById("titletextarea").value.trim() == "")
     {
         var sdfsdfdfddf = document.getElementById('errormessagelbl')
         sdfsdfdfddf.innerText = "Please enter Solasys Title";
         return false;
     }
-    if (document.getElementById("descriptiontextarea").value == "")
+    if (document.getElementById("descriptiontextarea").value.trim() == "")
     {
         var sdfsdfdfdfdfddf = document.getElementById('errormessagelbl')
         sdfsdfdfdfdfddf.innerText = "Please enter Solasys Description";
         return false;
     }
-    if (document.getElementById("titletextarea").value.length > 80)
+    if (document.getElementById("titletextarea").value.trim().length > 80)
     {
         var sdfsdfdfddf = document.getElementById('errormessagelbl')
         sdfsdfdfddf.innerText = "Please enter Solasys Title less than 80 chars";
         return false;
     }
-    if (document.getElementById("descriptiontextarea").value.length > 180)
+    if (document.getElementById("descriptiontextarea").value.trim().length > 180)
     {
         var sdfsdfdfdfdfddf = document.getElementById('errormessagelbl')
         sdfsdfdfdfdfddf.innerText = "Please enter Solasys Description less than 180 chars";
@@ -833,7 +834,7 @@ function GetNewlyAddedSolasys(solId){
 
 
 
-//DELECT GALAXZ START
+//DELECT SOLASYS START
 function DeleteSolasys(tagId,solId){
     //first remove the error message
     var element =  document.getElementById('cantdeletesolasys');
@@ -842,6 +843,18 @@ function DeleteSolasys(tagId,solId){
      element.remove();
        }
 
+       //get the number of articles from db
+    var noofarticles;
+    const database = firebase.database();
+    database.ref('/solasys').orderByChild('solasysId')
+    .equalTo(solId).limitToFirst(1)  
+    .once("value",function(ALLRecords){
+    ALLRecords.forEach(
+        function(CurrentRecord) {
+            
+        noofarticles = CurrentRecord.val().numberOfArticles;
+        });
+    });
    
       //show po up
       var showpopup = document.getElementById('modal-container');
@@ -859,8 +872,8 @@ function DeleteSolasys(tagId,solId){
        
        let extractnumberfromid = tagId.substr(18);
        var clickedsolasysdiv = "galaxzdiv"+extractnumberfromid;
-       var numberofarticles = "solasysval"+extractnumberfromid;
-       var noofarticles = document.getElementById(numberofarticles).innerText;
+       //var numberofarticles = "solasysval"+extractnumberfromid;
+       //var noofarticles = document.getElementById(numberofarticles).innerText;
        
        //can delete only if number of  solasys = 0
        if(noofarticles > 0){
@@ -888,11 +901,11 @@ function DeleteSolasys(tagId,solId){
 
 }
 
-//DELECT GALAXZ END
+//DELECT SOLASYS END
 
 
 
-//EDIT GALAXZ START 
+//EDIT SOLASYS START 
 
 //show the text areas under the solasys
 var stitleedited;
@@ -967,12 +980,12 @@ document.getElementById(parentdiveditsolasys).append(childdiveditsolasys);
 
 
 var titletexfdft4433 =document.createElement('h5');
-titletexfdft4433.innerText = "Update Galaxz";
+titletexfdft4433.innerText = "Update Solasys";
 titletexfdft4433.setAttribute('style',"color:green");
 document.getElementById('childdiveditsolasys').append(titletexfdft4433);
 
 var titletext4433 =document.createElement('h5');
-titletext4433.innerText = "Galaxz Title";
+titletext4433.innerText = "Solasys Title";
 document.getElementById('childdiveditsolasys').append(titletext4433);
 
 var br4dfddfd5345 =document.createElement('br');
@@ -994,7 +1007,7 @@ var br4dfddff5345 =document.createElement('br');
 document.getElementById('childdiveditsolasys').append(br4dfddff5345);
 
 var titledesc334 =document.createElement('h5');
-titledesc334.innerText = "Galaxz Description";
+titledesc334.innerText = "Solasys Description";
 document.getElementById('childdiveditsolasys').append(titledesc334);
 
 var br4dfdfdfd5345 =document.createElement('br');
@@ -1082,32 +1095,32 @@ function CancelUpdatingSolasys(childdiveditsolasys){
 function UpdateSolasys(childdivid,solId){
     
     //validate if text is entered
-    if (document.getElementById("titletextarea44").value == "")
+    if (document.getElementById("titletextarea44").value.trim() == "")
     {
         var sdfsdfffdfddf = document.getElementById('errormessage545')
         sdfsdfffdfddf.innerText = "Please enter Solasys Title";
         return false;
     }
-    if (document.getElementById("descriptiontextarea33").value == "")
+    if (document.getElementById("descriptiontextarea33").value.trim() == "")
     {
         var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
         sdfsdfdfddfdfdfddf.innerText = "Please enter Solasys Description";
         return false;
     }
-    if (document.getElementById("titletextarea44").value.length >80)
+    if (document.getElementById("titletextarea44").value.trim().length >80)
     {
         var sdfsdfffdfddf = document.getElementById('errormessage545')
         sdfsdfffdfddf.innerText = "Please enter Solasys Title less than 80 chars";
         return false;
     }
-    if (document.getElementById("descriptiontextarea33").value.length>180)
+    if (document.getElementById("descriptiontextarea33").value.trim().length>180)
     {
         var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
         sdfsdfdfddfdfdfddf.innerText = "Please enter Solasys Description less than 180 chars";
         return false;
     }
      
-//update galaxz
+//update SOLASYS
 
 
 const sname = document.getElementById("titletextarea44").value;
@@ -1167,4 +1180,4 @@ database.ref('/solasys').orderByChild('solasysId')
        });  
     }
 
-//EDIT GALAXZ END 
+//EDIT SOLASYS END 
