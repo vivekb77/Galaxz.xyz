@@ -27,8 +27,87 @@ analytics.logEvent('Solasys Page Viewed', {
 
 // display galaxz details first
 GetGalaxz();
-// then solasys
-GetSolasys();
+
+
+// display galaxz details at the top
+
+function GetGalaxz(){
+
+
+  const database = firebase.database();
+  var  galaxzArray = [];
+
+  database.ref('/galaxz').orderByChild('galaxzId')
+  .equalTo(galaxzId).limitToLast(1)
+  .once("value",function(ALLRecords){
+      ALLRecords.forEach(
+          function(CurrentRecord) {
+      
+  var name = CurrentRecord.val().name;
+  var description = CurrentRecord.val().description;
+  var status = CurrentRecord.val().status;
+
+             var galaxzObject = 
+                  {
+                  "name":name,
+                  "description":description,
+                  "status":status,
+                  };
+              
+                  galaxzArray.push(galaxzObject)
+             
+          });
+         // only the active ones
+         galaxzArray = galaxzArray.filter(function(filterByStatus) {
+          return filterByStatus.status == "Active"; });
+
+          if(galaxzArray.length >0 ){
+              document.getElementById('SolasysTitle').innerText = "SOLASYS under GALAXZ - "+galaxzArray[0].name; // set the title of page to galaxz name
+              AddGalaxzCell(galaxzArray);
+              //then get the solasys
+              GetSolasys();
+          }
+          if(galaxzArray.length  === 0){
+
+            //remove the placeholer first
+            const placeholder1 = document.getElementById('placeholder-animation1');
+            placeholder1.innerHTML ='';
+            const placeholder2 = document.getElementById('placeholder-animation2');
+            placeholder2.innerHTML ='';
+            const placeholder3 = document.getElementById('placeholder-animation3');
+            placeholder3.innerHTML ='';
+            
+            //if there the solasys is inactive , display go back to Galaxz view
+              var galaxzdiv = document.createElement('div');
+              galaxzdiv.className = 'post-preview';
+              galaxzdiv.id = 'galaxzdiv';
+              document.getElementById('maindiv').append(galaxzdiv);
+              console.log("Inactive");
+
+              var title = document.createElement('h2');
+              title.id = 'post-title';
+              //title.setAttribute('style',"color:#0085A1");
+              title.innerText = "Oops! Can't view SOLASESes because this GALAXZ is made InActive by the curator, click the Rocket to go back and check out other GALAXZies";
+              document.getElementById('galaxzdiv').append(title);
+              
+              var rocketclick = document.createElement('a');
+              rocketclick.setAttribute('href', "solasys.html?gId="+ galaxzId);
+              rocketclick.id = 'rocketclick';
+              document.getElementById('galaxzdiv').append(rocketclick);
+
+              var rocket = document.createElement('img');
+              rocket.id = 'rocket';
+              rocket.className = 'rocketgoback';
+              rocket.src = 'assets/rocket.svg';
+              document.getElementById('rocketclick').append(rocket);
+         }
+
+      
+   });
+
+  }
+
+
 function GetSolasys(){
 
 
@@ -319,47 +398,6 @@ function IncrementShares(id){
 
 }
 
-
-
-
-// display galaxz details at the top
-
-function GetGalaxz(){
-
-
-  const database = firebase.database();
-  var  galaxzArray = [];
-
-  database.ref('/galaxz').orderByChild('galaxzId')
-  .equalTo(galaxzId).limitToLast(1)
-  .once("value",function(ALLRecords){
-      ALLRecords.forEach(
-          function(CurrentRecord) {
-      
-  var name = CurrentRecord.val().name;
-  var description = CurrentRecord.val().description;
-  var status = CurrentRecord.val().status;
-
-             var galaxzObject = 
-                  {
-                  "name":name,
-                  "description":description,
-                  "status":status,
-                  };
-              
-                  galaxzArray.push(galaxzObject)
-             
-          });
-         // only the active ones
-         galaxzArray = galaxzArray.filter(function(filterByStatus) {
-          return filterByStatus.status == "Active"; });
-          document.getElementById('SolasysTitle').innerText = "GALAXZ - "+galaxzArray[0].name; // set the title of page to galaxz name
-          AddGalaxzCell(galaxzArray);
-
-      
-   });
-
-  }
 
 
 

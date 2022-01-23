@@ -442,6 +442,8 @@ posturl.id = 'post-url'+counter;
 posturl.className = 'post-url';  
 if (!planetsArray[i].url == "") {
 posturl.innerText = (planetsArray[i].url).substr(0,40) + "...";
+posturl.setAttribute('style',"color:#0085A1");
+posturl.setAttribute('rel',"noopener");
 }
 document.getElementById('titleDesc'+counter).append(posturl);
 
@@ -1072,13 +1074,13 @@ var erewwerwer =document.createElement('br');
 document.getElementById('childdiveditplanettextarea').append(erewwerwer);
 
 var titletext4433 =document.createElement('h5');
-titletext4433.innerText = "URL";
+titletext4433.innerText = "URL - Optional (only https:// urls allowed)";
 document.getElementById('childdiveditplanettextarea').append(titletext4433);
 
 var urltextarea333 = document.createElement('textarea');
 urltextarea333.id = 'urltextarea333';
 urltextarea333.className = 'post-title';
-urltextarea333.setAttribute('placeholder',"200 chars");
+urltextarea333.setAttribute('placeholder',"OPTIONAL 200 chars (only https:// urls allowed)");
 urltextarea333.setAttribute('rows',"2");
 urltextarea333.setAttribute('cols',"60");
 //titletextarea.setAttribute('minlength',"4");
@@ -1254,12 +1256,16 @@ database.ref('/articles').orderByChild('articleId')
         if(!purl == ""){
             document.getElementById(purledited).innerText = purl;
             document.getElementById(titleDesc).setAttribute('href', purl );
+            document.getElementById(purledited).setAttribute('style',"color:#0085A1");
             document.getElementById(titleDesc).setAttribute('target', '_blank');
+            document.getElementById(purledited).setAttribute('rel',"noopener");
         }
         if(purl == ""){
             document.getElementById(purledited).innerText = "";
             document.getElementById(titleDesc).removeAttribute('href', purl );
             document.getElementById(titleDesc).removeAttribute('target', '_blank');
+            document.getElementById(purledited).removeAttribute('style',"color:#0085A1");
+            document.getElementById(purledited).removeAttribute('rel',"noopener");
         }
           
 

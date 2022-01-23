@@ -53,3 +53,34 @@ body{
     color: seagreen;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.buttonG{
+    background: url(https://img.icons8.com/fluency/48/000000/google-logo.png);
+   height: 50px;
+   width: 50px;
+   padding: 0%;
+   border: none;
+   margin-right: 40px;
+}
+
+.buttonT{
+    background: url(https://img.icons8.com/fluency/48/000000/twitter.png);
+   height: 50px;
+   width: 50px;
+   padding: 0%;
+   border: none;
+   position:relative;
+  
+}
+
+.card{
+   position:relative;
+  
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 300px;
+  }

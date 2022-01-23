@@ -32,9 +32,91 @@ function countGoBackToSolasys(){
 // display solasys details 
  
  GetSolasys();
+ // display solasys details at the top
 
- // then Xanets
- GetXanets();
+function GetSolasys(){
+
+
+  const database = firebase.database();
+  var  solasysArray = [];
+
+  database.ref('/solasys').orderByChild('solasysId')
+  .equalTo(solasysId).limitToLast(1)
+  .once("value",function(ALLRecords){
+      ALLRecords.forEach(
+          function(CurrentRecord) {
+      
+  var name = CurrentRecord.val().name;
+  var description = CurrentRecord.val().description;
+  var status = CurrentRecord.val().status;
+
+             var solasysObject = 
+                  {
+                  "name":name,
+                  "description":description,
+                  "status":status,
+                  
+                  };
+              
+               solasysArray.push(solasysObject)
+               
+                
+          });
+         // only the actice ones
+         solasysArray = solasysArray.filter(function(filterByStatus) {
+          return filterByStatus.status == "Active"; });
+
+          if(solasysArray.length >0){
+             // then Xanets if solasys is inactive show its inactive and do not show planets
+             document.getElementById('XanetTitle').innerText = "PLANETS under SOLASYS - "+solasysArray[0].name; // set the title of page to solasys name
+               AddSolasysCell(solasysArray);
+
+               // then planets if the solasys is active
+               GetXanets();  
+          }
+          if(solasysArray.length  === 0){
+
+            //remove the placeholer first
+            const placeholder1 = document.getElementById('placeholder-animation1');
+            placeholder1.innerHTML ='';
+            const placeholder2 = document.getElementById('placeholder-animation2');
+            placeholder2.innerHTML ='';
+            const placeholder3 = document.getElementById('placeholder-animation3');
+            placeholder3.innerHTML ='';
+            
+            //if there the solasys is inactive , display go back to Galaxz view
+              var galaxzdiv = document.createElement('div');
+              galaxzdiv.className = 'post-preview';
+              galaxzdiv.id = 'galaxzdiv';
+              document.getElementById('maindiv').append(galaxzdiv);
+              console.log("Inactive");
+
+              var title = document.createElement('h2');
+              title.id = 'post-title';
+              //title.setAttribute('style',"color:#0085A1");
+              title.innerText = "Oops! can't view PLANETS because this SOLASYS is made InActive by the curator, click the Rocket to go back and check out other SOLASYSes";
+              document.getElementById('galaxzdiv').append(title);
+              
+              var rocketclick = document.createElement('a');
+              rocketclick.setAttribute('href', "solasys.html?gId="+ galaxzId);
+              rocketclick.id = 'rocketclick';
+              document.getElementById('galaxzdiv').append(rocketclick);
+
+              var rocket = document.createElement('img');
+              rocket.id = 'rocket';
+              rocket.className = 'rocketgoback';
+              rocket.src = 'assets/rocket.svg';
+              document.getElementById('rocketclick').append(rocket);
+
+              
+
+         }
+      
+   });
+
+  }
+
+
  
 function GetXanets(){
 
@@ -184,6 +266,8 @@ var posturl = document.createElement('h3');
 posturl.id = 'post-url'+counter;
 posturl.className = 'post-url';  
 posturl.innerText = (articlesArray[i].url).substr(0,40) + "...";
+posturl.setAttribute('style',"color:#0085A1");
+posturl.setAttribute('rel',"noopener");
 document.getElementById('titleDesc'+counter).append(posturl);
 }
 
@@ -367,45 +451,6 @@ function IncrementShares(id){
 
 
 
-// display solasys details at the top
-
-function GetSolasys(){
-
-
-  const database = firebase.database();
-  var  solasysArray = [];
-
-  database.ref('/solasys').orderByChild('solasysId')
-  .equalTo(solasysId).limitToLast(1)
-  .once("value",function(ALLRecords){
-      ALLRecords.forEach(
-          function(CurrentRecord) {
-      
-  var name = CurrentRecord.val().name;
-  var description = CurrentRecord.val().description;
-  var status = CurrentRecord.val().status;
-
-             var solasysObject = 
-                  {
-                  "name":name,
-                  "description":description,
-                  "status":status,
-                  
-                  };
-              
-               solasysArray.push(solasysObject)
-               
-                
-          });
-         // only the actice ones
-         solasysArray = solasysArray.filter(function(filterByStatus) {
-          return filterByStatus.status == "Active"; });
-          document.getElementById('XanetTitle').innerText = "SOLASYS - "+solasysArray[0].name; // set the title of page to solasys name
-          AddSolasysCell(solasysArray);
-      
-   });
-
-  }
 
 
 

@@ -24,17 +24,23 @@
         <link href="css/admin.css" rel="stylesheet" />
     </head>
     <body class="d-flex justify-content-center p-5">
-        <div class="card">
+        <div class="container">
+        <div class="card" name="card">
             <div class="card-header">
-                <center><h3>SIGN IN</h3></center>
+                <center><h1><b>GALAXZ</b></h1></center>
+                    <br>
+                <center><h4>SIGN IN</h4>
+                <span>By signing in you agree to our<a href="https://galaxz.xyz/termsofservice.html" target="_blank"> Privacy Policy and Terms of Service</a></span>
+            </center>
             </div>
-            
-                <center><button id="loginwithgoogle" class="btn btn-primary">Google</button>
-                  
-                <button id="loginwithtwitter" class="btn btn-secondary">Twitter</button>
+            <br>
+                <center><button name="buttonG" class="buttonG" id="loginwithgoogle"></button>
+                <button id="loginwithtwitter" name="buttonT" class="buttonT"></button>
                 </center>
-          
+          <br>
         </div>
+        </div>
+        
            <!-- The core Firebase JS SDK is always required and must be listed first -->
     <!-- <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script> use this for prod , remove below one -->
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase.js"></script>
