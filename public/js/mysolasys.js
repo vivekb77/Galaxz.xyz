@@ -5,15 +5,9 @@
   //DELECT SOLASYS START
   //EDIT SOLASYS START 
 
-  //test cases
-  // log in with twitter , new , existing , when anonomous login is present , when not
-  // log in with google , new , existing , when anonomous login is present , when not
-  // log out and try again
-  //q string has galaxz creared by user  - all displayed 
-  // q string has galaxz not created by user  -- error , you do not own this galaxz
-  // wrong g id in q string which do not exist in DB   -- you do not own this galaxz
-  // add first galaxz , add more , 
-  //delete with solasys >0 , =0 
+
+
+
   analytics.logEvent('MySolasys Page used', { name: ''});
 
 var galaxzIdfromQ = new URLSearchParams(window.location.search);

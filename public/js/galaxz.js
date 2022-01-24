@@ -7,16 +7,16 @@ analytics.logEvent('Galaxz Page Viewed', {
 
 //only sign in ano if no user 
 checkLogin();
-function checkLogin() {
+function checkLogin() {   // does not work as auth takes time and galaxz details are pulled before this is done , so wait for this to complete and then fetch galaxz details
+    
     firebase.auth().onAuthStateChanged((user)=>{
         if(!user){
             firebase.auth().signInAnonymously();
-            //console.log(user);
+            
         }
     })
 }
 
-  
 
 
 var galaxzIdfromQ = new URLSearchParams(window.location.search);

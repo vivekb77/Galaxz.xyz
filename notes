@@ -1,0 +1,100 @@
+---why do people blog - sell the solution , not the problem
+
+
+
+
+
+---go to market stratergy
+
+---content stratergy
+
+---get bloggers on board stratergy
+
+Advertising — As a blogger, you could sell ad space directly to companies to advertise related products on your site. You can also use ad networks, like Google Adwords and others, who will pay you for every click or view of the ads they show to your readers.
+Affiliate programs — If you promote a product or service on your blog, you can sometimes earn an affiliate commission if someone clicks on the link and buys through your site. Think of it as a “finder’s fee.” https://bloggingwizard.com/affiliate-platforms-and-networks/
+Content marketing — If you have a physical or digital product for sale, or if you offer coaching or consulting, your valuable blog posts can often be a natural starting point to introduce those opportunities to your audience. Bloggers like this approach compared to more “sales-y” techniques.
+Teaching courses — Blog posts can often be just the beginning of a topic. Creating and offering courses that do deeper with your blog content can create another stream of income.
+
+Display banner ads or other advertisements on their site
+Write about certain products with links to where people can buy
+Sell their own information product
+
+
+
+
+---niche
+Write about different niches, each niche can be a galaxz.
+What is a niche exactly?
+A blog niche is a specific topic you’ll write (or create other types of content) about on your blog.
+
+
+
+
+---business model so that bloggers want to write and readers want to read 
+
+affliate programmes
+
+
+Content curation
+Some sites allow you to curate your content into lists and collections. For example, if you were in the gardening niche, you could create a topic on ‘Hardy Bi-annuals’ and then save content to it that includes some of your posts.
+
+Here are a few sites where you can curate your content:
+
+Scoop.it
+List.ly
+Paper.li
+Pearl Trees
+Flipboard
+Content aggregators
+Content aggregators collect content from other websites and “aggregate” it into one easy-to-find location. It’s not classed as copyright theft as long as the aggregation site clearly states and links to the source, and doesn’t republish the content in full. Plus it’s a win-win:
+
+Visitors have access to all content in one place.
+Creators get their content in front of a larger audience.
+Here are some of the most popular content aggregators:
+
+Alltop
+AffDaily
+Blog Engage
+WP Clipboard
+WP News Desk
+Content syndication (blog republishing)
+According to Search Engine Watch:
+
+Content syndication is the process of pushing your blog post, article, video or any piece of web-based content out to other third-parties who will then republish it on their own sites.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //test cases
+  // log in with twitter , new , existing , when anonomous login is present , when not
+  // log in with google , new , existing , when anonomous login is present , when not
+  // log out and try again
+  //q string has galaxz creared by user  - all displayed 
+  // q string has galaxz not created by user  -- error , you do not own this galaxz
+  // wrong g id in q string which do not exist in DB   -- you do not own this galaxz
+  // add first galaxz , add more , 
+  //delete with solasys >0 , =0 
+
+  // galaxz is inactive - cant view solasys , myplanets via direct link
+  // solasys is inactive - cant view planets via direact link
+  // site speed

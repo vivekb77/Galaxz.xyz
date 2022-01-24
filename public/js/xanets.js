@@ -22,10 +22,6 @@ function checkLogin() {
      var galaxzId = solasysfromQ.get('gId');
  
      
-     //for google analytics to count how many navigates from S to G view
-function countGoBackToSolasys(){
-        analytics.logEvent('User Navigated from Planet to Solasys', { name: 'NavFromXtoS'});
-     }
 
      var  articlesArray = [];
 
@@ -41,26 +37,33 @@ function GetSolasys(){
   var  solasysArray = [];
 
   database.ref('/solasys').orderByChild('solasysId')
-  .equalTo(solasysId).limitToLast(1)
+  .equalTo(solasysId).limitToFirst(1)
   .once("value",function(ALLRecords){
       ALLRecords.forEach(
           function(CurrentRecord) {
-      
+    
+  var solasysId = CurrentRecord.val().solasysId;          
   var name = CurrentRecord.val().name;
   var description = CurrentRecord.val().description;
   var status = CurrentRecord.val().status;
+  var numberOfArticles = CurrentRecord.val().numberOfArticles;
+  var views = CurrentRecord.val().views;
+  var followers = CurrentRecord.val().followers;
 
              var solasysObject = 
                   {
+                    "solasysId":solasysId,
                   "name":name,
                   "description":description,
                   "status":status,
-                  
+                  "numberOfArticles":numberOfArticles,
+                  "views":views,
+                  "followers":followers,
+
                   };
               
                solasysArray.push(solasysObject)
                
-                
           });
          // only the actice ones
          solasysArray = solasysArray.filter(function(filterByStatus) {
@@ -364,7 +367,7 @@ document.getElementById('rocketclick').append(rocket);
 
 //analytics
 analytics.logEvent('No Planet shown error', { name: 'fatal error'});
-
+IncrementSolasysView();  // do this last as the views are fetched first and they overlap and value of view is sent as 1
 
 }
 
@@ -488,6 +491,50 @@ spostsubtitle.className = 'post-subtitle';
 spostsubtitle.innerText = solasysArray[i].description;
 document.getElementById('stitleDesc'+counter).append(spostsubtitle);
 
+//buttons
+var dfdfbr = document.createElement("br");
+document.getElementById('solasysdiv'+counter).append(dfdfbr);
+
+var solasysbottompara = document.createElement('p');
+solasysbottompara.className = 'post-meta';
+solasysbottompara.id = 'solasysbottompara'+counter;
+document.getElementById('solasysdiv'+counter).append(solasysbottompara);
+
+var solasysBtn = document.createElement('img');
+solasysBtn.id = 'solasysBtn'+counter;
+solasysBtn.className = 'img-bottompara';
+solasysBtn.src = 'assets/noofarticles.svg';
+document.getElementById('solasysbottompara'+counter).append(solasysBtn);
+
+var solasysval = document.createElement('span');
+solasysval.id = 'solasysval'+counter;
+solasysval.innerText = solasysArray[i].numberOfArticles;
+document.getElementById('solasysbottompara'+counter).append(solasysval);
+
+var soldsysviewsBtn = document.createElement('img');
+soldsysviewsBtn.id = 'soldsysviewsBtn'+counter;
+soldsysviewsBtn.className = 'img-bottompara';
+soldsysviewsBtn.src = 'assets/views.svg';
+document.getElementById('solasysbottompara'+counter).append(soldsysviewsBtn);
+
+var solasysviewsval = document.createElement('span');
+solasysviewsval.id = 'solasysviewsval'+counter;
+solasysviewsval.innerText = solasysArray[i].views;
+document.getElementById('solasysbottompara'+counter).append(solasysviewsval);
+
+var solasysfollowsBtn = document.createElement('img');
+solasysfollowsBtn.id = 'solasysfollowsBtn'+counter;
+solasysfollowsBtn.className = 'img-bottompara';
+solasysfollowsBtn.value = solasysArray[i].solasysId;   
+solasysfollowsBtn.setAttribute('onclick', "IncrementSolasysFollows(this.id,this.value)");   // 
+solasysfollowsBtn.src = 'assets/like.svg';
+document.getElementById('solasysbottompara'+counter).append(solasysfollowsBtn);
+
+var solasysfollowsval = document.createElement('span');
+solasysfollowsval.id = 'solasysfollowsval'+counter;
+solasysfollowsval.innerText = solasysArray[i].followers;
+document.getElementById('solasysbottompara'+counter).append(solasysfollowsval);
+
 //go back to solasys button 
 var div4534 = document.createElement("div");
 div4534.className = 'rocketshipgobackahref';
@@ -528,7 +575,7 @@ document.getElementById('maindiv').append(br34);
 }
 }
 
-IncrementSolasysView();
+
  //increment views for solasys in DB when planet page is viewed
 function IncrementSolasysView(){
   //view counting need to move to xanet js to count views from direct link visits rather than just clicks on solasys here
@@ -538,3 +585,22 @@ function IncrementSolasysView(){
     views:firebase.database.ServerValue.increment(1)})
  
 }
+
+function IncrementSolasysFollows(tagId,solaId){
+
+document.getElementById(tagId).src = "assets/likefill.svg";
+
+var like = document.getElementById('solasysfollowsval0').innerText;
+addedlike = ++like;
+document.getElementById('solasysfollowsval0').innerText = addedlike ;   
+
+const database = firebase.database();
+database.ref('/solasys/' +solaId).update({ 
+followers:firebase.database.ServerValue.increment(1)})
+
+}
+
+     //for google analytics to count how many navigates from S to G view
+function countGoBackToSolasys(){
+        analytics.logEvent('User Navigated from Planet to Solasys', { name: 'NavFromXtoS'});
+   }

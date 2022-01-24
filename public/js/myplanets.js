@@ -443,7 +443,7 @@ posturl.className = 'post-url';
 if (!planetsArray[i].url == "") {
 posturl.innerText = (planetsArray[i].url).substr(0,40) + "...";
 posturl.setAttribute('style',"color:#0085A1");
-posturl.setAttribute('rel',"noopener");
+posturl.setAttribute('rel',"noreferrer");
 }
 document.getElementById('titleDesc'+counter).append(posturl);
 
@@ -669,11 +669,11 @@ function AddNewPlanet(){
     var descriptiontextarea = document.createElement('textarea');
     descriptiontextarea.id = 'descriptiontextarea';
     descriptiontextarea.className = 'post-title';
-    descriptiontextarea.setAttribute('placeholder',"500 chars max");
+    descriptiontextarea.setAttribute('placeholder',"1000 chars max");
     descriptiontextarea.setAttribute('rows',"7");
     descriptiontextarea.setAttribute('cols',"60");
     //descriptiontextarea.setAttribute('minlength',"4");
-    descriptiontextarea.setAttribute('maxlength',"500");
+    descriptiontextarea.setAttribute('maxlength',"1000");
     document.getElementById('childdivaddPlanetselements').append(descriptiontextarea);
     
     //url
@@ -765,10 +765,10 @@ function AddPlanet(){
         sdfsdfdfddf.innerText = "Please enter Planet Title less than 80 chars";
         return false;
     }
-    if (document.getElementById("descriptiontextarea").value.trim().length > 500)
+    if (document.getElementById("descriptiontextarea").value.trim().length > 1000)
     {
         var sdfsdfdfdfdfddf = document.getElementById('errormessagelbl')
-        sdfsdfdfdfdfddf.innerText = "Please enter Planet Description less than 500 chars";
+        sdfsdfdfdfdfddf.innerText = "Please enter Planet Description less than 1000 chars";
         return false;
     }
     if (document.getElementById("urltextarea").value.trim().length > 200)
@@ -1061,11 +1061,11 @@ document.getElementById('childdiveditplanettextarea').append(titledesc334);
 var descriptiontextarea33 = document.createElement('textarea');
 descriptiontextarea33.id = 'descriptiontextarea33';
 descriptiontextarea33.className = 'post-title';
-descriptiontextarea33.setAttribute('placeholder',"500 chars");
+descriptiontextarea33.setAttribute('placeholder',"1000 chars");
 descriptiontextarea33.setAttribute('rows',"7");
 descriptiontextarea33.setAttribute('cols',"60");
 //descriptiontextarea.setAttribute('minlength',"4");
-descriptiontextarea33.setAttribute('maxlength',"500");
+descriptiontextarea33.setAttribute('maxlength',"1000");
 document.getElementById('childdiveditplanettextarea').append(descriptiontextarea33);
 
 var br4dfdddfddsdfsdafsdfd5345 =document.createElement('br');
@@ -1179,10 +1179,10 @@ function UpdatePlanet(childdivid,planetId){
         sdfsdfffdfddf.innerText = "Please enter Planet Title less than 80 chars";
         return false;
     }
-    if (document.getElementById("descriptiontextarea33").value.trim().length>500)
+    if (document.getElementById("descriptiontextarea33").value.trim().length>1000)
     {
         var sdfsdfdfddfdfdfddf = document.getElementById('errormessage545')
-        sdfsdfdfddfdfdfddf.innerText = "Please enter Planet Description less than 500 chars";
+        sdfsdfdfddfdfdfddf.innerText = "Please enter Planet Description less than 1000 chars";
         return false;
     }
     if (document.getElementById("urltextarea333").value.trim().length > 200)
@@ -1258,14 +1258,14 @@ database.ref('/articles').orderByChild('articleId')
             document.getElementById(titleDesc).setAttribute('href', purl );
             document.getElementById(purledited).setAttribute('style',"color:#0085A1");
             document.getElementById(titleDesc).setAttribute('target', '_blank');
-            document.getElementById(purledited).setAttribute('rel',"noopener");
+            document.getElementById(purledited).setAttribute('rel',"noreferrer");
         }
         if(purl == ""){
             document.getElementById(purledited).innerText = "";
             document.getElementById(titleDesc).removeAttribute('href', purl );
             document.getElementById(titleDesc).removeAttribute('target', '_blank');
             document.getElementById(purledited).removeAttribute('style',"color:#0085A1");
-            document.getElementById(purledited).removeAttribute('rel',"noopener");
+            document.getElementById(purledited).removeAttribute('rel',"noreferrer");
         }
           
 

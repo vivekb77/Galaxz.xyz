@@ -1,0 +1,80 @@
+//And if you want to know when the update or push has completed, you could use promises:
+
+//an example of promise , can be used  to wait for q query to complete to start another
+
+var ref = firebase.database().ref().child('users');
+var refUserId = ref.orderByChild('id').equalTo(Auth.$getAuth().uid);
+refUserId
+.once('value')
+.then(function (snapshot) {
+  if (snapshot.hasChildren()) {
+    return snapshot.forEach(function (child) {
+      child.ref.update(vm.user_infos);   // if key exists update the user info
+    });
+  } else {
+    return snapshot.ref.push({    // if key does not exist , generate id and set user info
+      player: vm.user_infos.player,
+      id: vm.user_infos.id
+    });
+  }
+})                   // promise to check if data is updated and then move 
+.then(function () {
+  console.log('update/push done');   // call the nextfunction here
+})
+.catch(function (error) {
+  console.log(error);             // if data is not updated , log error
+}); 
+
+
+// set	Write or replace data to a defined path, like messages/users/<username>
+// update	Update some of the keys for a defined path without replacing all of the data
+// push	Add to a list of data in the database. Every time you push a new node onto a list, your database generates a unique key, like messages/users/<unique-user-id>/<username>
+// transaction	Use transactions when working with complex data that could be corrupted by concurrent updates
+
+// if data exists then only do stuff
+ref.child("users").orderByChild("ID").equalTo("U1EL5623").once("value",snapshot => {
+    if (snapshot.exists()){
+      const userData = snapshot.val();
+      console.log("exists!", userData);
+    }
+});
+
+//Check if any users exist
+firebase.database().ref(`users`).limitToFirst(1).once("value", snapshot => {
+    if (snapshot.exists()){
+       console.log("exists!");
+       // TODO: Handle that users do exist
+       return true;
+    }
+ 
+    // TODO: Handle that users do not exist
+ });
+
+
+ const dbRef = firebase.database().ref();
+dbRef.child("users").child(userId).get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+
+//Add a Completion Callback
+// If you want to know when your data has been committed, you can add a completion callback. Both set() and update() take an optional completion callback that is called when the write has been committed to the database. If the call was unsuccessful, the callback is passed an error object indicating why the failure occurred.
+
+
+firebase.database().ref('users/' + userId).set({
+    username: name,
+    email: email,
+    profile_picture : imageUrl
+  }, (error) => {
+    if (error) {
+      // The write failed...  
+    } else {
+      // Data saved successfully!  call the next method here which is dependent on the data of this one
+    }
+  });
