@@ -11320,6 +11320,17 @@ white-space: nowrap;
 		padding: 0 5px 0 0;
 		font-size: 16px !important;		
 	}
+  .post-metagsp a span
+	{
+		width: 45%;
+		font-size: 16px;
+		padding-left: 0;
+	}
+	.post-metagsp span
+	{
+		padding: 0 4px 0 0;
+		font-size: 16px !important;		
+	}
 	.img-bottompara
 	{
 		width: 16px;
@@ -11329,6 +11340,10 @@ white-space: nowrap;
 	{
 		 width: 100%;
 	}
+  .post-titlegsp{
+    width: 100%; 
+    max-width: 100%;
+  }
 }
 @media (max-width: 450px) {
 	header.masthead .site-heading h1
@@ -11340,6 +11355,15 @@ white-space: nowrap;
 		width: 70%;
 		font-size: 16px;
 	}
+  .post-metagsp a span
+	{
+		width: 50%;
+		font-size: 15px;
+	}
+  .post-titlegsp{
+    width: 100%; 
+    max-width: 100%;
+  }
 }
 @media (max-width: 420px) {
 	.post-meta a span
@@ -11347,6 +11371,15 @@ white-space: nowrap;
 		width: 65%;
 		font-size: 16px;
 	}
+  .post-metagsp a span
+	{
+		width: 50%;
+		font-size: 16px;
+	}
+  .post-titlegsp{
+    width: 100%; 
+    max-width: 100%;
+  }
 }
 
 /* mobile layout end block */
@@ -11354,6 +11387,11 @@ white-space: nowrap;
 .post-meta span
 {
 	padding: 0 20px 0 5px;
+	font-size: 1.2rem;
+}
+.post-metagsp span
+{
+	padding: 0 13px 0 3px;
 	font-size: 1.2rem;
 }
 .rocketgoback {
@@ -11447,9 +11485,12 @@ padding: 10px 25px;
 .modal-container1{
   
   background-color: #fff;
-  position:relative;
-  width: 20vw;
-  height: 10vh;
+  width:100px;
+  height:70px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin:-10px 0 0 -10px;
   display:none;
   align-items: center;
   justify-content: center;
@@ -11466,10 +11507,10 @@ padding: 10px 25px;
   top: 40%;
   left: 40%;
   width: auto;
-  height: 10vh;
-  max-width: 100%;
+  height: auto;
+  max-width: 700%;
   border-radius: 5px;
-  padding: 30px 50px;
+  padding: 30px 40px;
   box-shadow:0px 2px 4px rgba(0, 0, 0, .2);
  
 }

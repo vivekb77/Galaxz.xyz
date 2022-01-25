@@ -392,7 +392,7 @@ attachallplanetsdiv.id = 'attachallplanetsdiv'+counter;
 document.getElementById('maindiv').append(attachallplanetsdiv);
 
 var toppara = document.createElement('p');
-toppara.className = 'post-meta';
+toppara.className = 'post-metagsp';
 toppara.id = 'toppara'+counter;
 document.getElementById('attachallplanetsdiv'+counter).append(toppara);
 
@@ -455,7 +455,7 @@ var br = document.createElement("br");
 document.getElementById('attachallplanetsdiv'+counter).append(br);
 
 var bottompara = document.createElement('p');
-bottompara.className = 'post-meta';
+bottompara.className = 'post-metagsp';
 bottompara.id = 'bottompara'+counter;
 document.getElementById('attachallplanetsdiv'+counter).append(bottompara);
 
@@ -495,7 +495,7 @@ document.getElementById('bottompara'+counter).append(sharesval);
 //edit / delete buttons start
 
 var actionbuttons = document.createElement('p');
-actionbuttons.className = 'post-meta';
+actionbuttons.className = 'post-metagsp';
 actionbuttons.id = 'actionbuttons'+counter;
 document.getElementById('attachallplanetsdiv'+counter).append(actionbuttons);
 
@@ -646,7 +646,7 @@ function AddNewPlanet(){
     
     var titletextarea = document.createElement('textarea');
     titletextarea.id = 'titletextarea';
-    titletextarea.className = 'post-title';
+    titletextarea.className = 'post-titlegsp';
     titletextarea.setAttribute('placeholder',"80 chars max");
     titletextarea.setAttribute('rows',"3");
     titletextarea.setAttribute('cols',"60");
@@ -668,7 +668,7 @@ function AddNewPlanet(){
     
     var descriptiontextarea = document.createElement('textarea');
     descriptiontextarea.id = 'descriptiontextarea';
-    descriptiontextarea.className = 'post-title';
+    descriptiontextarea.className = 'post-titlegsp';
     descriptiontextarea.setAttribute('placeholder',"1000 chars max");
     descriptiontextarea.setAttribute('rows',"7");
     descriptiontextarea.setAttribute('cols',"60");
@@ -692,7 +692,7 @@ function AddNewPlanet(){
     
     var urltextarea = document.createElement('textarea');
     urltextarea.id = 'urltextarea';
-    urltextarea.className = 'post-title';
+    urltextarea.className = 'post-titlegsp';
     urltextarea.setAttribute('placeholder',"OPTIONAL - 200 chars max, only https:// urls allowed");
     urltextarea.setAttribute('rows',"2");
     urltextarea.setAttribute('cols',"60");
@@ -703,7 +703,7 @@ function AddNewPlanet(){
     
     //error message label
     var errormessagelbl = document.createElement('h6');
-    errormessagelbl.className = 'post-meta';
+    errormessagelbl.className = 'post-metagsp';
     errormessagelbl.id = 'errormessagelbl';
     errormessagelbl.setAttribute('style',"color:red");
     document.getElementById('childdivaddPlanetselements').append(errormessagelbl);
@@ -712,7 +712,7 @@ function AddNewPlanet(){
     
     
     var submitcancelbuttons = document.createElement('p');
-    submitcancelbuttons.className = 'post-meta';
+    submitcancelbuttons.className = 'post-metagsp';
     submitcancelbuttons.id = 'submitcancelbuttons';
     document.getElementById('childdivaddPlanetselements').append(submitcancelbuttons);
     
@@ -1014,7 +1014,7 @@ var parentdiveditplanettextarea = "parentdiveditplanettextarea"+extractnumberfro
 //success message tag to parent edit div
 var successmessage443 =document.createElement('h6');
 successmessage443.id = 'successmessage443';
-successmessage443.className = 'post-meta';
+successmessage443.className = 'post-metagsp';
 successmessage443.setAttribute('style',"color:green");
 document.getElementById(parentdiveditplanettextarea).append(successmessage443);  
 
@@ -1038,7 +1038,7 @@ document.getElementById('childdiveditplanettextarea').append(titletext4433);
 
 var titletextarea44 = document.createElement('textarea');
 titletextarea44.id = 'titletextarea44';
-titletextarea44.className = 'post-title';
+titletextarea44.className = 'post-titlegsp';
 titletextarea44.setAttribute('placeholder',"80 chars");
 titletextarea44.setAttribute('rows',"3");
 titletextarea44.setAttribute('cols',"60");
@@ -1060,7 +1060,7 @@ document.getElementById('childdiveditplanettextarea').append(titledesc334);
 
 var descriptiontextarea33 = document.createElement('textarea');
 descriptiontextarea33.id = 'descriptiontextarea33';
-descriptiontextarea33.className = 'post-title';
+descriptiontextarea33.className = 'post-titlegsp';
 descriptiontextarea33.setAttribute('placeholder',"1000 chars");
 descriptiontextarea33.setAttribute('rows',"7");
 descriptiontextarea33.setAttribute('cols',"60");
@@ -1079,7 +1079,7 @@ document.getElementById('childdiveditplanettextarea').append(titletext4433);
 
 var urltextarea333 = document.createElement('textarea');
 urltextarea333.id = 'urltextarea333';
-urltextarea333.className = 'post-title';
+urltextarea333.className = 'post-titlegsp';
 urltextarea333.setAttribute('placeholder',"OPTIONAL 200 chars (only https:// urls allowed)");
 urltextarea333.setAttribute('rows',"2");
 urltextarea333.setAttribute('cols',"60");
@@ -1121,7 +1121,7 @@ document.getElementById('childdiveditplanettextarea').append(radiobuttons);
 
 //error message label
 var errormessage545 = document.createElement('h6');
-errormessage545.className = 'post-meta';
+errormessage545.className = 'post-metagsp';
 errormessage545.id = 'errormessage545';
 errormessage545.setAttribute('style',"color:red");
 document.getElementById('childdiveditplanettextarea').append(errormessage545);

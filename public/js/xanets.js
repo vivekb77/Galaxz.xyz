@@ -367,14 +367,14 @@ document.getElementById('rocketclick').append(rocket);
 
 //analytics
 analytics.logEvent('No Planet shown error', { name: 'fatal error'});
+
+}
 IncrementSolasysView();  // do this last as the views are fetched first and they overlap and value of view is sent as 1
 
 }
 
-}
 
-
-//increment views in DB when clicked
+//increment views in DB when article clicked
 function IncrementView(id){
     var clickedArticletag = document.getElementById(id);
     const database = firebase.database();
@@ -492,8 +492,8 @@ spostsubtitle.innerText = solasysArray[i].description;
 document.getElementById('stitleDesc'+counter).append(spostsubtitle);
 
 //buttons
-var dfdfbr = document.createElement("br");
-document.getElementById('solasysdiv'+counter).append(dfdfbr);
+// var dfdfbr = document.createElement("br");
+// document.getElementById('solasysdiv'+counter).append(dfdfbr);
 
 var solasysbottompara = document.createElement('p');
 solasysbottompara.className = 'post-meta';

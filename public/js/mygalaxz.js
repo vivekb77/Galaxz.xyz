@@ -250,7 +250,7 @@ document.getElementById('maindiv').append(galaxzdiv);
 }
 
 var toppara = document.createElement('p');
-toppara.className = 'post-meta';
+toppara.className = 'post-metagsp';
 toppara.id = 'toppara'+counter;
 document.getElementById('galaxzdiv'+counter).append(toppara);
 
@@ -271,6 +271,7 @@ document.getElementById('toppara'+counter).append(curatedDate);
 var titleDesc = document.createElement('a');
 titleDesc.setAttribute('href', "mysolasys.html?gId="+ galaxzArray[i].galaxzId);
 //titleDesc.setAttribute('onclick', "IncrementView(this.id)");
+titleDesc.className = 'post-metagsp';
 titleDesc.id = 'titleDesc'+counter;
 titleDesc.value = galaxzArray[i].galaxzId;
 document.getElementById('galaxzdiv'+counter).append(titleDesc);
@@ -291,7 +292,7 @@ var br = document.createElement("br");
 document.getElementById('galaxzdiv'+counter).append(br);
 
 var bottompara = document.createElement('p');
-bottompara.className = 'post-meta';
+bottompara.className = 'post-metagsp';
 bottompara.id = 'bottompara'+counter;
 document.getElementById('galaxzdiv'+counter).append(bottompara);
 
@@ -346,7 +347,7 @@ document.getElementById('bottompara'+counter).append(sharesval);
 
 
 var actionbuttons = document.createElement('p');
-actionbuttons.className = 'post-meta';
+actionbuttons.className = 'post-metagsp';
 actionbuttons.id = 'actionbuttons'+counter;
 document.getElementById('galaxzdiv'+counter).append(actionbuttons);
 
@@ -431,7 +432,7 @@ document.getElementById('gadddivholderroot').append(div3423423);
 
 //add success  message label to root div
 var successmessage = document.createElement('h6');
-successmessage.className = 'post-meta';
+successmessage.className = 'post-metagsp';
 successmessage.id = 'successmessage';
 successmessage.setAttribute('style',"color:green");
 document.getElementById('gadddivholderroot').append(successmessage);
@@ -454,7 +455,7 @@ document.getElementById('div3423423').append(br4dfd5345);
 
 var titletextarea = document.createElement('textarea');
 titletextarea.id = 'titletextarea';
-titletextarea.className = 'post-title';
+titletextarea.className = 'post-titlegsp';
 titletextarea.setAttribute('placeholder',"80 chars max");
 titletextarea.setAttribute('rows',"3");
 titletextarea.setAttribute('cols',"60");
@@ -476,7 +477,7 @@ document.getElementById('div3423423').append(br4dfdf5345);
 
 var descriptiontextarea = document.createElement('textarea');
 descriptiontextarea.id = 'descriptiontextarea';
-descriptiontextarea.className = 'post-title';
+descriptiontextarea.className = 'post-titlegsp';
 descriptiontextarea.setAttribute('placeholder',"180 chars max");
 descriptiontextarea.setAttribute('rows',"5");
 descriptiontextarea.setAttribute('cols',"60");
@@ -487,7 +488,7 @@ document.getElementById('div3423423').append(descriptiontextarea);
 
 //error message label
 var errormessage = document.createElement('h6');
-errormessage.className = 'post-meta';
+errormessage.className = 'post-metagsp';
 errormessage.id = 'errormessage';
 errormessage.setAttribute('style',"color:red");
 document.getElementById('div3423423').append(errormessage);
@@ -496,7 +497,7 @@ document.getElementById('div3423423').append(errormessage);
 
 
 var submitcancelbuttons = document.createElement('p');
-submitcancelbuttons.className = 'post-meta';
+submitcancelbuttons.className = 'post-metagsp';
 submitcancelbuttons.id = 'submitcancelbuttons';
 document.getElementById('div3423423').append(submitcancelbuttons);
 
@@ -672,7 +673,7 @@ gtitleedited = "post-title"+extractnumberfromid;  // UpdateGalaxzAfterEdit() to 
 //success message tag to rootedit div
 var successmessage443 =document.createElement('h6');
 successmessage443.id = 'successmessage443';
-successmessage443.className = 'post-meta';
+successmessage443.className = 'post-metagsp';
 successmessage443.setAttribute('style',"color:green");
 document.getElementById(clickededitgalaxzdivtagroot).append(successmessage443);
 
@@ -696,7 +697,7 @@ document.getElementById('clickededitgalaxzdivtag').append(br4dfddfd5345);
 
 var titletextarea44 = document.createElement('textarea');
 titletextarea44.id = 'titletextarea44';
-titletextarea44.className = 'post-title';
+titletextarea44.className = 'post-titlegsp';
 titletextarea44.setAttribute('placeholder',"80 chars");
 titletextarea44.setAttribute('rows',"3");
 titletextarea44.setAttribute('cols',"60");
@@ -718,7 +719,7 @@ document.getElementById('clickededitgalaxzdivtag').append(br4dfdfdfd5345);
 
 var descriptiontextarea33 = document.createElement('textarea');
 descriptiontextarea33.id = 'descriptiontextarea33';
-descriptiontextarea33.className = 'post-title';
+descriptiontextarea33.className = 'post-titlegsp';
 descriptiontextarea33.setAttribute('placeholder',"180 chars");
 descriptiontextarea33.setAttribute('rows',"5");
 descriptiontextarea33.setAttribute('cols',"60");
@@ -757,7 +758,7 @@ document.getElementById('clickededitgalaxzdivtag').append(radiobuttons);
 
 //error message label
 var errormessage545 = document.createElement('h6');
-errormessage545.className = 'post-meta';
+errormessage545.className = 'post-metagsp';
 errormessage545.id = 'errormessage545';
 errormessage545.setAttribute('style',"color:red");
 document.getElementById('clickededitgalaxzdivtag').append(errormessage545);
@@ -932,7 +933,7 @@ function DeleteGalaxz(tagId,galId){
         //success message tag to rootedit div
         var cantdeletegalaxz =document.createElement('h6');
         cantdeletegalaxz.id = 'cantdeletegalaxz';
-        cantdeletegalaxz.className = 'post-meta';
+        cantdeletegalaxz.className = 'post-metagsp';
         cantdeletegalaxz.innerText = "There are SOLASYSes under this GALAXZ, delete them first to delete GALAXZ";
         cantdeletegalaxz.setAttribute('style',"color:red");
         document.getElementById(clickededitgalaxzdivtagroot).append(cantdeletegalaxz);

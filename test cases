@@ -1,0 +1,27 @@
+
+  //test cases
+  LOGIN
+  // log in with twitter , new , existing , when anonomous login is present , when not
+  // log in with google , new , existing , when anonomous login is present , when not
+  // log out and try again
+  // wait for login to happen and then do next
+
+Active and Inactive behaviour
+  //q string has galaxz creared by user  - all displayed 
+  // q string has galaxz not created by user  -- error , you do not own this galaxz
+  // wrong g id in q string which do not exist in DB   -- you do not own this galaxz
+  // add first galaxz , add more , 
+  //delete with solasys >0 , =0 
+
+  // galaxz is inactive - cant view solasys , myplanets via direct link
+  // solasys is inactive - cant view planets via direact link
+number of solasys and number of planets should be +1 -1 when they made active or inactive along with add and delete
+
+
+database update , set , push , remove
+if a key does not exist , add update is sent a new record is created 
+so everywhere where like, share , follow is incrementd , decremented put validation to check if key exists , only update if exists
+
+
+ // site speed
+ unused js and css

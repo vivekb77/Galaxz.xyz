@@ -442,8 +442,8 @@ gpostsubtitle.innerText = galaxzArray[i].description;
 document.getElementById('gtitleDesc'+counter).append(gpostsubtitle);
 
 //buttons
-var brere = document.createElement("br");
-document.getElementById('galaxzdivnext'+counter).append(brere);
+// var brere = document.createElement("br");
+// document.getElementById('galaxzdivnext'+counter).append(brere);
 
 var galaxzbottompara = document.createElement('p');
 galaxzbottompara.className = 'post-meta';
